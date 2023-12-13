@@ -1,0 +1,25 @@
+/* FormStyleSheet.css */
+label, input {
+    margin-top: 10px; /* Adds 10px margin to the top */
+    margin-bottom: 10px; /* Adds 10px margin to the bottom */
+    margin-left: 5px; /* Adds 5px margin to the left */
+    margin-right: 5px; /* Adds 5px margin to the right */
+}
+
+.smallFont {
+    font-size: 0.60em; /* This sets the font size to 60% of the surrounding text */
+    position: absolute; /* Position the word count div absolutely within the container */
+    top: 40px;
+    bottom: -20px; /* Adjust this value as needed to position it below the textarea */
+    right: 106px; /* Aligns it to the right edge of the container */
+    margin: 0; /* Removes any margin */
+}
+
+.textAreaContainer {
+    position: relative; /* This makes it a positioning context for absolute children */
+    margin: 0; /* Removes any margin */
+}
+
+.textarea{
+    margin-top: 10px; /* Adds 10px margin to the top */
+}
