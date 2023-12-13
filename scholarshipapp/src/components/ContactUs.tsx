@@ -18,7 +18,7 @@ export const ContactUs: React.FC = () => {
         e.preventDefault();
 
         if (form.current) {
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
+            emailjs.sendForm('service_55zyzln', 'template_rbwigdh', form.current, '5MK4rWbh_fCErDO7u')
                 .then((result) => {
                     console.log(result.text);
                 }, (error) => {
@@ -51,7 +51,7 @@ export const ContactUs: React.FC = () => {
             <div className="textAreaContainer">
                 <label>Message</label>
                 <textarea
-                    name="message"
+                    name="message_area_01"
                     value={message}
                     onChange={handleMessageChange}
                 />
