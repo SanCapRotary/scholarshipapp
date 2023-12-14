@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformationForm'; // Adjust the path as needed
+import { ClassStanding } from '../components/tradeSchool/TradeClassStandingForm'; // Adjust path as needed
 
 
 interface PersonalInfo {
@@ -28,6 +29,7 @@ interface EmploymentEntry {
 interface TradeSchoolFormData {
     personalInfo: PersonalInfo;
     academicHistory: AcademicEntry[];
+    classStanding: ClassStanding;
     employmentHistory: EmploymentEntry[];
     guardians: GuardianEntry[];
     siblings: SiblingEntry[];
@@ -35,7 +37,7 @@ interface TradeSchoolFormData {
 
 interface TradeSchoolContextProps {
     formData: TradeSchoolFormData;
-    updateFormData: (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[]) => void;
+    updateFormData: (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding) => void;
 }
 
 
@@ -55,12 +57,13 @@ export const TradeSchoolProvider: React.FC<ProviderProps> = ({ children }) => {
             emailAddress: ''
         },
         academicHistory: [],
+        classStanding: { tradeHighSchoolGPA: '' },
         employmentHistory: [],
         guardians: [],
         siblings: []
     });
 
-    const updateFormData = (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[]) => {
+    const updateFormData = (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding) => {
         setFormData(prevData => ({
             ...prevData,
             [field]: value,

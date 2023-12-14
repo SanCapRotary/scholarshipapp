@@ -5,6 +5,7 @@ import emailjs from '@emailjs/browser';
 import { useTradeSchoolContext } from '../contexts/TradeSchoolContext';
 import PersonalInfoForm, { PersonalInfo } from '../components/shared/PersonalInfoForm';
 import AcademicHistoryForm, { AcademicEntry } from '../components/shared/AcademicHistoryForm';
+import TradeClassStandingForm, { ClassStanding } from '../components/tradeSchool/TradeClassStandingForm';
 import EmploymentForm, { EmploymentEntry } from '../components/shared/EmploymentForm';
 import FamilyInformationForm, { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformationForm';
 import '../components/FormStyleSheet.css';
@@ -22,6 +23,10 @@ export const TradeSchoolForm: React.FC = () => {
 
     const handleAcademicHistoryUpdate = (history: AcademicEntry[]) => {
         updateFormData('academicHistory', history);
+    };
+
+    const handleClassStandingUpdate = (classStanding: ClassStanding) => {
+        updateFormData('classStanding', classStanding);
     };
 
     const handleEmploymentUpdate = (entries: EmploymentEntry[]) => {
@@ -62,6 +67,7 @@ export const TradeSchoolForm: React.FC = () => {
             mailingAddress: formData.personalInfo.mailingAddress,
             dateOfBirth: formData.personalInfo.dateOfBirth,
             schoolDetailsString: schoolDetailsString,
+            classStanding: formData.classStanding.tradeHighSchoolGPA,
             employmentDetailsString: employmentDetailsString,
             guardianDetailsString: guardianDetailsString,
             siblingDetailsString: siblingDetailsString
@@ -81,6 +87,7 @@ export const TradeSchoolForm: React.FC = () => {
         <form ref={form} onSubmit={sendEmail}>
             <PersonalInfoForm onUpdate={handlePersonalInfoUpdate} />
             <AcademicHistoryForm onUpdate={handleAcademicHistoryUpdate} />
+            <TradeClassStandingForm onUpdate={handleClassStandingUpdate} />
             <EmploymentForm onUpdate={handleEmploymentUpdate} />
             <FamilyInformationForm onUpdate={handleFamilyInfoUpdate} />
             {/* ... any other form components go here ... */}
