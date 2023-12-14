@@ -3,6 +3,8 @@ import { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformat
 import { ClassStanding } from '../components/tradeSchool/TradeClassStandingForm';
 import { HonorsAwardsOrgsInfo } from '../components/tradeSchool/TradeHonorsAwardsOrgsForm';
 import { TradeApplicationEntry } from '../components/tradeSchool/TradeSchoolApplicationForm';
+import { EmploymentPlan } from '../components/tradeSchool/TradeEmploymentPlanForm';
+
 
 interface PersonalInfo {
     firstName: string;
@@ -36,11 +38,12 @@ interface TradeSchoolFormData {
     guardians: GuardianEntry[];
     siblings: SiblingEntry[];
     tradeSchoolApplication: TradeApplicationEntry;
+    employmentPlan: EmploymentPlan;
 }
 
 interface TradeSchoolContextProps {
     formData: TradeSchoolFormData;
-    updateFormData: (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding | HonorsAwardsOrgsInfo | TradeApplicationEntry) => void;
+    updateFormData: (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding | HonorsAwardsOrgsInfo | TradeApplicationEntry | EmploymentPlan) => void;
 }
 
 interface ProviderProps {
@@ -71,10 +74,13 @@ export const TradeSchoolProvider: React.FC<ProviderProps> = ({ children }) => {
             appliedTo: '',
             acceptedTo: false,
             programCost: ''
+        },
+        employmentPlan: { // Initialize employmentPlan
+            employmentPlans: ''
         }
     });
 
-    const updateFormData = (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding | HonorsAwardsOrgsInfo | TradeApplicationEntry) => {
+    const updateFormData = (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding | HonorsAwardsOrgsInfo | TradeApplicationEntry | EmploymentPlan) => {
         setFormData(prevData => ({
             ...prevData,
             [field]: value,

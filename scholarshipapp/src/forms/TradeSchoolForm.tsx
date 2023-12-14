@@ -8,6 +8,7 @@ import AcademicHistoryForm, { AcademicEntry } from '../components/shared/Academi
 import TradeHonorsAwardsOrgsForm, { HonorsAwardsOrgsInfo } from '../components/tradeSchool/TradeHonorsAwardsOrgsForm';
 import TradeClassStandingForm, { ClassStanding } from '../components/tradeSchool/TradeClassStandingForm';
 import EmploymentForm, { EmploymentEntry } from '../components/shared/EmploymentForm';
+import TradeEmploymentPlanForm, { EmploymentPlan } from '../components/tradeSchool/TradeEmploymentPlanForm';
 import FamilyInformationForm, { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformationForm';
 import TradeSchoolApplicationForm, { TradeApplicationEntry } from '../components/tradeSchool/TradeSchoolApplicationForm';
 import '../components/FormStyleSheet.css';
@@ -37,6 +38,10 @@ export const TradeSchoolForm: React.FC = () => {
 
     const handleEmploymentUpdate = (entries: EmploymentEntry[]) => {
         updateFormData('employmentHistory', entries);
+    };
+
+    const handleEmploymentPlanUpdate = (employmentPlan: EmploymentPlan) => {
+        updateFormData('employmentPlan', employmentPlan);
     };
 
     const handleFamilyInfoUpdate = (guardians: GuardianEntry[], siblings: SiblingEntry[]) => {
@@ -80,6 +85,7 @@ export const TradeSchoolForm: React.FC = () => {
             schoolDetailsString,
             tradeHighSchoolGPA: formData.classStanding.tradeHighSchoolGPA,
             employmentDetailsString,
+            employmentPlans: formData.employmentPlan.employmentPlans,
             guardianDetailsString,
             siblingDetailsString,
             honorsAndAwards: formData.honorsAwardsOrgsInfo.honorsAndAwards,
@@ -107,6 +113,7 @@ export const TradeSchoolForm: React.FC = () => {
             <TradeHonorsAwardsOrgsForm onUpdate={handleHonorsAwardsOrgsUpdate} />
             <TradeSchoolApplicationForm onUpdate={handleTradeSchoolApplicationUpdate} />
             <EmploymentForm onUpdate={handleEmploymentUpdate} />
+            <TradeEmploymentPlanForm onUpdate={handleEmploymentPlanUpdate} />
             <FamilyInformationForm onUpdate={handleFamilyInfoUpdate} />
 
             {isSubmitted && !submissionError && (
