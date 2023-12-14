@@ -1,7 +1,8 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-import { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformationForm'; // Adjust the path as needed
-import { ClassStanding } from '../components/tradeSchool/TradeClassStandingForm'; // Adjust path as needed
-
+import { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformationForm';
+import { ClassStanding } from '../components/tradeSchool/TradeClassStandingForm';
+import { HonorsAwardsOrgsInfo } from '../components/tradeSchool/TradeHonorsAwardsOrgsForm';
+import { TradeApplicationEntry } from '../components/tradeSchool/TradeSchoolApplicationForm';
 
 interface PersonalInfo {
     firstName: string;
@@ -14,11 +15,6 @@ interface PersonalInfo {
 interface AcademicEntry {
     schoolAttended: string;
     schoolAttendedDates: string;
-}
-
-interface HonorsAwardsOrgsInfo {
-    honorsAndAwards: string;
-    organizationsAndLeadership: string;
 }
 
 interface EmploymentEntry {
@@ -39,13 +35,13 @@ interface TradeSchoolFormData {
     employmentHistory: EmploymentEntry[];
     guardians: GuardianEntry[];
     siblings: SiblingEntry[];
+    tradeSchoolApplication: TradeApplicationEntry;
 }
 
 interface TradeSchoolContextProps {
     formData: TradeSchoolFormData;
-    updateFormData: (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding | HonorsAwardsOrgsInfo) => void;
+    updateFormData: (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding | HonorsAwardsOrgsInfo | TradeApplicationEntry) => void;
 }
-
 
 interface ProviderProps {
     children: ReactNode;
@@ -70,16 +66,20 @@ export const TradeSchoolProvider: React.FC<ProviderProps> = ({ children }) => {
         },
         employmentHistory: [],
         guardians: [],
-        siblings: []
+        siblings: [],
+        tradeSchoolApplication: {
+            appliedTo: '',
+            acceptedTo: false,
+            programCost: ''
+        }
     });
 
-    const updateFormData = (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding | HonorsAwardsOrgsInfo) => {
+    const updateFormData = (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding | HonorsAwardsOrgsInfo | TradeApplicationEntry) => {
         setFormData(prevData => ({
             ...prevData,
             [field]: value,
         }));
     };
-
 
     return (
         <TradeSchoolContext.Provider value={{ formData, updateFormData }}>

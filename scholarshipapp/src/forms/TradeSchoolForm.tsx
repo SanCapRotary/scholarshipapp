@@ -9,6 +9,7 @@ import TradeHonorsAwardsOrgsForm, { HonorsAwardsOrgsInfo } from '../components/t
 import TradeClassStandingForm, { ClassStanding } from '../components/tradeSchool/TradeClassStandingForm';
 import EmploymentForm, { EmploymentEntry } from '../components/shared/EmploymentForm';
 import FamilyInformationForm, { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformationForm';
+import TradeSchoolApplicationForm, { TradeApplicationEntry } from '../components/tradeSchool/TradeSchoolApplicationForm';
 import '../components/FormStyleSheet.css';
 
 export const TradeSchoolForm: React.FC = () => {
@@ -43,6 +44,10 @@ export const TradeSchoolForm: React.FC = () => {
         updateFormData('siblings', siblings);
     };
 
+    const handleTradeSchoolApplicationUpdate = (entry: TradeApplicationEntry) => {
+        updateFormData('tradeSchoolApplication', entry);
+    };
+
     const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitted(false);
@@ -64,6 +69,8 @@ export const TradeSchoolForm: React.FC = () => {
             `Name: ${entry.siblingName}, Age: ${entry.siblingAge}, In School: ${entry.siblingInSchool ? 'Yes' : 'No'}, School Name: ${entry.siblingSchoolName}`
         ).join('\n');
 
+        //const tradeSchoolApplicationString = `Applied To: ${formData.tradeSchoolApplication.appliedTo}, Accepted: ${formData.tradeSchoolApplication.acceptedTo ? 'Yes' : 'No'}, Program Cost: ${formData.tradeSchoolApplication.programCost}`;
+
         const tradeSchoolData = {
             firstName: formData.personalInfo.firstName,
             lastName: formData.personalInfo.lastName,
@@ -76,7 +83,10 @@ export const TradeSchoolForm: React.FC = () => {
             guardianDetailsString,
             siblingDetailsString,
             honorsAndAwards: formData.honorsAwardsOrgsInfo.honorsAndAwards,
-            organizationsAndLeadership: formData.honorsAwardsOrgsInfo.organizationsAndLeadership
+            organizationsAndLeadership: formData.honorsAwardsOrgsInfo.organizationsAndLeadership,
+            appliedTo: formData.tradeSchoolApplication.appliedTo,
+            acceptedTo: formData.tradeSchoolApplication.acceptedTo ? 'Yes' : 'No',
+            programCost: formData.tradeSchoolApplication.programCost
         };
 
         emailjs.send('service_55zyzln', 'template_rbwigdh', tradeSchoolData, '5MK4rWbh_fCErDO7u')
@@ -95,6 +105,7 @@ export const TradeSchoolForm: React.FC = () => {
             <AcademicHistoryForm onUpdate={handleAcademicHistoryUpdate} />
             <TradeClassStandingForm onUpdate={handleClassStandingUpdate} />
             <TradeHonorsAwardsOrgsForm onUpdate={handleHonorsAwardsOrgsUpdate} />
+            <TradeSchoolApplicationForm onUpdate={handleTradeSchoolApplicationUpdate} />
             <EmploymentForm onUpdate={handleEmploymentUpdate} />
             <FamilyInformationForm onUpdate={handleFamilyInfoUpdate} />
 
