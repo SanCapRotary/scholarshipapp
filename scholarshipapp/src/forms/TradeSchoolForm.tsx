@@ -5,6 +5,7 @@ import emailjs from '@emailjs/browser';
 import { useTradeSchoolContext } from '../contexts/TradeSchoolContext';
 import PersonalInfoForm, { PersonalInfo } from '../components/shared/PersonalInfoForm';
 import AcademicHistoryForm, { AcademicEntry } from '../components/shared/AcademicHistoryForm';
+import EmploymentForm, { EmploymentEntry } from '../components/shared/EmploymentForm'; // Make sure the path is correct
 import '../components/FormStyleSheet.css';
 
 export const TradeSchoolForm: React.FC = () => {
@@ -22,15 +23,22 @@ export const TradeSchoolForm: React.FC = () => {
         updateFormData('academicHistory', history);
     };
 
+    const handleEmploymentUpdate = (entries: EmploymentEntry[]) => {
+        updateFormData('employmentHistory', entries);
+    };
+
     const sendEmail = (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitted(false);
         setSubmissionError('');
 
-        // Prepare the schools string in plain text
         const schoolDetailsString = formData.academicHistory.map(entry =>
             `School: ${entry.schoolAttended}, Dates: ${entry.schoolAttendedDates}`
-        ).join('\n'); // Separate each entry with a new line
+        ).join('\n');
+
+        const employmentDetailsString = formData.employmentHistory.map(entry =>
+            `Employer: ${entry.employmentEmployer}, Address: ${entry.employmentAddress}, Title: ${entry.employmentTitle}, Supervisor: ${entry.employmentSupervisor}, Start Date: ${entry.employmentStartDate}, End Date: ${entry.employmentEndDate}, Average Hours: ${entry.employmentAverageHours}`
+        ).join('\n');
 
         const tradeSchoolData = {
             firstName: formData.personalInfo.firstName,
@@ -38,7 +46,8 @@ export const TradeSchoolForm: React.FC = () => {
             emailAddress: formData.personalInfo.emailAddress,
             mailingAddress: formData.personalInfo.mailingAddress,
             dateOfBirth: formData.personalInfo.dateOfBirth,
-            schoolDetailsString: schoolDetailsString
+            schoolDetailsString: schoolDetailsString,
+            employmentDetailsString: employmentDetailsString
         };
 
         emailjs.send('service_55zyzln', 'template_rbwigdh', tradeSchoolData, '5MK4rWbh_fCErDO7u')
@@ -55,6 +64,7 @@ export const TradeSchoolForm: React.FC = () => {
         <form ref={form} onSubmit={sendEmail}>
             <PersonalInfoForm onUpdate={handlePersonalInfoUpdate} />
             <AcademicHistoryForm onUpdate={handleAcademicHistoryUpdate} />
+            <EmploymentForm onUpdate={handleEmploymentUpdate} />
             {/* ... any other form components go here ... */}
 
             {isSubmitted && !submissionError && (
