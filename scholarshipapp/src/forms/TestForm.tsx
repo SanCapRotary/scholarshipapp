@@ -10,7 +10,7 @@ interface EmploymentEntry {
     averageHours: string;
 }
 
-export const UniversityForm: React.FC = () => {
+export const TestForm: React.FC = () => {
     const [employmentHistory, setEmploymentHistory] = useState<EmploymentEntry[]>([
         { employment: '', address: '', title: '', supervisor: '', startDate: '', endDate: '', averageHours: '' }
     ]);

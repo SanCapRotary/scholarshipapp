@@ -3,7 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 /*import { ContactUs } from './components/ContactUs';*/
-import { UniversityForm } from './components/TestForm'
+import { TradeSchoolForm } from './forms/TradeSchoolForm'
+import TradeSchoolProvider from './contexts/TradeSchoolContext'
 
 
 function App() {
@@ -33,7 +34,9 @@ function App() {
           </p>
           <div>
               {/* Other components */}
-              <UniversityForm />
+              <TradeSchoolProvider>
+                  <TradeSchoolForm />
+              </TradeSchoolProvider>
           </div>
     </>
   )
