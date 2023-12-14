@@ -34,7 +34,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
     };
 
     return (
-        <form>
+        <div>
             <label>
                 First Name:
                 <input
@@ -80,7 +80,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
                     onChange={handleChange}
                 />
             </label>
-        </form>
+        </div>
     );
 };
 
