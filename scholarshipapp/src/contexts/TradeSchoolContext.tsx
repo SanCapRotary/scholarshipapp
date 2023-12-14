@@ -1,4 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformationForm'; // Adjust the path as needed
+
 
 interface PersonalInfo {
     firstName: string;
@@ -27,12 +29,15 @@ interface TradeSchoolFormData {
     personalInfo: PersonalInfo;
     academicHistory: AcademicEntry[];
     employmentHistory: EmploymentEntry[];
+    guardians: GuardianEntry[];
+    siblings: SiblingEntry[];
 }
 
 interface TradeSchoolContextProps {
     formData: TradeSchoolFormData;
-    updateFormData: (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[]) => void;
+    updateFormData: (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[]) => void;
 }
+
 
 interface ProviderProps {
     children: ReactNode;
@@ -50,15 +55,18 @@ export const TradeSchoolProvider: React.FC<ProviderProps> = ({ children }) => {
             emailAddress: ''
         },
         academicHistory: [],
-        employmentHistory: []
+        employmentHistory: [],
+        guardians: [],
+        siblings: []
     });
 
-    const updateFormData = (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[]) => {
+    const updateFormData = (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[]) => {
         setFormData(prevData => ({
             ...prevData,
             [field]: value,
         }));
     };
+
 
     return (
         <TradeSchoolContext.Provider value={{ formData, updateFormData }}>

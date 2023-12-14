@@ -5,7 +5,8 @@ import emailjs from '@emailjs/browser';
 import { useTradeSchoolContext } from '../contexts/TradeSchoolContext';
 import PersonalInfoForm, { PersonalInfo } from '../components/shared/PersonalInfoForm';
 import AcademicHistoryForm, { AcademicEntry } from '../components/shared/AcademicHistoryForm';
-import EmploymentForm, { EmploymentEntry } from '../components/shared/EmploymentForm'; // Make sure the path is correct
+import EmploymentForm, { EmploymentEntry } from '../components/shared/EmploymentForm';
+import FamilyInformationForm, { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformationForm';
 import '../components/FormStyleSheet.css';
 
 export const TradeSchoolForm: React.FC = () => {
@@ -27,17 +28,31 @@ export const TradeSchoolForm: React.FC = () => {
         updateFormData('employmentHistory', entries);
     };
 
+    const handleFamilyInfoUpdate = (guardians: GuardianEntry[], siblings: SiblingEntry[]) => {
+        updateFormData('guardians', guardians);
+        updateFormData('siblings', siblings);
+    };
+
     const sendEmail = (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitted(false);
         setSubmissionError('');
 
+        // Prepare the details strings
         const schoolDetailsString = formData.academicHistory.map(entry =>
             `School: ${entry.schoolAttended}, Dates: ${entry.schoolAttendedDates}`
         ).join('\n');
 
         const employmentDetailsString = formData.employmentHistory.map(entry =>
             `Employer: ${entry.employmentEmployer}, Address: ${entry.employmentAddress}, Title: ${entry.employmentTitle}, Supervisor: ${entry.employmentSupervisor}, Start Date: ${entry.employmentStartDate}, End Date: ${entry.employmentEndDate}, Average Hours: ${entry.employmentAverageHours}`
+        ).join('\n');
+
+        const guardianDetailsString = formData.guardians.map(entry =>
+            `Name: ${entry.guardianName}, Relationship: ${entry.guardianRelationship}, Address: ${entry.guardianAddress}, Mobile: ${entry.guardianMobile}, Email: ${entry.guardianEmail}, Occupation: ${entry.guardianOccupation}, Employer: ${entry.guardianEmployer}`
+        ).join('\n');
+
+        const siblingDetailsString = formData.siblings.map(entry =>
+            `Name: ${entry.siblingName}, Age: ${entry.siblingAge}, In School: ${entry.siblingInSchool ? 'Yes' : 'No'}, School Name: ${entry.siblingSchoolName}`
         ).join('\n');
 
         const tradeSchoolData = {
@@ -47,7 +62,9 @@ export const TradeSchoolForm: React.FC = () => {
             mailingAddress: formData.personalInfo.mailingAddress,
             dateOfBirth: formData.personalInfo.dateOfBirth,
             schoolDetailsString: schoolDetailsString,
-            employmentDetailsString: employmentDetailsString
+            employmentDetailsString: employmentDetailsString,
+            guardianDetailsString: guardianDetailsString,
+            siblingDetailsString: siblingDetailsString
         };
 
         emailjs.send('service_55zyzln', 'template_rbwigdh', tradeSchoolData, '5MK4rWbh_fCErDO7u')
@@ -65,6 +82,7 @@ export const TradeSchoolForm: React.FC = () => {
             <PersonalInfoForm onUpdate={handlePersonalInfoUpdate} />
             <AcademicHistoryForm onUpdate={handleAcademicHistoryUpdate} />
             <EmploymentForm onUpdate={handleEmploymentUpdate} />
+            <FamilyInformationForm onUpdate={handleFamilyInfoUpdate} />
             {/* ... any other form components go here ... */}
 
             {isSubmitted && !submissionError && (
