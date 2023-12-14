@@ -1,5 +1,3 @@
-// src/forms/TradeSchoolForm.tsx
-
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { useTradeSchoolContext } from '../contexts/TradeSchoolContext';
@@ -38,12 +36,11 @@ export const TradeSchoolForm: React.FC = () => {
         updateFormData('siblings', siblings);
     };
 
-    const sendEmail = (e: React.FormEvent) => {
+    const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitted(false);
         setSubmissionError('');
 
-        // Prepare the details strings
         const schoolDetailsString = formData.academicHistory.map(entry =>
             `School: ${entry.schoolAttended}, Dates: ${entry.schoolAttendedDates}`
         ).join('\n');
@@ -66,11 +63,11 @@ export const TradeSchoolForm: React.FC = () => {
             emailAddress: formData.personalInfo.emailAddress,
             mailingAddress: formData.personalInfo.mailingAddress,
             dateOfBirth: formData.personalInfo.dateOfBirth,
-            schoolDetailsString: schoolDetailsString,
-            classStanding: formData.classStanding.tradeHighSchoolGPA,
-            employmentDetailsString: employmentDetailsString,
-            guardianDetailsString: guardianDetailsString,
-            siblingDetailsString: siblingDetailsString
+            schoolDetailsString,
+            tradeHighSchoolGPA: formData.classStanding.tradeHighSchoolGPA, // Updated key
+            employmentDetailsString,
+            guardianDetailsString,
+            siblingDetailsString
         };
 
         emailjs.send('service_55zyzln', 'template_rbwigdh', tradeSchoolData, '5MK4rWbh_fCErDO7u')
@@ -90,7 +87,6 @@ export const TradeSchoolForm: React.FC = () => {
             <TradeClassStandingForm onUpdate={handleClassStandingUpdate} />
             <EmploymentForm onUpdate={handleEmploymentUpdate} />
             <FamilyInformationForm onUpdate={handleFamilyInfoUpdate} />
-            {/* ... any other form components go here ... */}
 
             {isSubmitted && !submissionError && (
                 <div className="submissionSuccess">

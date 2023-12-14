@@ -11,6 +11,8 @@ export const TradeClassStandingForm: React.FC<{ onUpdate: (classStanding: ClassS
         const updatedClassStanding = { ...classStanding, tradeHighSchoolGPA: e.target.value };
         setClassStanding(updatedClassStanding);
         onUpdate(updatedClassStanding);
+        console.log("Updated Class Standing:", updatedClassStanding);
+
     };
 
     return (
