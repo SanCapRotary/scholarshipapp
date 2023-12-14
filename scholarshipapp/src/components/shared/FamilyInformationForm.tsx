@@ -74,7 +74,42 @@ export const FamilyInformationForm: React.FC<{ onUpdate: (guardians: GuardianEnt
                             onChange={(e) => handleGuardianChange(index, 'guardianName', e.target.value)}
                             placeholder="Guardian Name"
                         />
-                        {/* Repeat this pattern for other guardian fields */}
+                        <input
+                            type="text"
+                            value={entry.guardianRelationship}
+                            onChange={(e) => handleGuardianChange(index, 'guardianRelationship', e.target.value)}
+                            placeholder="Guardian Relationship"
+                        />
+                        <input
+                            type="text"
+                            value={entry.guardianAddress}
+                            onChange={(e) => handleGuardianChange(index, 'guardianAddress', e.target.value)}
+                            placeholder="Guardian Address"
+                        />
+                        <input
+                            type="text"
+                            value={entry.guardianMobile}
+                            onChange={(e) => handleGuardianChange(index, 'guardianMobile', e.target.value)}
+                            placeholder="Guardian Mobile"
+                        />
+                        <input
+                            type="email"
+                            value={entry.guardianEmail}
+                            onChange={(e) => handleGuardianChange(index, 'guardianEmail', e.target.value)}
+                            placeholder="Guardian Email"
+                        />
+                        <input
+                            type="text"
+                            value={entry.guardianOccupation}
+                            onChange={(e) => handleGuardianChange(index, 'guardianOccupation', e.target.value)}
+                            placeholder="Guardian Occupation"
+                        />
+                        <input
+                            type="text"
+                            value={entry.guardianEmployer}
+                            onChange={(e) => handleGuardianChange(index, 'guardianEmployer', e.target.value)}
+                            placeholder="Guardian Employer"
+                        />
                         <button onClick={() => removeGuardianEntry(index)}>Remove</button>
                     </div>
                 ))}
@@ -91,7 +126,27 @@ export const FamilyInformationForm: React.FC<{ onUpdate: (guardians: GuardianEnt
                             onChange={(e) => handleSiblingChange(index, 'siblingName', e.target.value)}
                             placeholder="Sibling Name"
                         />
-                        {/* Repeat this pattern for other sibling fields */}
+                        <input
+                            type="text"
+                            value={entry.siblingAge}
+                            onChange={(e) => handleSiblingChange(index, 'siblingAge', e.target.value)}
+                            placeholder="Sibling Age"
+                        />
+                        <label>
+                            In School:
+                            <input
+                                type="checkbox"
+                                checked={entry.siblingInSchool}
+                                onChange={(e) => handleSiblingChange(index, 'siblingInSchool', e.target.checked)}
+                            />
+                        </label>
+                        <input
+                            type="text"
+                            value={entry.siblingSchoolName}
+                            onChange={(e) => handleSiblingChange(index, 'siblingSchoolName', e.target.value)}
+                            placeholder="Sibling School Name"
+                            disabled={!entry.siblingInSchool}
+                        />
                         <button onClick={() => removeSiblingEntry(index)}>Remove</button>
                     </div>
                 ))}
@@ -99,6 +154,7 @@ export const FamilyInformationForm: React.FC<{ onUpdate: (guardians: GuardianEnt
             </div>
         </>
     );
+
 };
 
 export default FamilyInformationForm;
