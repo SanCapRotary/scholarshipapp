@@ -1,45 +1,37 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-/*import { ContactUs } from './components/ContactUs';*/
 import { TradeSchoolForm } from './forms/TradeSchoolForm'
 import TradeSchoolProvider from './contexts/TradeSchoolContext'
-
+import sancaplogo from './assets/sancaplogo.png'
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more...or just text Rick.
-          </p>
-          <div>
-              {/* Other components */}
-              <TradeSchoolProvider>
-                  <TradeSchoolForm />
-              </TradeSchoolProvider>
-          </div>
-    </>
-  )
+    return (
+        <>
+            <div>
+                <img
+                    src={sancaplogo}
+                    className="logo"
+                    alt="Sanibel Captiva Rotary Club logo"
+                    style={{ width: 'auto', height: 'auto' }}
+                />
+            </div>
+
+            <div>
+            <h1>Sanibel Captiva Rotary Scholarship Applications</h1>
+
+            <p className="read-the-docs">
+                Select which application you would like to complete:
+                </p>
+            </div>
+            <div>
+                {/* Other components */}
+                <TradeSchoolProvider>
+                    <TradeSchoolForm />
+                </TradeSchoolProvider>
+            </div>
+        </>
+    )
 }
 
 export default App
