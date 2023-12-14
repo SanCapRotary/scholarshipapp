@@ -2,7 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { ContactUs } from './components/ContactUs';
+/*import { ContactUs } from './components/ContactUs';*/
+import { UniversityForm } from './components/TestForm'
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
           </p>
           <div>
               {/* Other components */}
-              <ContactUs />
+              <UniversityForm />
           </div>
     </>
   )
