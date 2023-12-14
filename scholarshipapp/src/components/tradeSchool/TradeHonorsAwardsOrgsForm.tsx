@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export interface HonorsAwardsOrgsInfo {
     honorsAndAwards: string;
@@ -14,21 +14,28 @@ const TradeHonorsAwardsOrgsForm: React.FC<TradeHonorsAwardsOrgsFormProps> = ({ o
         honorsAndAwards: '',
         organizationsAndLeadership: ''
     });
-
-    useEffect(() => {
-        onUpdate(honorsAwardsOrgsInfo);
-    }, [honorsAwardsOrgsInfo, onUpdate]);
+    const maxWords = 150;
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        const wordCount = value.trim().split(/\s+/).length;
-        if (wordCount <= 150 || value === '') {
+        const words = value.trim().split(/\s+/);
+        const filteredWords = words.filter(word => word.length > 0);
+
+        if (filteredWords.length <= maxWords || value === '') {
             setHonorsAwardsOrgsInfo({
+                ...honorsAwardsOrgsInfo,
+                [name]: value
+            });
+
+            // Update the parent component state
+            onUpdate({
                 ...honorsAwardsOrgsInfo,
                 [name]: value
             });
         }
     };
+
+    const wordCount = (text: string) => text.trim().split(/\s+/).filter(word => word.length > 0).length;
 
     return (
         <div>
@@ -41,6 +48,9 @@ const TradeHonorsAwardsOrgsForm: React.FC<TradeHonorsAwardsOrgsFormProps> = ({ o
                         onChange={handleInputChange}
                     />
                 </label>
+                <div className="smallFont">
+                    Word Count: {wordCount(honorsAwardsOrgsInfo.honorsAndAwards)}/{maxWords}
+                </div>
             </div>
             <div>
                 <label>
@@ -51,6 +61,9 @@ const TradeHonorsAwardsOrgsForm: React.FC<TradeHonorsAwardsOrgsFormProps> = ({ o
                         onChange={handleInputChange}
                     />
                 </label>
+                <div className="smallFont">
+                    Word Count: {wordCount(honorsAwardsOrgsInfo.organizationsAndLeadership)}/{maxWords}
+                </div>
             </div>
         </div>
     );

@@ -1,8 +1,11 @@
+// src/forms/TradeSchoolForm.tsx
+
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { useTradeSchoolContext } from '../contexts/TradeSchoolContext';
 import PersonalInfoForm, { PersonalInfo } from '../components/shared/PersonalInfoForm';
 import AcademicHistoryForm, { AcademicEntry } from '../components/shared/AcademicHistoryForm';
+import TradeHonorsAwardsOrgsForm, { HonorsAwardsOrgsInfo } from '../components/tradeSchool/TradeHonorsAwardsOrgsForm';
 import TradeClassStandingForm, { ClassStanding } from '../components/tradeSchool/TradeClassStandingForm';
 import EmploymentForm, { EmploymentEntry } from '../components/shared/EmploymentForm';
 import FamilyInformationForm, { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformationForm';
@@ -25,6 +28,10 @@ export const TradeSchoolForm: React.FC = () => {
 
     const handleClassStandingUpdate = (classStanding: ClassStanding) => {
         updateFormData('classStanding', classStanding);
+    };
+
+    const handleHonorsAwardsOrgsUpdate = (info: HonorsAwardsOrgsInfo) => {
+        updateFormData('honorsAwardsOrgsInfo', info);
     };
 
     const handleEmploymentUpdate = (entries: EmploymentEntry[]) => {
@@ -64,10 +71,12 @@ export const TradeSchoolForm: React.FC = () => {
             mailingAddress: formData.personalInfo.mailingAddress,
             dateOfBirth: formData.personalInfo.dateOfBirth,
             schoolDetailsString,
-            tradeHighSchoolGPA: formData.classStanding.tradeHighSchoolGPA, // Updated key
+            tradeHighSchoolGPA: formData.classStanding.tradeHighSchoolGPA,
             employmentDetailsString,
             guardianDetailsString,
-            siblingDetailsString
+            siblingDetailsString,
+            honorsAndAwards: formData.honorsAwardsOrgsInfo.honorsAndAwards,
+            organizationsAndLeadership: formData.honorsAwardsOrgsInfo.organizationsAndLeadership
         };
 
         emailjs.send('service_55zyzln', 'template_rbwigdh', tradeSchoolData, '5MK4rWbh_fCErDO7u')
@@ -85,6 +94,7 @@ export const TradeSchoolForm: React.FC = () => {
             <PersonalInfoForm onUpdate={handlePersonalInfoUpdate} />
             <AcademicHistoryForm onUpdate={handleAcademicHistoryUpdate} />
             <TradeClassStandingForm onUpdate={handleClassStandingUpdate} />
+            <TradeHonorsAwardsOrgsForm onUpdate={handleHonorsAwardsOrgsUpdate} />
             <EmploymentForm onUpdate={handleEmploymentUpdate} />
             <FamilyInformationForm onUpdate={handleFamilyInfoUpdate} />
 

@@ -16,6 +16,11 @@ interface AcademicEntry {
     schoolAttendedDates: string;
 }
 
+interface HonorsAwardsOrgsInfo {
+    honorsAndAwards: string;
+    organizationsAndLeadership: string;
+}
+
 interface EmploymentEntry {
     employmentEmployer: string;
     employmentAddress: string;
@@ -30,6 +35,7 @@ interface TradeSchoolFormData {
     personalInfo: PersonalInfo;
     academicHistory: AcademicEntry[];
     classStanding: ClassStanding;
+    honorsAwardsOrgsInfo: HonorsAwardsOrgsInfo;
     employmentHistory: EmploymentEntry[];
     guardians: GuardianEntry[];
     siblings: SiblingEntry[];
@@ -37,7 +43,7 @@ interface TradeSchoolFormData {
 
 interface TradeSchoolContextProps {
     formData: TradeSchoolFormData;
-    updateFormData: (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding) => void;
+    updateFormData: (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding | HonorsAwardsOrgsInfo) => void;
 }
 
 
@@ -58,12 +64,16 @@ export const TradeSchoolProvider: React.FC<ProviderProps> = ({ children }) => {
         },
         academicHistory: [],
         classStanding: { tradeHighSchoolGPA: '' },
+        honorsAwardsOrgsInfo: {
+            honorsAndAwards: '',
+            organizationsAndLeadership: ''
+        },
         employmentHistory: [],
         guardians: [],
         siblings: []
     });
 
-    const updateFormData = (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding) => {
+    const updateFormData = (field: keyof TradeSchoolFormData, value: PersonalInfo | AcademicEntry[] | EmploymentEntry[] | GuardianEntry[] | SiblingEntry[] | ClassStanding | HonorsAwardsOrgsInfo) => {
         setFormData(prevData => ({
             ...prevData,
             [field]: value,
