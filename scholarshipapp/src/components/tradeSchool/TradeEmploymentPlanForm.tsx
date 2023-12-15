@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../FormStyleSheet.css'
 
 export interface EmploymentPlan {
     employmentPlans: string;
@@ -28,17 +29,18 @@ const TradeEmploymentPlanForm: React.FC<TradeEmploymentPlanFormProps> = ({ onUpd
     const wordCount = (text: string) => text.trim().split(/\s+/).filter(word => word.length > 0).length;
 
     return (
-        <div>
-            <label>
-                Employment Plans (Limit to 150 words):
+        <div className="trade-employment-plan-container">
+            <div className="trade-employment-plan-form-group">
+                <label htmlFor="employmentPlans">Employment Plans:</label>
+                <span className="word-count">
+                    Word Count: {wordCount(employmentPlan.employmentPlans)}/{maxWords}
+                </span>
                 <textarea
+                    id="employmentPlans"
                     name="employmentPlans"
                     value={employmentPlan.employmentPlans}
                     onChange={handleInputChange}
                 />
-            </label>
-            <div className="smallFont">
-                Word Count: {wordCount(employmentPlan.employmentPlans)}/{maxWords}
             </div>
         </div>
     );

@@ -28,6 +28,18 @@ export const TradeClassStandingForm: React.FC<{ onUpdate: (classStanding: ClassS
                     placeholder="Enter GPA"
                 />
             </div>
+            <div>
+                <p style={{ textAlign: 'left' }}>
+                    Student must have completed at least two courses in one of the high school Career and Technical Academies and be on track for certification/degree in the same field.
+                </p>
+
+                <p style={{ textAlign: 'left' }}>
+                    To apply for this scholarship, you must be a graduating senior.
+                </p>
+            </div>
+
+
+
         </div>
     );
 

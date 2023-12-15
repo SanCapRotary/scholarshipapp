@@ -11,6 +11,7 @@ import EmploymentForm, { EmploymentEntry } from '../components/shared/Employment
 import TradeEmploymentPlanForm, { EmploymentPlan } from '../components/tradeSchool/TradeEmploymentPlanForm';
 import FamilyInformationForm, { GuardianEntry, SiblingEntry } from '../components/shared/FamilyInformationForm';
 import TradeSchoolApplicationForm, { TradeApplicationEntry } from '../components/tradeSchool/TradeSchoolApplicationForm';
+import sancaplogo from '../assets/sancaplogo.png';
 import '../components/FormStyleSheet.css';
 
 export const TradeSchoolForm: React.FC = () => {
@@ -107,6 +108,19 @@ export const TradeSchoolForm: React.FC = () => {
 
     return (
         <form ref={form} onSubmit={sendEmail}>
+            <div>
+                <img
+                    src={sancaplogo}
+                    className="logo"
+                    alt="Sanibel Captiva Rotary Club logo"
+                    style={{ width: 'auto', height: 'auto' }}
+                />
+            </div>
+            <div>
+                <h3>Trade School Scholarship Application</h3>
+                <h5>Must be submitted by February 15</h5>
+            </div>
+
             <PersonalInfoForm onUpdate={handlePersonalInfoUpdate} />
             <AcademicHistoryForm onUpdate={handleAcademicHistoryUpdate} />
             <TradeClassStandingForm onUpdate={handleClassStandingUpdate} />
@@ -115,6 +129,19 @@ export const TradeSchoolForm: React.FC = () => {
             <EmploymentForm onUpdate={handleEmploymentUpdate} />
             <TradeEmploymentPlanForm onUpdate={handleEmploymentPlanUpdate} />
             <FamilyInformationForm onUpdate={handleFamilyInfoUpdate} />
+
+            <div>
+                <h5>LETTER OF RECOMMENDATION</h5>
+                <p style={{ textAlign: 'left' }}>
+                    A letter of recommendation is REQUIRED as part of this application.  That letter must be from an instructor or program director of the academy you are attending. The letter must be sent via email to someone@sancaprotary.com.
+                </p>
+                <p style={{ textAlign: 'left' }}>
+                    It is your responsibility to make certain the email has been sent.
+                </p>
+                <p style={{ textAlign: 'left' }}>
+                    By clicking the <b>Submit Application</b> button below I acknowledge that I have completed this application truthfully to the best of my ability.
+                </p>
+            </div>
 
             {isSubmitted && !submissionError && (
                 <div className="submissionSuccess">

@@ -1,6 +1,6 @@
 // src/components/tradeSchool/TradeSchoolApplicationForm.tsx
-
 import React, { useState } from 'react';
+import '../FormStyleSheet.css'
 
 export interface TradeApplicationEntry {
     appliedTo: string;

@@ -135,9 +135,6 @@ label, input {
         border-radius: 0.25em;
     }
 
-
-
-
 /* TradeHonorsAwardsAndOrgsForm.css */
 .trade-honors-awards-container {
     max-width: 600px;
@@ -170,3 +167,39 @@ label, input {
     font-size: 0.8em;
     padding-top: 2em;
 }
+/* TradeEmploymentPlanForm.css */
+
+.trade-employment-plan-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #333;
+    overflow: auto;
+}
+
+.trade-employment-plan-form-group {
+    position: relative; /* Allows absolute positioning inside this div */
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+    .trade-employment-plan-form-group label {
+        float: left;
+        margin-bottom: 0.5em;
+    }
+
+    .trade-employment-plan-form-group textarea {
+        width: 100%;
+        padding: 0.5em;
+        border: 1px solid #ddd;
+        border-radius: 0.25em;
+        height: 150px;
+    }
+
+.smallFont {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0.8em;
+    margin-top: 5px; /* Adjust as needed for spacing */
+}
+
