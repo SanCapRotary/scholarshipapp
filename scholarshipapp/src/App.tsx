@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { TradeSchoolForm } from './forms/TradeSchoolForm';
-// import { UniversityForm } from './forms/UniversityForm'; // Import the UniversityForm component
 import sancaplogo from './assets/sancaplogo.png';
 
 function App() {
@@ -10,22 +9,31 @@ function App() {
     const handleFormChange = (formName: string) => {
         if (formName === 'tradeSchool') {
             setActiveForm(<TradeSchoolForm />);
-            // Uncomment below if you have UniversityForm
-            // setActiveForm(<UniversityForm />);
         }
     };
 
     const handleBackButtonClick = () => {
-        setActiveForm(null); // Clear the active form to go back to the initial state
+        setActiveForm(null);
+    };
+
+    const containerStyle: React.CSSProperties = {
+        maxWidth: '100%', // Make content adapt to the viewport width
+        margin: '0 auto', // Center the content horizontally
+        padding: '20px',
+        boxSizing: 'border-box', // Specify box-sizing
+        textAlign: 'center', // Center text within the container
     };
 
     const buttonStyle = {
-        margin: '5px'
+        margin: '5px',
     };
 
+    useEffect(() => {
+        document.title = 'SanCap Rotary Scholarship Application';
+    }, []);
+
     return (
-        <>
-            {/* Conditionally render the content */}
+        <div style={containerStyle}>
             {!activeForm && (
                 <>
                     <div>
@@ -56,12 +64,11 @@ function App() {
 
             {activeForm && (
                 <div>
-                    {/* Render the active form */}
                     {activeForm}
                     <button onClick={handleBackButtonClick}>Back</button>
                 </div>
             )}
-        </>
+        </div>
     );
 }
 
