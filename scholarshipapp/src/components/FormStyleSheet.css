@@ -31,10 +31,11 @@ label, input {
 
 .section-container {
     max-width: 600px;
-    margin: 1px;
+    margin: 0.25em;
     padding: 20px;
     border: 1px solid #333;
     overflow: auto;
+    text-align: left;
 }
 
 .sub-section-container {
@@ -79,8 +80,16 @@ label, input {
         margin-bottom: 5px; /* Add space between the inputs and labels */
     }
 
+.add-button {
+    padding: 2px 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1em;
+    cursor: pointer;
+}
+
 .remove-x-button {
-    padding: 2px 5px;
+    padding: 1px 4px;
     font-weight: bold;
     cursor: pointer;
     margin-top: 10px; /* Space from the inputs container */

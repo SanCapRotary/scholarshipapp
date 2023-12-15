@@ -35,7 +35,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
 
     return (
         <div className="section-container">
-            <label>Personal Info</label>
+            <label><h5>Personal Info</h5></label>
 
             <div className="form-group">
                 <label>First Name:</label>

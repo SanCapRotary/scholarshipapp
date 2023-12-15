@@ -34,37 +34,40 @@ export const AcademicHistoryForm: React.FC<{ onUpdate: (history: AcademicEntry[]
 
     return (
         <div className="section-container">
-            <label>Academic History</label>
-
+            <label><h5>Academic History</h5></label>
             {academicHistory.map((entry, index) => (
-                <div key={index} className="academic-history-entry">
-                    <div className="academic-history-inputs">
-                        <input
-                            type="text"
-                            value={entry.schoolAttended}
-                            onChange={(e) => handleAcademicChange(index, 'schoolAttended', e.target.value)}
-                            placeholder="School Attended"
-                        />
-                        <input
-                            type="text"
-                            value={entry.schoolAttendedDates}
-                            onChange={(e) => handleAcademicChange(index, 'schoolAttendedDates', e.target.value)}
-                            placeholder="Dates Attended"
-                        />
+                <div className="sub-section-container">
+                    <div key={index} className="academic-history-entry">
+                        <div className="academic-history-inputs">
+                            <label>Name of School</label>
+                            <input
+                                type="text"
+                                value={entry.schoolAttended}
+                                onChange={(e) => handleAcademicChange(index, 'schoolAttended', e.target.value)}
+                                placeholder="School Attended"
+                            />
+                            <label>Dates Attended</label>
+                            <input
+                                type="text"
+                                value={entry.schoolAttendedDates}
+                                onChange={(e) => handleAcademicChange(index, 'schoolAttendedDates', e.target.value)}
+                                placeholder="Dates Attended"
+                            />
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => removeAcademicEntry(index)}
+                            className="remove-x-button"
+                            title="Remove entry">X</button>
+
                     </div>
-                    <button
-                        type="button"
-                        onClick={() => removeAcademicEntry(index)}
-                        className="remove-button"
-                    >
-                        Remove
-                    </button>
                 </div>
             ))}
+
             <button
                 type="button"
                 onClick={addAcademicEntry}
-                className="add-school-button"
+                className="add-button"
             >
                 Add School
             </button>

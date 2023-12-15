@@ -92,7 +92,7 @@ export const EmploymentForm: React.FC<{ onUpdate: (history: EmploymentEntry[]) =
                                     placeholder="Average Hours Per Week"
                                 />
                             </div>
-                            <button type="button" className="remove-x-button" onClick={() => removeEmploymentEntry(index)}>X</button>
+                            <button type="button" title="Remove entry" className="remove-x-button" onClick={() => removeEmploymentEntry(index)}>X</button>
                         </div>
                     </div>
                 ))}
