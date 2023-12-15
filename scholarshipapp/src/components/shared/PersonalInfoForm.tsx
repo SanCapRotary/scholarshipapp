@@ -35,6 +35,8 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
 
     return (
         <div className="personal-info-container">
+            <label>Personal Info</label>
+
             <div className="form-group">
                 <label>First Name:</label>
                 <input
@@ -42,6 +44,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
                     name="firstName"
                     value={personalInfo.firstName}
                     onChange={handleChange}
+                    placeholder="first name"
                 />
             </div>
             <div className="form-group">
@@ -51,6 +54,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
                     name="lastName"
                     value={personalInfo.lastName}
                     onChange={handleChange}
+                    placeholder="last name"
                 />
             </div>
             <div className="form-group">
@@ -69,6 +73,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
                     name="mailingAddress"
                     value={personalInfo.mailingAddress}
                     onChange={handleChange}
+                    placeholder="street/city/state/zip"
                 />
             </div>
             <div className="form-group">
@@ -78,6 +83,8 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
                     name="emailAddress"
                     value={personalInfo.emailAddress}
                     onChange={handleChange}
+                    placeholder="name@domain"
+
                 />
             </div>
         </div>
