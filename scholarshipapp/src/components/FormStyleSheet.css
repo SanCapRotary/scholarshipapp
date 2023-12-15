@@ -109,3 +109,28 @@ label, input {
     border: none;
     cursor: pointer;
 }
+/* TradeClassStandingForm.css */
+.trade-class-standing-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #333;
+}
+
+.trade-class-standing-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+    .trade-class-standing-form-group label {
+        align-self: flex-start;
+    }
+
+    .trade-class-standing-form-group input[type="text"] {
+        width: 100%;
+        padding: 0.5em;
+        margin-top: 0.5em; /* Adjust the space between the label and input */
+        border: 1px solid #ddd;
+        border-radius: 0.25em;
+    }

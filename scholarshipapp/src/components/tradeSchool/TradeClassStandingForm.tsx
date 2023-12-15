@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../FormStyleSheet.css'
 
 export interface ClassStanding {
     tradeHighSchoolGPA: string;
@@ -16,18 +17,22 @@ export const TradeClassStandingForm: React.FC<{ onUpdate: (classStanding: ClassS
     };
 
     return (
-        <div>
-            <label>
-                High School GPA:
+        <div className="trade-class-standing-container">
+            <div className="trade-class-standing-form-group">
+                <label htmlFor="tradeHighSchoolGPA">High School GPA:</label>
                 <input
                     type="text"
+                    id="tradeHighSchoolGPA"
                     value={classStanding.tradeHighSchoolGPA}
                     onChange={handleChange}
                     placeholder="Enter GPA"
                 />
-            </label>
+            </div>
         </div>
     );
+
+
+
 };
 
 export default TradeClassStandingForm;
