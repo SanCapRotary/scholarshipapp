@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import '../FormStyleSheet.css'
+
 
 export type PersonalInfo = {
     firstName: string;
     lastName: string;
-    dateOfBirth: string; // This could be Date type if you want to handle Date objects
+    dateOfBirth: string;
     mailingAddress: string;
     emailAddress: string;
 };
 
 type PersonalInfoFormProps = {
-    onUpdate: (info: PersonalInfo) => void; // This function will be used to update the state in the parent component
+    onUpdate: (info: PersonalInfo) => void;
 };
 
 const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
@@ -18,70 +20,71 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
         lastName: '',
         dateOfBirth: '',
         mailingAddress: '',
-        emailAddress: ''
+        emailAddress: '',
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         const updatedInfo = {
             ...personalInfo,
-            [name]: value
+            [name]: value,
         };
         setPersonalInfo(updatedInfo);
-
-        // Update the parent component state
         onUpdate(updatedInfo);
     };
 
     return (
-        <div>
-            <label>
-                First Name:
+        <div className="personal-info-container">
+            <div className="form-group">
+                <label>First Name:</label>
                 <input
                     type="text"
                     name="firstName"
                     value={personalInfo.firstName}
                     onChange={handleChange}
                 />
-            </label>
-            <label>
-                Last Name:
+            </div>
+            <div className="form-group">
+                <label>Last Name:</label>
                 <input
                     type="text"
                     name="lastName"
                     value={personalInfo.lastName}
                     onChange={handleChange}
                 />
-            </label>
-            <label>
-                Date of Birth:
+            </div>
+            <div className="form-group">
+                <label>Date of Birth:</label>
                 <input
                     type="date"
                     name="dateOfBirth"
                     value={personalInfo.dateOfBirth}
                     onChange={handleChange}
                 />
-            </label>
-            <label>
-                Mailing Address:
+            </div>
+            <div className="form-group">
+                <label>Mailing Address:</label>
                 <input
                     type="text"
                     name="mailingAddress"
                     value={personalInfo.mailingAddress}
                     onChange={handleChange}
                 />
-            </label>
-            <label>
-                Email Address:
+            </div>
+            <div className="form-group">
+                <label>Email Address:</label>
                 <input
                     type="email"
                     name="emailAddress"
                     value={personalInfo.emailAddress}
                     onChange={handleChange}
                 />
-            </label>
+            </div>
         </div>
     );
+
+
+
 };
 
 export default PersonalInfoForm;

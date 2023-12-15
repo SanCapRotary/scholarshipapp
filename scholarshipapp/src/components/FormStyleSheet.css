@@ -33,3 +33,79 @@ label, input {
     color: red;
     margin-top: 10px; /* Adds 10px margin to the top */
 }
+
+/* PersonalInfoForm.css */
+.personal-info-container {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #333;
+    padding: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+    .form-group label {
+        align-self: flex-start;
+        margin-bottom: .5em;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"],
+    .form-group input[type="email"] {
+        width: 100%;
+        padding: .5em;
+        border: 1px solid #ddd;
+        border-radius: .25em;
+    }
+
+/* AcademicHistoryForm.css or PersonalInfoForm.css */
+.academic-history-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #333;
+}
+
+.academic-history-entry {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+    .academic-history-entry input[type="text"] {
+        padding: .5em;
+        margin-bottom: .5em;
+        border: 1px solid #ddd;
+        border-radius: .25em;
+        width: 100%;
+    }
+
+    .academic-history-entry .inputs-and-remove {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .academic-history-entry .remove-button {
+        padding: .5em 1em;
+        margin-top: .5em;
+        border-radius: .25em; /* Rounded corners for buttons */
+        align-self: flex-end; /* Aligns the button to the right */
+        background: #000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+.add-school-button {
+    padding: .5em 1em;
+    margin-top: 1em; /* Space between the last entry and this button */
+    border-radius: .25em; /* Rounded corners for buttons */
+    background: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
