@@ -6,15 +6,6 @@ label, input {
     margin-right: 5px; /* Adds 5px margin to the right */
 }
 
-.smallFont {
-    font-size: 0.60em; /* This sets the font size to 60% of the surrounding text */
-    position: absolute; /* Position the word count div absolutely within the container */
-    top: 40px;
-    bottom: -20px; /* Adjust this value as needed to position it below the textarea */
-    right: 106px; /* Aligns it to the right edge of the container */
-    margin: 0; /* Removes any margin */
-}
-
 .textAreaContainer {
     position: relative; /* This makes it a positioning context for absolute children */
     margin: 0; /* Removes any margin */

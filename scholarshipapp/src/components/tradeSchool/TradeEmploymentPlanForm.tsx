@@ -31,7 +31,7 @@ const TradeEmploymentPlanForm: React.FC<TradeEmploymentPlanFormProps> = ({ onUpd
     return (
         <div className="trade-employment-plan-container">
             <div className="trade-employment-plan-form-group">
-                <label htmlFor="employmentPlans">Employment Plans:</label>
+                <label htmlFor="employmentPlans">What plans do you have for employment during technical school:</label>
                 <span className="word-count">
                     Word Count: {wordCount(employmentPlan.employmentPlans)}/{maxWords}
                 </span>

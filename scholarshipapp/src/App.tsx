@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { TradeSchoolForm } from './forms/TradeSchoolForm';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import sancaplogo from './assets/sancaplogo.png';
 
 function App() {
@@ -16,32 +17,27 @@ function App() {
         setActiveForm(null);
     };
 
-    const containerStyle: React.CSSProperties = {
-        maxWidth: '100%', // Make content adapt to the viewport width
-        margin: '0 auto', // Center the content horizontally
-        padding: '20px',
-        boxSizing: 'border-box', // Specify box-sizing
-        textAlign: 'center', // Center text within the container
-    };
-
-    const buttonStyle = {
-        margin: '5px',
-    };
+    //const containerStyle: React.CSSProperties = {
+    //    maxWidth: '100%', // Make content adapt to the viewport width
+    //    margin: '0 auto', // Center the content horizontally
+    //    padding: '20px',
+    //    boxSizing: 'border-box', // Specify box-sizing
+    //    textAlign: 'center', // Center text within the container
+    //};
 
     useEffect(() => {
         document.title = 'SanCap Rotary Scholarship Application';
     }, []);
 
     return (
-        <div style={containerStyle}>
+        <div className="container"> {/* Use Bootstrap container for responsive padding and margin */}
             {!activeForm && (
                 <>
-                    <div>
+                    <div className="text-center">
                         <img
                             src={sancaplogo}
-                            className="logo"
+                            className="logo img-fluid" // img-fluid for responsive image
                             alt="Sanibel Captiva Rotary Club logo"
-                            style={{ width: 'auto', height: 'auto' }}
                         />
                     </div>
 
@@ -52,10 +48,10 @@ function App() {
                         <p className="read-the-docs">
                             Select which application you would like to complete:
                         </p>
-                        <button style={buttonStyle} onClick={() => handleFormChange('tradeSchool')}>
+                        <button className="btn btn-primary m-2" onClick={() => handleFormChange('tradeSchool')}>
                             Trade School Scholarship
                         </button>
-                        <button disabled={true} style={buttonStyle} onClick={() => handleFormChange('tradeSchool')}>
+                        <button className="btn btn-secondary m-2" disabled={true} onClick={() => handleFormChange('tradeSchool')}>
                             University Scholarship
                         </button>
                     </div>
@@ -65,7 +61,7 @@ function App() {
             {activeForm && (
                 <div>
                     {activeForm}
-                    <button onClick={handleBackButtonClick}>Back</button>
+                    <button className="btn btn-info" onClick={handleBackButtonClick}>Back</button>
                 </div>
             )}
         </div>
