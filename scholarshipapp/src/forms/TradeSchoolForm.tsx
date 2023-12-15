@@ -13,6 +13,8 @@ import FamilyInformationForm, { GuardianEntry, SiblingEntry } from '../component
 import TradeSchoolApplicationForm, { TradeApplicationEntry } from '../components/tradeSchool/TradeSchoolApplicationForm';
 import sancaplogo from '../assets/sancaplogo.png';
 import '../components/FormStyleSheet.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export const TradeSchoolForm: React.FC = () => {
     const form = useRef<HTMLFormElement>(null);
@@ -107,19 +109,20 @@ export const TradeSchoolForm: React.FC = () => {
     };
 
     return (
-        <form ref={form} onSubmit={sendEmail}>
-            <div>
-                <img
-                    src={sancaplogo}
-                    className="logo"
-                    alt="Sanibel Captiva Rotary Club logo"
-                    style={{ width: 'auto', height: 'auto' }}
-                />
-            </div>
-            <div>
-                <h3>Trade School Scholarship Application</h3>
-                <h5>Must be submitted by February 15</h5>
-            </div>
+        <form ref={form} onSubmit={sendEmail} className="container">
+            <div className="row justify-content-center">
+                <div className="col-12 col-md-8">
+                    <img
+                        src={sancaplogo}
+                        className="logo img-fluid"
+                        alt="Sanibel Captiva Rotary Club logo"
+                    />
+                </div>
+
+                <div className="col-12 col-md-8 text-center">
+                    <h3>Trade School Scholarship Application</h3>
+                    <h5>Must be submitted by February 15</h5>
+                </div>
 
             <PersonalInfoForm onUpdate={handlePersonalInfoUpdate} />
             <AcademicHistoryForm onUpdate={handleAcademicHistoryUpdate} />
@@ -155,9 +158,10 @@ export const TradeSchoolForm: React.FC = () => {
                 </div>
             )}
 
-            <p>
-                <input type="submit" value="Submit Application" />
-            </p>
+                <div className="col-12">
+                    <input type="submit" value="Submit Application" className="btn btn-primary" />
+                </div>
+            </div>
         </form>
     );
 };

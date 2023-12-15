@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../FormStyleSheet.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 export type PersonalInfo = {
@@ -60,8 +62,9 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
             <div className="form-group">
                 <label>Date of Birth:</label>
                 <input
+                className="none"
                     type="date"
-                    name="dateOfBirth"
+                    name="do-not-bootstrap"
                     value={personalInfo.dateOfBirth}
                     onChange={handleChange}
                 />

@@ -17,14 +17,6 @@ function App() {
         setActiveForm(null);
     };
 
-    //const containerStyle: React.CSSProperties = {
-    //    maxWidth: '100%', // Make content adapt to the viewport width
-    //    margin: '0 auto', // Center the content horizontally
-    //    padding: '20px',
-    //    boxSizing: 'border-box', // Specify box-sizing
-    //    textAlign: 'center', // Center text within the container
-    //};
-
     useEffect(() => {
         document.title = 'SanCap Rotary Scholarship Application';
     }, []);
@@ -36,13 +28,12 @@ function App() {
                     <div className="text-center">
                         <img
                             src={sancaplogo}
-                            className="logo img-fluid" // img-fluid for responsive image
+                            className="logo img-fluid"
                             alt="Sanibel Captiva Rotary Club logo"
                         />
                     </div>
 
                     <div>
-                        <h1>Rotary Club of Sanibel Captiva</h1>
                         <h2>Scholarship Applications</h2>
 
                         <p className="read-the-docs">
