@@ -29,7 +29,7 @@ const TradeEmploymentPlanForm: React.FC<TradeEmploymentPlanFormProps> = ({ onUpd
     const wordCount = (text: string) => text.trim().split(/\s+/).filter(word => word.length > 0).length;
 
     return (
-        <div className="trade-employment-plan-container">
+        <div className="section-container">
             <div className="trade-employment-plan-form-group">
                 <label htmlFor="employmentPlans">What plans do you have for employment during technical school:</label>
                 <span className="word-count">

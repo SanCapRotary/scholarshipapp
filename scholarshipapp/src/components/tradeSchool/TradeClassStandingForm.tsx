@@ -17,7 +17,7 @@ export const TradeClassStandingForm: React.FC<{ onUpdate: (classStanding: ClassS
     };
 
     return (
-        <div className="trade-class-standing-container">
+        <div className="section-container">
             <div className="trade-class-standing-form-group">
                 <label htmlFor="tradeHighSchoolGPA">High School GPA:</label>
                 <input

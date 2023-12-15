@@ -24,14 +24,73 @@ label, input {
     color: red;
     margin-top: 10px; /* Adds 10px margin to the top */
 }
+.logo {
+    max-width: 100%;
+    height: auto;
+}
+
+.section-container {
+    max-width: 600px;
+    margin: 1px;
+    padding: 20px;
+    border: 1px solid #333;
+    overflow: auto;
+}
+
+.sub-section-container {
+    max-width: auto;
+    margin: 1px;
+    padding: 10px;
+    border: 1px solid #333;
+    overflow:auto
+}
+
+.inputs-container {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap; /* Wrap inputs if space is not enough */
+    gap: 10px; /* Space between inputs */
+}
+
+    .inputs-container input,
+    .inputs-container label {
+        flex: 1 1 auto; /* Allow inputs and labels to grow and shrink */
+        min-width: 120px; /* Minimum width for inputs */
+    }
+
+.date-label {
+    flex-basis: 100%; /* Full width */
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* This will vertically align items in the center */
+}
+
+.input-group {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+    .input-group input,
+    .input-group label {
+        margin-bottom: 5px; /* Add space between the inputs and labels */
+    }
+
+.remove-x-button {
+    padding: 2px 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px; /* Space from the inputs container */
+    margin-left: auto; /* Push the button to the right */
+    align-self: flex-end; /* Align at the end of the flex container */
+}
+
 
 /* PersonalInfoForm.css */
-.personal-info-container {
-    max-width: 600px;
-    margin: 0 auto;
-    border: 1px solid #333;
-    padding: 20px;
-}
+
 
 .form-group {
     display: flex;
@@ -54,12 +113,7 @@ label, input {
     }
 
 /* AcademicHistoryForm.css or PersonalInfoForm.css */
-.academic-history-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #333;
-}
+
 
 .academic-history-entry {
     display: flex;
@@ -101,12 +155,7 @@ label, input {
     cursor: pointer;
 }
 /* TradeClassStandingForm.css */
-.trade-class-standing-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #333;
-}
+
 
 .trade-class-standing-form-group {
     display: flex;
@@ -127,13 +176,7 @@ label, input {
     }
 
 /* TradeHonorsAwardsAndOrgsForm.css */
-.trade-honors-awards-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #333;
-    overflow: auto;
-}
+
 
 .trade-honors-awards-form-group {
     margin-bottom: 0;
@@ -160,13 +203,7 @@ label, input {
 }
 /* TradeEmploymentPlanForm.css */
 
-.trade-employment-plan-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #333;
-    overflow: auto;
-}
+
 
 .trade-employment-plan-form-group {
     position: relative; /* Allows absolute positioning inside this div */

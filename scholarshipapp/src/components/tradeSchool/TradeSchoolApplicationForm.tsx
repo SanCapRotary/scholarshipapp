@@ -30,7 +30,7 @@ const TradeSchoolApplicationForm: React.FC<TradeSchoolApplicationFormProps> = ({
     };
 
     return (
-        <div>
+        <div className="section-container">
             <label>
                 School Applied To:
                 <input

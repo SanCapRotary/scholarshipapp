@@ -33,7 +33,7 @@ export const AcademicHistoryForm: React.FC<{ onUpdate: (history: AcademicEntry[]
     };
 
     return (
-        <div className="academic-history-container">
+        <div className="section-container">
             <label>Academic History</label>
 
             {academicHistory.map((entry, index) => (

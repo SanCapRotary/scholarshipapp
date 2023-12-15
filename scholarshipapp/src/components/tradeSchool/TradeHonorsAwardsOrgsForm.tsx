@@ -39,7 +39,7 @@ const TradeHonorsAwardsOrgsForm: React.FC<TradeHonorsAwardsOrgsFormProps> = ({ o
     const wordCount = (text: string) => text.trim().split(/\s+/).filter(word => word.length > 0).length;
 
     return (
-        <div className="trade-honors-awards-container">
+        <div className="section-container">
             <div className="trade-honors-awards-form-group">
                 <label htmlFor="honorsAndAwards">Honors and Awards:</label>
                 <span className="word-count">

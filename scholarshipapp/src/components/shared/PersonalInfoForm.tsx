@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import '../FormStyleSheet.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
 export type PersonalInfo = {
     firstName: string;
     lastName: string;
@@ -36,7 +34,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
     };
 
     return (
-        <div className="personal-info-container">
+        <div className="section-container">
             <label>Personal Info</label>
 
             <div className="form-group">
