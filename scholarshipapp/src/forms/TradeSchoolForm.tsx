@@ -124,42 +124,45 @@ export const TradeSchoolForm: React.FC = () => {
                     <h5>Must be submitted by February 15</h5>
                 </div>
 
-            <PersonalInfoForm onUpdate={handlePersonalInfoUpdate} />
-            <AcademicHistoryForm onUpdate={handleAcademicHistoryUpdate} />
-            <TradeClassStandingForm onUpdate={handleClassStandingUpdate} />
-            <TradeHonorsAwardsOrgsForm onUpdate={handleHonorsAwardsOrgsUpdate} />
-            <TradeSchoolApplicationForm onUpdate={handleTradeSchoolApplicationUpdate} />
-            <EmploymentForm onUpdate={handleEmploymentUpdate} />
-            <TradeEmploymentPlanForm onUpdate={handleEmploymentPlanUpdate} />
-            <FamilyInformationForm onUpdate={handleFamilyInfoUpdate} />
+                <PersonalInfoForm onUpdate={handlePersonalInfoUpdate} />
+                <AcademicHistoryForm onUpdate={handleAcademicHistoryUpdate} />
+                <TradeClassStandingForm onUpdate={handleClassStandingUpdate} />
+                <TradeHonorsAwardsOrgsForm onUpdate={handleHonorsAwardsOrgsUpdate} />
+                <TradeSchoolApplicationForm onUpdate={handleTradeSchoolApplicationUpdate} />
+                <EmploymentForm onUpdate={handleEmploymentUpdate} />
+                <TradeEmploymentPlanForm onUpdate={handleEmploymentPlanUpdate} />
+                <FamilyInformationForm onUpdate={handleFamilyInfoUpdate} />
 
-            <div>
-                <h5>LETTER OF RECOMMENDATION</h5>
-                <p style={{ textAlign: 'left' }}>
-                    A letter of recommendation is REQUIRED as part of this application.  That letter must be from an instructor or program director of the academy you are attending. The letter must be sent via email to someone@sancaprotary.com.
-                </p>
-                <p style={{ textAlign: 'left' }}>
-                    It is your responsibility to make certain the email has been sent.
-                </p>
-                <p style={{ textAlign: 'left' }}>
-                    By clicking the <b>Submit Application</b> button below I acknowledge that I have completed this application truthfully to the best of my ability.
-                </p>
-            </div>
-
-            {isSubmitted && !submissionError && (
-                <div className="submissionSuccess">
-                    Your application has been sent successfully!
+                <div className="section-container">
+                    <h5>LETTER OF RECOMMENDATION</h5>
+                    <p style={{ textAlign: 'left' }}>
+                        A letter of recommendation is <strong>REQUIRED</strong> as part of this application.  That letter must be from an instructor or program director of the academy you are attending. The letter must be sent via email to <strong>someone@sancaprotary.com</strong>.
+                    </p>
+                    <p style={{ textAlign: 'left' }}>
+                        It is your responsibility to make certain the email has been sent.
+                    </p>
                 </div>
-            )}
+                <div className="section-container">
+                    <p style={{ textAlign: 'left' }}>
+                        By clicking the <b>Submit Application</b> button below I acknowledge that I have completed this application truthfully to the best of my ability.
+                    </p>
 
-            {submissionError && (
-                <div className="submissionError">
-                    Failed to send the application: {submissionError}
-                </div>
-            )}
 
-                <div className="col-12">
-                    <input type="submit" value="Submit Application" className="btn btn-primary" />
+                    {isSubmitted && !submissionError && (
+                        <div className="submissionSuccess">
+                            Your application has been sent successfully!
+                        </div>
+                    )}
+
+                    {submissionError && (
+                        <div className="submissionError">
+                            Failed to send the application: {submissionError}
+                        </div>
+                    )}
+
+                    <div className="col-12" style={{textAlign: 'center'} }>
+                        <input type="submit" value="Submit Application" className="btn btn-primary" />
+                    </div>
                 </div>
             </div>
         </form>
