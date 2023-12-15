@@ -96,7 +96,7 @@ export const EmploymentForm: React.FC<{ onUpdate: (history: EmploymentEntry[]) =
                         </div>
                     </div>
                 ))}
-                <button type="button" onClick={addEmploymentEntry}>Add Employment</button>
+                <button type="button" className="add-button" onClick={addEmploymentEntry}>Add Employment</button>
             </div>
         </>
 

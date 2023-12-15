@@ -76,62 +76,62 @@ export const FamilyInformationForm: React.FC<{ onUpdate: (guardians: GuardianEnt
                                     type="text"
                                     value={entry.guardianName}
                                     onChange={(e) => handleGuardianChange(index, 'guardianName', e.target.value)}
-                                    placeholder="Guardian Name"
+                                    placeholder="name"
                                 />
 
-                                <label>Guardian Relationship</label>
+                                <label>Relationship</label>
                                 <input
                                     type="text"
                                     value={entry.guardianRelationship}
                                     onChange={(e) => handleGuardianChange(index, 'guardianRelationship', e.target.value)}
-                                    placeholder="Guardian Relationship"
+                                    placeholder="father / mother / legal guardian / etc."
                                 />
 
-                                <label>Guardian Address</label>
+                                <label>Address</label>
                                 <input
                                     type="text"
                                     value={entry.guardianAddress}
                                     onChange={(e) => handleGuardianChange(index, 'guardianAddress', e.target.value)}
-                                    placeholder="Guardian Address"
+                                    placeholder="street / city / state / zip"
                                 />
 
-                                <label>Guardian Mobile</label>
+                                <label>Mobile</label>
                                 <input
                                     type="text"
                                     value={entry.guardianMobile}
                                     onChange={(e) => handleGuardianChange(index, 'guardianMobile', e.target.value)}
-                                    placeholder="Guardian Mobile"
+                                    placeholder="000-555-1212"
                                 />
 
-                                <label>Guardian Email</label>
+                                <label>Email</label>
                                 <input
                                     type="email"
                                     value={entry.guardianEmail}
                                     onChange={(e) => handleGuardianChange(index, 'guardianEmail', e.target.value)}
-                                    placeholder="Guardian Email"
+                                    placeholder="name@domain"
                                 />
 
-                                <label>Guardian Occupation</label>
+                                <label>Occupation</label>
                                 <input
                                     type="text"
                                     value={entry.guardianOccupation}
                                     onChange={(e) => handleGuardianChange(index, 'guardianOccupation', e.target.value)}
-                                    placeholder="Guardian Occupation"
+                                    placeholder="occupation"
                                 />
 
-                                <label>Guardian Employer</label>
+                                <label>Employer</label>
                                 <input
                                     type="text"
                                     value={entry.guardianEmployer}
                                     onChange={(e) => handleGuardianChange(index, 'guardianEmployer', e.target.value)}
-                                    placeholder="Guardian Employer"
+                                    placeholder="employer"
                                 />
                             </div>
                             <button type="button" title="Remove entry" className="remove-x-button" onClick={() => removeGuardianEntry(index)}>X</button>
                         </div>
                     </div>
                 ))}
-                <button type="button" onClick={addGuardianEntry}>Add Guardian</button>
+                <button type="button" className="add-button" onClick={addGuardianEntry}>Add Guardian</button>
             </div>
 
             <div className="section-container">
@@ -145,7 +145,7 @@ export const FamilyInformationForm: React.FC<{ onUpdate: (guardians: GuardianEnt
                                     type="text"
                                     value={entry.siblingName}
                                     onChange={(e) => handleSiblingChange(index, 'siblingName', e.target.value)}
-                                    placeholder="Sibling Name"
+                                    placeholder="sibling name"
                                 />
 
                                 <label>Sibling Age</label>
@@ -153,24 +153,25 @@ export const FamilyInformationForm: React.FC<{ onUpdate: (guardians: GuardianEnt
                                     type="text"
                                     value={entry.siblingAge}
                                     onChange={(e) => handleSiblingChange(index, 'siblingAge', e.target.value)}
-                                    placeholder="Sibling Age"
+                                    placeholder="age"
                                 />
 
-                                <label>
-                                    In School:
+                                <div>
+                                    <label>In School:</label>
                                     <input
                                         type="checkbox"
+                                        className="stupid-checkbox"
                                         checked={entry.siblingInSchool}
                                         onChange={(e) => handleSiblingChange(index, 'siblingInSchool', e.target.checked)}
                                     />
-                                </label>
+                                </div>
 
                                 <label>Sibling School Name</label>
                                 <input
                                     type="text"
                                     value={entry.siblingSchoolName}
                                     onChange={(e) => handleSiblingChange(index, 'siblingSchoolName', e.target.value)}
-                                    placeholder="Sibling School Name"
+                                    placeholder="school name"
                                     disabled={!entry.siblingInSchool}
                                 />
                             </div>
@@ -178,7 +179,7 @@ export const FamilyInformationForm: React.FC<{ onUpdate: (guardians: GuardianEnt
                         </div>
                     </div>
                 ))}
-                <button type="button" onClick={addSiblingEntry}>Add Sibling</button>
+                <button type="button" className="add-button" onClick={addSiblingEntry}>Add Sibling</button>
             </div>
         </>
 

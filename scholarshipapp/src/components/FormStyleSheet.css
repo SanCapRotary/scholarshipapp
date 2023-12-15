@@ -97,6 +97,15 @@ label, input {
     align-self: flex-end; /* Align at the end of the flex container */
 }
 
+.stupid-checkbox {
+    margin: 0;
+    padding: 0;
+    vertical-align: middle; /* Align the checkbox vertically with the text */
+    /* Position the checkbox closer to the label */
+    position: relative;
+    left: -6em; /* Adjust this value as needed to move the checkbox closer to the label */
+}
+
 
 /* PersonalInfoForm.css */
 
