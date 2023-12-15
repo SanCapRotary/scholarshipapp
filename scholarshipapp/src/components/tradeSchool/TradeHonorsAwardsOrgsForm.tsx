@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../FormStyleSheet.css'
 
 export interface HonorsAwardsOrgsInfo {
     honorsAndAwards: string;
@@ -38,35 +39,34 @@ const TradeHonorsAwardsOrgsForm: React.FC<TradeHonorsAwardsOrgsFormProps> = ({ o
     const wordCount = (text: string) => text.trim().split(/\s+/).filter(word => word.length > 0).length;
 
     return (
-        <div>
-            <div>
-                <label>
-                    Honors and Awards (Limit to 150 words):
-                    <textarea
-                        name="honorsAndAwards"
-                        value={honorsAwardsOrgsInfo.honorsAndAwards}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <div className="smallFont">
+        <div className="trade-honors-awards-container">
+            <div className="trade-honors-awards-form-group">
+                <label htmlFor="honorsAndAwards">Honors and Awards:</label>
+                <span className="word-count">
                     Word Count: {wordCount(honorsAwardsOrgsInfo.honorsAndAwards)}/{maxWords}
-                </div>
+                </span>
+                <textarea
+                    id="honorsAndAwards"
+                    name="honorsAndAwards"
+                    value={honorsAwardsOrgsInfo.honorsAndAwards}
+                    onChange={handleInputChange}
+                />
             </div>
-            <div>
-                <label>
-                    Organizations and Leadership Roles (Limit to 150 words):
-                    <textarea
-                        name="organizationsAndLeadership"
-                        value={honorsAwardsOrgsInfo.organizationsAndLeadership}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <div className="smallFont">
+            <div className="trade-honors-awards-form-group">
+                <label htmlFor="organizationsAndLeadership">Organizations and Leadership Roles:</label>
+                <span className="word-count">
                     Word Count: {wordCount(honorsAwardsOrgsInfo.organizationsAndLeadership)}/{maxWords}
-                </div>
+                </span>
+                <textarea
+                    id="organizationsAndLeadership"
+                    name="organizationsAndLeadership"
+                    value={honorsAwardsOrgsInfo.organizationsAndLeadership}
+                    onChange={handleInputChange}
+                />
             </div>
         </div>
     );
+
 };
 
 export default TradeHonorsAwardsOrgsForm;

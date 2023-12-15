@@ -134,3 +134,39 @@ label, input {
         border: 1px solid #ddd;
         border-radius: 0.25em;
     }
+
+
+
+
+/* TradeHonorsAwardsAndOrgsForm.css */
+.trade-honors-awards-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #333;
+    overflow: auto;
+}
+
+.trade-honors-awards-form-group {
+    margin-bottom: 0;
+    clear: both;
+}
+
+    .trade-honors-awards-form-group label {
+        float: left;
+        margin-bottom: 0.5em;
+    }
+
+    .trade-honors-awards-form-group textarea {
+        width: 100%;
+        padding: 0.5em;
+        border: 1px solid #ddd;
+        border-radius: 0.25em;
+        height: 150px;
+    }
+
+.word-count {
+    float: right;
+    font-size: 0.8em;
+    padding-top: 2em;
+}
