@@ -60,11 +60,11 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
             <div className="form-group">
                 <label>Date of Birth:</label>
                 <input
-                className="none"
+                    className="none" // Ensure this class name is correct and does what you expect
                     type="date"
-                    name="do-not-bootstrap"
-                    value={personalInfo.dateOfBirth}
-                    onChange={handleChange}
+                    name="dateOfBirth" // This should match the key in the PersonalInfo state
+                    value={personalInfo.dateOfBirth} // Bind value to the state
+                    onChange={handleChange} // Use the handleChange function to update state
                 />
             </div>
             <div className="form-group">
