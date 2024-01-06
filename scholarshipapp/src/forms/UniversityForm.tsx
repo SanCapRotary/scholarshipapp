@@ -22,9 +22,7 @@ const SignupSchema = Yup.object().shape({
     name: Yup.string().required('Required'),
     dob: Yup.date().required('Required').max(new Date(), 'Date of birth cannot be in the future'),
     address: Yup.string().required('Required'),
-    phoneNumber: Yup.string()
-        .matches(/^[1-9]{1}[0-9]{9}$/, 'Invalid phone number')
-        .required('Required'),
+    phoneNumber: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email').required('Required'),
     message: Yup.string()
         .max(maxMessageWords, `Message cannot exceed ${maxMessageWords} words`)
