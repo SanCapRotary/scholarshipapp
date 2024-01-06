@@ -23,18 +23,37 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
         emailAddress: '',
     });
 
+    const validateField = (name: string, value: string): boolean => {
+        if (!value.trim()) {
+            alert(`Please fill out the ${name} field.`);
+            return false;
+        }
+        return true;
+    };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        const updatedInfo = {
-            ...personalInfo,
+        setPersonalInfo(prevState => ({
+            ...prevState,
             [name]: value,
-        };
-        setPersonalInfo(updatedInfo);
-        onUpdate(updatedInfo);
+        }));
+    };
+
+    //const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    //    const { name, value } = e.target;
+    //    validateField(name, value);
+    //};
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        for (const [key, value] of Object.entries(personalInfo)) {
+            if (!validateField(key, value)) return;
+        }
+        onUpdate(personalInfo);
     };
 
     return (
-        <div className="section-container">
+        <form onSubmit={handleSubmit} className="section-container">
             <label><h5>Personal Info</h5></label>
 
             <div className="form-group">
@@ -45,6 +64,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
                     value={personalInfo.firstName}
                     onChange={handleChange}
                     placeholder="first name"
+                    required // This makes the field required
                 />
             </div>
             <div className="form-group">
@@ -55,6 +75,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
                     value={personalInfo.lastName}
                     onChange={handleChange}
                     placeholder="last name"
+                    required // This makes the field required
                 />
             </div>
             <div className="form-group">
@@ -65,6 +86,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
                     name="dateOfBirth" // This should match the key in the PersonalInfo state
                     value={personalInfo.dateOfBirth} // Bind value to the state
                     onChange={handleChange} // Use the handleChange function to update state
+                    required // This makes the field required
                 />
             </div>
             <div className="form-group">
@@ -75,6 +97,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
                     value={personalInfo.mailingAddress}
                     onChange={handleChange}
                     placeholder="street/city/state/zip"
+                    required // This makes the field required
                 />
             </div>
             <div className="form-group">
@@ -85,14 +108,11 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onUpdate }) => {
                     value={personalInfo.emailAddress}
                     onChange={handleChange}
                     placeholder="name@domain"
-
+                    required // This makes the field required
                 />
             </div>
-        </div>
+        </form>
     );
-
-
-
 };
 
 export default PersonalInfoForm;

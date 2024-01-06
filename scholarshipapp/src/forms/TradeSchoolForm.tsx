@@ -160,7 +160,7 @@ export const TradeSchoolForm: React.FC = () => {
                         </div>
                     )}
 
-                    <div className="col-12" style={{textAlign: 'center'} }>
+                    <div className="col-12" style={{ textAlign: 'center' }}>
                         <input type="submit" value="Submit Application" className="btn btn-primary" />
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { TradeSchoolForm } from './forms/TradeSchoolForm';
+import UniversityForm from './forms/UniversityForm'; // Import UniversityForm
 import 'bootstrap/dist/css/bootstrap.min.css';
 import sancaplogo from './assets/sancaplogo.png';
 
@@ -10,6 +11,8 @@ function App() {
     const handleFormChange = (formName: string) => {
         if (formName === 'tradeSchool') {
             setActiveForm(<TradeSchoolForm />);
+        } else if (formName === 'university') { // Handle the case for the University form
+            setActiveForm(<UniversityForm />);
         }
     };
 
@@ -42,7 +45,7 @@ function App() {
                         <button className="btn btn-primary m-2" onClick={() => handleFormChange('tradeSchool')}>
                             Trade School Scholarship
                         </button>
-                        <button className="btn btn-secondary m-2" disabled={true} onClick={() => handleFormChange('tradeSchool')}>
+                        <button className="btn btn-primary m-2" disabled={false} onClick={() => handleFormChange('university')}>
                             University Scholarship
                         </button>
                     </div>
