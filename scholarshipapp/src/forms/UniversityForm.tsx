@@ -12,6 +12,12 @@ interface AcademicHistory {
     classRank: string;
 }
 
+interface Scholastic {
+    honorsAwards: string;
+    leadershipPositions: string;
+    organizationsMembership: string;
+}
+
 interface FormValues {
     name: string;
     dob: string;
@@ -20,6 +26,7 @@ interface FormValues {
     email: string;
     message: string;
     academicHistories: AcademicHistory[];
+    scholastic: Scholastic;
 }
 
 const maxMessageWords = 250;
@@ -56,6 +63,9 @@ const sendEmail = (templateParams: FormValues) => {
 
 const UniversityForm = () => {
     const [messageWordCount, setMessageWordCount] = useState(0);
+    const [honorsWordCount, setHonorsWordCount] = useState(0);
+    const [leadershipWordCount, setLeadershipWordCount] = useState(0);
+    const [membershipWordCount, setMembershipWordCount] = useState(0);
 
     const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { value } = e.target;
@@ -65,6 +75,28 @@ const UniversityForm = () => {
             setMessageWordCount(currentWordCount);
         }
     };
+
+    const handleTextAreaChange = (
+        e: React.ChangeEvent<HTMLTextAreaElement>,
+        fieldName: 'honorsAwards' | 'leadershipPositions' | 'organizationsMembership',
+        setFieldValue: (field: string, value: string) => void
+    ) => {
+        const { value } = e.target;
+        const words = value.trim().split(/\s+/);
+        const wordCount = words.length;
+
+        if (fieldName === 'honorsAwards' && wordCount <= maxMessageWords) {
+            setHonorsWordCount(wordCount);
+            setFieldValue('scholastic.honorsAwards', value);
+        } else if (fieldName === 'leadershipPositions' && wordCount <= maxMessageWords) {
+            setLeadershipWordCount(wordCount);
+            setFieldValue('scholastic.leadershipPositions', value);
+        } else if (fieldName === 'organizationsMembership' && wordCount <= maxMessageWords) {
+            setMembershipWordCount(wordCount);
+            setFieldValue('scholastic.organizationsMembership', value);
+        }
+    };
+
 
     const initialValues: FormValues = {
         name: '',
@@ -79,6 +111,11 @@ const UniversityForm = () => {
             numberInClass: '',
             classRank: '',
         }],
+        scholastic: {
+            honorsAwards: '',
+            leadershipPositions: '',
+            organizationsMembership: '',
+        },
     };
 
     return (
@@ -146,6 +183,47 @@ const UniversityForm = () => {
                                     }}
                                 />
                                 <ErrorMessage name="message" component="div" />
+                            </div>
+                        </div>
+
+                        <div className="section-container">
+                            <b>Scholastic</b>
+                            <div className="trade-honors-awards-form-group">
+                                {/* Honors, Awards & Distinctions */}
+                                <label htmlFor="scholastic.honorsAwards">
+                                    Honors, Awards & Distinctions Received (Year and Nature of Award):
+                                </label>
+                                <span className="word-count">Word Count: {honorsWordCount}/{maxMessageWords}</span>
+                                <Field name="scholastic.honorsAwards" as="textarea"
+                                    placeholder="Detail your honors and awards"
+                                    value={values.scholastic.honorsAwards}
+                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleTextAreaChange(e, 'honorsAwards', setFieldValue)}
+                                />
+                                <ErrorMessage name="scholastic.honorsAwards" component="div" />
+
+                                {/* Office and Positions of Leadership */}
+                                <label htmlFor="scholastic.leadershipPositions">
+                                    Office and Positions of Leadership (Organization, Position, Year):
+                                </label>
+                                <span className="word-count">Word Count: {leadershipWordCount}/{maxMessageWords}</span>
+                                <Field name="scholastic.leadershipPositions" as="textarea"
+                                    placeholder="Detail your leadership positions"
+                                    value={values.scholastic.leadershipPositions}
+                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleTextAreaChange(e, 'leadershipPositions', setFieldValue)}
+                                />
+                                <ErrorMessage name="scholastic.leadershipPositions" component="div" />
+
+                                {/* Member of Organization */}
+                                <label htmlFor="scholastic.organizationsMembership">
+                                    Member of Organization (Where no office was held):
+                                </label>
+                                <span className="word-count">Word Count: {membershipWordCount}/{maxMessageWords}</span>
+                                <Field name="scholastic.organizationsMembership" as="textarea"
+                                    placeholder="Detail your organization memberships"
+                                    value={values.scholastic.organizationsMembership}
+                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleTextAreaChange(e, 'organizationsMembership', setFieldValue)}
+                                />
+                                <ErrorMessage name="scholastic.organizationsMembership" component="div" />
                             </div>
                         </div>
 
