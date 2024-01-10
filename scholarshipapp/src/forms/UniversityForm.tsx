@@ -24,6 +24,17 @@ interface ExtraCurricular {
     ecOrganizationsMembership: string;
 }
 
+interface EmploymentHistory {
+    placeOfEmployment: string;
+    employmentAddress: string;
+    jobTitle: string;
+    supervisorName: string;
+    startDate: string;
+    endDate: string;
+    hoursPerWeek: string;
+}
+
+
 interface FormValues {
     name: string;
     dob: string;
@@ -34,6 +45,7 @@ interface FormValues {
     academicHistories: AcademicHistory[];
     scholastic: Scholastic;
     extraCurricular: ExtraCurricular;
+    employmentHistories: EmploymentHistory[];
 }
 
 const maxMessageWords = 250;
@@ -152,6 +164,15 @@ const UniversityForm = () => {
             ecLeadershipPositions: '',
             ecOrganizationsMembership: '',
         },
+        employmentHistories: [{
+            placeOfEmployment: '',
+            employmentAddress: '',
+            jobTitle: '',
+            supervisorName: '',
+            startDate: '',
+            endDate: '',
+            hoursPerWeek: '',
+}],
     };
 
     return (
@@ -229,12 +250,16 @@ const UniversityForm = () => {
                                         <b>Academic History</b>
                                         {values.academicHistories.map((_, index) => (
                                             <div className="academic-history-entry" key={index}>
+                                            School
                                                 <Field name={`academicHistories.${index}.nameOfSchool`} placeholder="Name of School" />
                                                 <ErrorMessage name={`academicHistories.${index}.nameOfSchool`} component="div" />
+                                            Dates Attended
                                                 <Field name={`academicHistories.${index}.datesAttended`} placeholder="Dates Attended" />
                                                 <ErrorMessage name={`academicHistories.${index}.datesAttended`} component="div" />
+                                            Number in Class
                                                 <Field name={`academicHistories.${index}.numberInClass`} placeholder="Number in Class" />
                                                 <ErrorMessage name={`academicHistories.${index}.numberInClass`} component="div" />
+                                            Class Rank
                                                 <Field name={`academicHistories.${index}.classRank`} placeholder="Class Rank" />
                                                 <ErrorMessage name={`academicHistories.${index}.classRank`} component="div" />
                                                 <button type="button" className="remove-x-button" onClick={() => remove(index)}>
@@ -254,6 +279,7 @@ const UniversityForm = () => {
                             </FieldArray>
                         </div>
 
+                        {/* Scholastic Section */}
                         <div className="section-container">
                             <b>Scholastic</b>
                             <div className="trade-honors-awards-form-group">
@@ -339,6 +365,51 @@ const UniversityForm = () => {
                             </div>
                         </div>
 
+                        <div className="section-container">
+                            <FieldArray name="employmentHistories">
+                                {({ remove, push }) => (
+                                    <div>
+                                        <b>Employment History</b>
+                                        {values.employmentHistories.map((_, index) => (
+                                            <div className="academic-history-entry" key={index}>
+                                                Employer <br />
+                                                <Field name={`employmentHistories.${index}.placeOfEmployment`} placeholder="Place of Employment" />
+                                                    <ErrorMessage name={`employmentHistories.${index}.placeOfEmployment`} component="div" />
+                                            
+                                                Address <br />
+                                                <Field name={`employmentHistories.${index}.employmentAddress`} placeholder="Address" />
+                                                <ErrorMessage name={`employmentHistories.${index}.employmentAddress`} component="div" />
+
+                                                Job Title
+                                                <Field name={`employmentHistories.${index}.jobTitle`} placeholder="Job Title" />
+                                                <ErrorMessage name={`employmentHistories.${index}.jobTitle`} component="div" />
+
+                                                Supervisor Name <br />
+                                                <Field name={`employmentHistories.${index}.supervisorName`} placeholder="Supervisor Name" />
+                                                <ErrorMessage name={`employmentHistories.${index}.supervisorName`} component="div" />
+
+                                            
+                                                Start Date <br />
+                                                <Field name={`employmentHistories.${index}.startDate`} type="date" placeholder="Start Date" />
+                                                    <ErrorMessage name={`employmentHistories.${index}.startDate`} component="div" />
+                                            
+
+                                                End Date <br />
+                                                <Field name={`employmentHistories.${index}.endDate`} type="date" placeholder="End Date" />
+                                                <ErrorMessage name={`employmentHistories.${index}.endDate`} component="div" />
+
+                                                Average Hours per Week <br />
+                                                <Field name={`employmentHistories.${index}.hoursPerWeek`} type="number" placeholder="Average Hours per Week" />
+                                                <ErrorMessage name={`employmentHistories.${index}.hoursPerWeek`} component="div" />
+
+                                                <button type="button" className="remove-x-button" onClick={() => remove(index)}>X</button>
+                                            </div>
+                                        ))}
+                                        <button type="button" className="add-button" onClick={() => push({ placeOfEmployment: '', employmentAddress: '', jobTitle: '', supervisorName: '', startDate: '', endDate: '', hoursPerWeek: '' })}>Add Employment</button>
+                                    </div>
+                                )}
+                            </FieldArray>
+                        </div>
 
                         
                         <div className="section-container">
