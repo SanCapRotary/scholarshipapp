@@ -73,6 +73,9 @@ interface FormValues {
     summerEarnings: string;
     schoolYearEarnings: string;
     floridaPrePaid: string;
+    fundsFromParents: string;
+    fundsFromRelatives: string;
+    otherSources: string;
 }
 
 const maxMessageWords = 250;
@@ -224,6 +227,9 @@ const UniversityForm = () => {
         summerEarnings: '',
         schoolYearEarnings: '',
         floridaPrePaid: '',
+        fundsFromParents: '',
+        fundsFromRelatives: '',
+        otherSources: '',
     };
 
     return (
@@ -594,6 +600,28 @@ const UniversityForm = () => {
                                 <label htmlFor="floridaPrePaid">Florida Pre-Paid:</label>
                                 <Field name="floridaPrePaid" type="text" placeholder="Florida Pre-Paid Amount" />
                                 <ErrorMessage name="floridaPrePaid" component="div" />
+                            </div>
+                        </div>
+
+                        {/* Other Income Section */}
+                        <div className="section-container">
+                            <b>Other Income</b>
+                            <div className="form-group">
+                                <label htmlFor="fundsFromParents">Funds from Parents or Guardians:</label>
+                                <Field name="fundsFromParents" type="text" placeholder="Amount from Parents/Guardians" />
+                                <ErrorMessage name="fundsFromParents" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="fundsFromRelatives">Funds from Relatives or Friends:</label>
+                                <Field name="fundsFromRelatives" type="text" placeholder="Amount from Relatives/Friends" />
+                                <ErrorMessage name="fundsFromRelatives" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="otherSources">Other Sources:</label>
+                                <Field name="otherSources" type="text" placeholder="Other Income Sources" />
+                                <ErrorMessage name="otherSources" component="div" />
                             </div>
                         </div>
 
