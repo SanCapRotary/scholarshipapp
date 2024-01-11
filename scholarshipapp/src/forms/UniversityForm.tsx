@@ -8,8 +8,6 @@ import '../components/FormStyleSheet.css'; // Ensure this path is correct
 interface AcademicHistory {
     nameOfSchool: string;
     datesAttended: string;
-    //numberInClass: string;
-    //classRank: string;
 }
 
 interface Scholastic {
@@ -186,7 +184,7 @@ const UniversityForm = () => {
     };
 
     const handleQuestionTextAreaChange = (
-        e: React.ChangeEvent<HTMLTextAreaElement>, // This is now the correct type for 'e'
+        e: React.ChangeEvent<HTMLTextAreaElement>,
         fieldName: 'questionOne' | 'questionTwo',
         setWordCount: (count: number) => void,
         setFieldValue: (field: string, value: string) => void
@@ -200,13 +198,6 @@ const UniversityForm = () => {
             setFieldValue(fieldName, value);
         }
     };
-
-
-
-
-
-
-
 
     const initialValues: FormValues = {
         name: '',
@@ -360,12 +351,6 @@ const UniversityForm = () => {
                                             Dates Attended
                                                 <Field name={`academicHistories.${index}.datesAttended`} placeholder="Dates Attended" />
                                                 <ErrorMessage name={`academicHistories.${index}.datesAttended`} component="div" />
-                                            {/*Number in Class*/}
-                                            {/*    <Field name={`academicHistories.${index}.numberInClass`} placeholder="Number in Class" />*/}
-                                            {/*    <ErrorMessage name={`academicHistories.${index}.numberInClass`} component="div" />*/}
-                                            {/*Class Rank*/}
-                                            {/*    <Field name={`academicHistories.${index}.classRank`} placeholder="Class Rank" />*/}
-                                            {/*    <ErrorMessage name={`academicHistories.${index}.classRank`} component="div" />*/}
                                                 <button type="button" className="remove-x-button" onClick={() => remove(index)}>
                                                     X
                                                 </button>
