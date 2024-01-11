@@ -34,6 +34,23 @@ interface EmploymentHistory {
     hoursPerWeek: string;
 }
 
+interface Guardian {
+    name: string;
+    relationship: string;
+    address: string;
+    mobileNumber: string;
+    email: string;
+    occupation: string;
+    employer: string;
+}
+
+interface Sibling {
+    name: string;
+    age: string;
+    relationship: string;
+    school: string;
+}
+
 interface FormValues {
     name: string;
     dob: string;
@@ -49,6 +66,8 @@ interface FormValues {
     plannedCollege: string;
     intendedMajor: string;
     plannedCollegeStartDate: string;
+    guardians: Guardian[];
+    siblings: Sibling[];
 }
 
 const maxMessageWords = 250;
@@ -180,6 +199,21 @@ const UniversityForm = () => {
         plannedCollege: '',
         intendedMajor: '',
         plannedCollegeStartDate: '',
+        guardians: [{
+            name: '',
+            relationship: '',
+            address: '',
+            mobileNumber: '',
+            email: '',
+            occupation: '',
+            employer: ''
+        }],
+        siblings: [{
+            name: '',
+            age: '',
+            relationship: '',
+            school: ''
+        }],
     };
 
     return (
@@ -449,6 +483,75 @@ const UniversityForm = () => {
                             </div>
                         </div>
 
+                        {/* Family Information Section */}
+                        <div className="section-container">
+                            <b>Family Information</b>
+                            <p />
+                            <b>Parent / Guardian</b>
+
+                            <FieldArray name="guardians">
+                                {({ remove, push }) => (
+                                    <div>
+                                        {values.guardians.map((_, index) => (
+                                            <div key={index} className="academic-history-entry">
+                                                <Field name={`guardians.${index}.name`} placeholder="Name of Parent or Guardian" />
+                                                <ErrorMessage name={`guardians.${index}.name`} component="div" />
+
+                                                <Field name={`guardians.${index}.relationship`} placeholder="Relationship" />
+                                                <ErrorMessage name={`guardians.${index}.relationship`} component="div" />
+
+                                                <Field name={`guardians.${index}.address`} placeholder="Address" />
+                                                <ErrorMessage name={`guardians.${index}.address`} component="div" />
+
+                                                <Field name={`guardians.${index}.mobileNumber`} placeholder="Mobile Number" />
+                                                <ErrorMessage name={`guardians.${index}.mobileNumber`} component="div" />
+
+                                                <Field name={`guardians.${index}.email`} placeholder="Email address" />
+                                                <ErrorMessage name={`guardians.${index}.email`} component="div" />
+
+                                                <Field name={`guardians.${index}.occupation`} placeholder="Occupation" />
+                                                <ErrorMessage name={`guardians.${index}.occupation`} component="div" />
+
+                                                <Field name={`guardians.${index}.employer`} placeholder="Employer" />
+                                                <ErrorMessage name={`guardians.${index}.employer`} component="div" />
+
+                                                <button type="button" className="remove-x-button" onClick={() => remove(index)}>X</button>
+                                            </div>
+                                        ))}
+                                        <button type="button" className="add-button" onClick={() => push({ name: '', relationship: '', address: '', mobileNumber: '', email: '', occupation: '', employer: '' })}>Add Guardian</button>
+                                    </div>
+                                )}
+                            </FieldArray>
+
+                            {/* Siblings Information Section */}
+                            <p />
+
+                            <b>Siblings</b>
+                            <FieldArray name="siblings">
+                                {({ remove, push }) => (
+                                    <div>
+                                        {values.siblings.map((_, index) => (
+                                            <div key={index} className="academic-history-entry">
+                                                <Field name={`siblings.${index}.name`} placeholder="Sibling Name" />
+                                                <ErrorMessage name={`siblings.${index}.name`} component="div" />
+
+                                                <Field name={`siblings.${index}.age`} placeholder="Sibling Age" />
+                                                <ErrorMessage name={`siblings.${index}.age`} component="div" />
+
+                                                <Field name={`siblings.${index}.relationship`} placeholder="Relationship" />
+                                                <ErrorMessage name={`siblings.${index}.relationship`} component="div" />
+
+                                                <Field name={`siblings.${index}.school`} placeholder="School" />
+                                                <ErrorMessage name={`siblings.${index}.school`} component="div" />
+
+                                                <button type="button" className="remove-x-button" onClick={() => remove(index)}>X</button>
+                                            </div>
+                                        ))}
+                                        <button type="button" className="add-button" onClick={() => push({ name: '', age: '', relationship: '', school: '' })}>Add Sibling</button>
+                                    </div>
+                                )}
+                            </FieldArray>
+                        </div>
 
 
                         <div className="section-container">
