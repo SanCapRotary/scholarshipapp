@@ -34,7 +34,6 @@ interface EmploymentHistory {
     hoursPerWeek: string;
 }
 
-
 interface FormValues {
     name: string;
     dob: string;
@@ -46,6 +45,10 @@ interface FormValues {
     scholastic: Scholastic;
     extraCurricular: ExtraCurricular;
     employmentHistories: EmploymentHistory[];
+    appliedCollege: string;
+    plannedCollege: string;
+    intendedMajor: string;
+    plannedCollegeStartDate: string;
 }
 
 const maxMessageWords = 250;
@@ -172,7 +175,11 @@ const UniversityForm = () => {
             startDate: '',
             endDate: '',
             hoursPerWeek: '',
-}],
+        }],
+        appliedCollege: '',
+        plannedCollege: '',
+        intendedMajor: '',
+        plannedCollegeStartDate: '',
     };
 
     return (
@@ -189,8 +196,9 @@ const UniversityForm = () => {
                     <Form>
                         <img src={sancaplogo} className="logo img-fluid" alt="Sanibel Captiva Rotary Club logo" />
                         <h3>University Scholarship Application</h3>
-                        <h5>Must be submitted by March 15</h5>
+                        <h5>Must be submitted by April 15</h5>
 
+                        { /* Personal Information Section */ }
                         <div className="section-container">
                             <b>Personal Information</b>
 
@@ -243,6 +251,7 @@ const UniversityForm = () => {
                             </div>
                         </div>
 
+                        { /* Academic History Section */}
                         <div className="section-container">
                             <FieldArray name="academicHistories">
                                 {({ remove, push }) => (
@@ -365,6 +374,7 @@ const UniversityForm = () => {
                             </div>
                         </div>
 
+                        {/* Employment History Section */ }
                         <div className="section-container">
                             <FieldArray name="employmentHistories">
                                 {({ remove, push }) => (
@@ -411,7 +421,36 @@ const UniversityForm = () => {
                             </FieldArray>
                         </div>
 
-                        
+                        {/* College Section */}
+                        <div className="section-container">
+                            <b>College</b>
+                            <div className="form-group">
+                                <label htmlFor="appliedCollege">Which College, University, or Post-Secondary Institution have you applied to?</label>
+                                <Field name="appliedCollege" type="text" placeholder="College Name" />
+                                <ErrorMessage name="appliedCollege" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="plannedCollege">Which College do you plan to attend?</label>
+                                <Field name="plannedCollege" type="text" placeholder="Planned College" />
+                                <ErrorMessage name="plannedCollege" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="intendedMajor">What is your intended Major?</label>
+                                <Field name="intendedMajor" type="text" placeholder="Intended Major" />
+                                <ErrorMessage name="intendedMajor" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="plannedCollegeStartDate">When do you plan to start?</label>
+                                <Field name="plannedCollegeStartDate" type="date" />
+                                <ErrorMessage name="plannedCollegeStartDate" component="div" />
+                            </div>
+                        </div>
+
+
+
                         <div className="section-container">
                             <p style={{ textAlign: 'left' }}>
                                 By clicking the <b>Submit Application</b> button below I acknowledge that I have completed this application truthfully to the best of my ability.
