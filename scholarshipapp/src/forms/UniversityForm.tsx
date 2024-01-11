@@ -68,6 +68,11 @@ interface FormValues {
     plannedCollegeStartDate: string;
     guardians: Guardian[];
     siblings: Sibling[];
+    scholarships: string;
+    loans: string;
+    summerEarnings: string;
+    schoolYearEarnings: string;
+    floridaPrePaid: string;
 }
 
 const maxMessageWords = 250;
@@ -214,6 +219,11 @@ const UniversityForm = () => {
             relationship: '',
             school: ''
         }],
+        scholarships: '',
+        loans: '',
+        summerEarnings: '',
+        schoolYearEarnings: '',
+        floridaPrePaid: '',
     };
 
     return (
@@ -551,6 +561,40 @@ const UniversityForm = () => {
                                     </div>
                                 )}
                             </FieldArray>
+                        </div>
+
+                        {/* Budget Section */}
+                        <div className="section-container">
+                            <b>Projected Budget for Next Year</b>
+                            <div className="form-group">
+                                <label htmlFor="scholarships">Scholarships:</label>
+                                <Field name="scholarships" type="text" placeholder="Scholarships Amount" />
+                                <ErrorMessage name="scholarships" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="loans">Loan(s):</label>
+                                <Field name="loans" type="text" placeholder="Loan Amount" />
+                                <ErrorMessage name="loans" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="summerEarnings">Summer Earnings:</label>
+                                <Field name="summerEarnings" type="text" placeholder="Summer Earnings Amount" />
+                                <ErrorMessage name="summerEarnings" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="schoolYearEarnings">School Year Earnings:</label>
+                                <Field name="schoolYearEarnings" type="text" placeholder="School Year Earnings Amount" />
+                                <ErrorMessage name="schoolYearEarnings" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="floridaPrePaid">Florida Pre-Paid:</label>
+                                <Field name="floridaPrePaid" type="text" placeholder="Florida Pre-Paid Amount" />
+                                <ErrorMessage name="floridaPrePaid" component="div" />
+                            </div>
                         </div>
 
 
