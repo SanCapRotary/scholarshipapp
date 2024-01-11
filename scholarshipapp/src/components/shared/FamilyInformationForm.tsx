@@ -156,23 +156,12 @@ export const FamilyInformationForm: React.FC<{ onUpdate: (guardians: GuardianEnt
                                     placeholder="age"
                                 />
 
-                                {/*<div>*/}
-                                {/*    <label>In School:</label>*/}
-                                {/*    <input*/}
-                                {/*        type="checkbox"*/}
-                                {/*        className="stupid-checkbox"*/}
-                                {/*        checked={entry.siblingInSchool}*/}
-                                {/*        onChange={(e) => handleSiblingChange(index, 'siblingInSchool', e.target.checked)}*/}
-                                {/*    />*/}
-                                {/*</div>*/}
-
                                 <label>Sibling School Name</label>
                                 <input
                                     type="text"
                                     value={entry.siblingSchoolName}
                                     onChange={(e) => handleSiblingChange(index, 'siblingSchoolName', e.target.value)}
                                     placeholder="[leave blank if not enrolled]"
-                                    disabled={!entry.siblingInSchool}
                                 />
                             </div>
                             <button type="button" title="Remove entry" className="remove-x-button" onClick={() => removeSiblingEntry(index)}>X</button>

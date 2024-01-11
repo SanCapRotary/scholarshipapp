@@ -55,7 +55,6 @@ interface FormValues {
     address: string;
     phoneNumber: string;
     email: string;
-    message: string;
     academicHistories: AcademicHistory[];
     numberInClass: string;
     classRank: string;
@@ -120,7 +119,6 @@ const sendEmail = (templateParams: FormValues) => {
 }
 
 const UniversityForm = () => {
-    const [messageWordCount, setMessageWordCount] = useState(0);
     const [honorsWordCount, setHonorsWordCount] = useState(0);
     const [leadershipWordCount, setLeadershipWordCount] = useState(0);
     const [membershipWordCount, setMembershipWordCount] = useState(0);
@@ -129,17 +127,6 @@ const UniversityForm = () => {
     const [ecMembershipWordCount, setECMembershipWordCount] = useState(0);
     const [questionOneWordCount, setQuestionOneWordCount] = useState(0);
     const [questionTwoWordCount, setQuestionTwoWordCount] = useState(0);
-
-
-
-    const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const { value } = e.target;
-        const words = value.split(' ').filter(n => n);
-        const currentWordCount = words.length;
-        if (currentWordCount <= maxMessageWords) {
-            setMessageWordCount(currentWordCount);
-        }
-    };
 
     const handleTextAreaChange = (
         e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -205,7 +192,6 @@ const UniversityForm = () => {
         address: '',
         phoneNumber: '',
         email: '',
-        message: '',
         academicHistories: [{
             nameOfSchool: '',
             datesAttended: '',
@@ -317,24 +303,6 @@ const UniversityForm = () => {
                                 <Field name="email" type="email" placeholder="Email Address" />
                                 <ErrorMessage name="email" component="div" />
                             </div>
-
-                            <div className="trade-honors-awards-form-group">
-                                <label htmlFor="message">Message:</label>
-                                <span className="word-count">
-                                    Word Count: {messageWordCount}/{maxMessageWords}
-                                </span>
-                                <Field
-                                    name="message"
-                                    as="textarea"
-                                    placeholder="Message"
-                                    value={values.message}
-                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                                        handleMessageChange(e);
-                                        setFieldValue("message", e.target.value);
-                                    }}
-                                />
-                                <ErrorMessage name="message" component="div" />
-                            </div>
                         </div>
 
                         { /* Academic History Section */}
@@ -432,11 +400,10 @@ const UniversityForm = () => {
 
                         {/* ExtraCurricular Section */}
                         <div className="section-container">
-                            <b>ExtraCurricular</b>
-
+                            <b>Extra Curricular</b>
                             {/* Honors, Awards & Distinctions */}
                             <div className="trade-honors-awards-form-group">
-                                <label htmlFor="extraCurricular.ecHonorsAwards">Honors, Awards & Distinctions Received (Year and Nature of Award):</label>
+                                Honors, Awards & Distinctions Received (Year and Nature of Award):
                                 <span className="word-count">Word Count: {ecHonorsWordCount}/{maxMessageWords}</span>
                                 <Field
                                     name="extraCurricular.ecHonorsAwards"
@@ -449,7 +416,7 @@ const UniversityForm = () => {
 
                             {/* Office and Positions of Leadership */}
                             <div className="trade-honors-awards-form-group">
-                                <label htmlFor="extraCurricular.ecLeadershipPositions">Office and Positions of Leadership (Organization, Position, Year):</label>
+                                Office and Positions of Leadership (Organization, Position, Year):
                                 <span className="word-count">Word Count: {ecLeadershipWordCount}/{maxMessageWords}</span>
                                 <Field
                                     name="extraCurricular.ecLeadershipPositions"
@@ -462,7 +429,7 @@ const UniversityForm = () => {
 
                             {/* Member of Organization (Where no office was held) */}
                             <div className="trade-honors-awards-form-group">
-                                <label htmlFor="extraCurricular.ecOrganizationsMembership">Member of Organization (Where no office was held):</label>
+                                Member of Organization (Where no office was held):
                                 <span className="word-count">Word Count: {ecMembershipWordCount}/{maxMessageWords}</span>
                                 <Field
                                     name="extraCurricular.ecOrganizationsMembership"
