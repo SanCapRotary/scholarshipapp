@@ -8,8 +8,8 @@ import '../components/FormStyleSheet.css'; // Ensure this path is correct
 interface AcademicHistory {
     nameOfSchool: string;
     datesAttended: string;
-    numberInClass: string;
-    classRank: string;
+    //numberInClass: string;
+    //classRank: string;
 }
 
 interface Scholastic {
@@ -59,6 +59,9 @@ interface FormValues {
     email: string;
     message: string;
     academicHistories: AcademicHistory[];
+    numberInClass: string;
+    classRank: string;
+    expectedGraduationDate: string;
     scholastic: Scholastic;
     extraCurricular: ExtraCurricular;
     employmentHistories: EmploymentHistory[];
@@ -76,9 +79,17 @@ interface FormValues {
     fundsFromParents: string;
     fundsFromRelatives: string;
     otherSources: string;
+    tuition: string;
+    roomAndBoard: string;
+    booksAndSupplies: string;
+    allOtherExpenses: string;
+    questionOne: string;
+    questionTwo: string;
 }
 
 const maxMessageWords = 250;
+const maxQuestionWords = 500;
+
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string().required('Required'),
@@ -118,6 +129,9 @@ const UniversityForm = () => {
     const [ecHonorsWordCount, setECHonorsWordCount] = useState(0);
     const [ecLeadershipWordCount, setECLeadershipWordCount] = useState(0);
     const [ecMembershipWordCount, setECMembershipWordCount] = useState(0);
+    const [questionOneWordCount, setQuestionOneWordCount] = useState(0);
+    const [questionTwoWordCount, setQuestionTwoWordCount] = useState(0);
+
 
 
     const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -171,6 +185,29 @@ const UniversityForm = () => {
         }
     };
 
+    const handleQuestionTextAreaChange = (
+        e: React.ChangeEvent<HTMLTextAreaElement>, // This is now the correct type for 'e'
+        fieldName: 'questionOne' | 'questionTwo',
+        setWordCount: (count: number) => void,
+        setFieldValue: (field: string, value: string) => void
+    ) => {
+        const { value } = e.target;
+        const words = value.trim().split(/\s+/);
+        const wordCount = words.length;
+
+        if (wordCount <= maxQuestionWords) {
+            setWordCount(wordCount);
+            setFieldValue(fieldName, value);
+        }
+    };
+
+
+
+
+
+
+
+
     const initialValues: FormValues = {
         name: '',
         dob: '',
@@ -181,9 +218,11 @@ const UniversityForm = () => {
         academicHistories: [{
             nameOfSchool: '',
             datesAttended: '',
-            numberInClass: '',
-            classRank: '',
+
         }],
+        numberInClass: '',
+        classRank: '',
+        expectedGraduationDate: '',
         scholastic: {
             honorsAwards: '',
             leadershipPositions: '',
@@ -230,6 +269,12 @@ const UniversityForm = () => {
         fundsFromParents: '',
         fundsFromRelatives: '',
         otherSources: '',
+        tuition: '',
+        roomAndBoard: '',
+        booksAndSupplies: '',
+        allOtherExpenses: '',
+        questionOne: '',
+        questionTwo: '',
     };
 
     return (
@@ -315,12 +360,12 @@ const UniversityForm = () => {
                                             Dates Attended
                                                 <Field name={`academicHistories.${index}.datesAttended`} placeholder="Dates Attended" />
                                                 <ErrorMessage name={`academicHistories.${index}.datesAttended`} component="div" />
-                                            Number in Class
-                                                <Field name={`academicHistories.${index}.numberInClass`} placeholder="Number in Class" />
-                                                <ErrorMessage name={`academicHistories.${index}.numberInClass`} component="div" />
-                                            Class Rank
-                                                <Field name={`academicHistories.${index}.classRank`} placeholder="Class Rank" />
-                                                <ErrorMessage name={`academicHistories.${index}.classRank`} component="div" />
+                                            {/*Number in Class*/}
+                                            {/*    <Field name={`academicHistories.${index}.numberInClass`} placeholder="Number in Class" />*/}
+                                            {/*    <ErrorMessage name={`academicHistories.${index}.numberInClass`} component="div" />*/}
+                                            {/*Class Rank*/}
+                                            {/*    <Field name={`academicHistories.${index}.classRank`} placeholder="Class Rank" />*/}
+                                            {/*    <ErrorMessage name={`academicHistories.${index}.classRank`} component="div" />*/}
                                                 <button type="button" className="remove-x-button" onClick={() => remove(index)}>
                                                     X
                                                 </button>
@@ -336,6 +381,26 @@ const UniversityForm = () => {
                                     </div>
                                 )}
                             </FieldArray>
+
+                            <p />
+
+                            <div className="academic-history-entry">
+                                Number in Class
+                                <Field name="numberInClass" placeholder="Number in Class" />
+                                <ErrorMessage name="numberInClass" component="div" />
+                            </div>
+
+                            <div className="academic-history-entry">
+                                Class Rank
+                                <Field name="classRank" placeholder="Class Rank" />
+                                <ErrorMessage name="classRank" component="div" />
+                            </div>
+
+                            <div className="academic-history-entry">
+                                Class Rank
+                                <Field name="expectedGraduationDate" placeholder="Expected Graduation" />
+                                <ErrorMessage name="expectedGraduationDate" component="div" />
+                            </div>
                         </div>
 
                         {/* Scholastic Section */}
@@ -622,6 +687,64 @@ const UniversityForm = () => {
                                 <label htmlFor="otherSources">Other Sources:</label>
                                 <Field name="otherSources" type="text" placeholder="Other Income Sources" />
                                 <ErrorMessage name="otherSources" component="div" />
+                            </div>
+                        </div>
+
+                        {/* Estimated Costs Section */}
+                        <div className="section-container">
+                            <b>Estimated Costs</b>
+                            <div className="form-group">
+                                <label htmlFor="tuition">Tuition:</label>
+                                <Field name="tuition" type="text" placeholder="Tuition Cost" />
+                                <ErrorMessage name="tuition" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="roomAndBoard">Room & Board:</label>
+                                <Field name="roomAndBoard" type="text" placeholder="Room and Board Cost" />
+                                <ErrorMessage name="roomAndBoard" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="booksAndSupplies">Books & Supplies:</label>
+                                <Field name="booksAndSupplies" type="text" placeholder="Cost of Books & Supplies" />
+                                <ErrorMessage name="booksAndSupplies" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="allOtherExpenses">All Other Expenses:</label>
+                                <Field name="allOtherExpenses" type="text" placeholder="Other Expenses" />
+                                <ErrorMessage name="allOtherExpenses" component="div" />
+                            </div>
+                        </div>
+
+                        {/* QuestionOne Section */}
+                        <div className="section-container">
+                            <b>Essay Questions</b>
+                            <div className="trade-honors-awards-form-group">
+                                    Why do you want to pursue a College Degree? How will your college experience prepare you to achieve your life goals?
+                                <span className="word-count">Word Count: {questionOneWordCount}/{maxQuestionWords}</span>
+                                <Field
+                                    name="questionOne"
+                                    as="textarea"
+                                    placeholder="Your response to Question One"
+                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleQuestionTextAreaChange(e, 'questionOne', setQuestionOneWordCount, setFieldValue)}
+                                />
+                                <ErrorMessage name="questionOne" component="div" />
+                            </div>
+
+                            <p />
+
+                            <div className="trade-honors-awards-form-group">
+                                    What is your opinion of Rotary's "4-Way Test"?
+                                <span className="word-count">Word Count: {questionTwoWordCount}/{maxQuestionWords}</span>
+                                <Field
+                                    name="questionTwo"
+                                    as="textarea"
+                                    placeholder="Your response to Question Two"
+                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleQuestionTextAreaChange(e, 'questionTwo', setQuestionTwoWordCount, setFieldValue)}
+                                />
+                                <ErrorMessage name="questionTwo" component="div" />
                             </div>
                         </div>
 
