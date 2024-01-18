@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import emailjs from '@emailjs/browser';
 import React, { useState } from 'react';
 import sancaplogo from '../assets/sancaplogo.png';
-import '../components/FormStyleSheet.css'; // Ensure this path is correct
+import '../components/FormStyleSheet.css';
 
 interface AcademicHistory {
     nameOfSchool: string;
@@ -86,7 +86,6 @@ interface FormValues {
 
 const maxMessageWords = 250;
 const maxQuestionWords = 500;
-
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string().required('Required'),
@@ -699,7 +698,6 @@ const UniversityForm = () => {
                                 <ErrorMessage name="questionTwo" component="div" />
                             </div>
                         </div>
-
 
                         <div className="section-container">
                             <p style={{ textAlign: 'left' }}>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { TradeSchoolForm } from './forms/TradeSchoolForm';
+import TradeSchoolForm from './forms/TradeSchoolForm';
 import UniversityForm from './forms/UniversityForm'; // Import UniversityForm
 import 'bootstrap/dist/css/bootstrap.min.css';
 import sancaplogo from './assets/sancaplogo.png';
@@ -9,9 +9,12 @@ function App() {
     const [activeForm, setActiveForm] = useState<React.ReactNode | null>(null);
 
     const handleFormChange = (formName: string) => {
-        if (formName === 'tradeSchool') {
+        if (formName === 'tradeSchool')
+        {
             setActiveForm(<TradeSchoolForm />);
-        } else if (formName === 'university') { // Handle the case for the University form
+        }
+        else if (formName === 'university')
+        {
             setActiveForm(<UniversityForm />);
         }
     };
