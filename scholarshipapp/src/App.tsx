@@ -5,6 +5,9 @@ import UniversityForm from './forms/UniversityForm'; // Import UniversityForm
 import 'bootstrap/dist/css/bootstrap.min.css';
 import sancaplogo from './assets/sancaplogo.png';
 
+//Publish to GitHub Pages
+//npm run deploy
+
 function App() {
     const [activeForm, setActiveForm] = useState<React.ReactNode | null>(null);
 

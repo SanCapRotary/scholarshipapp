@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FieldArray, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import emailjs from '@emailjs/browser';
 import React, { useState } from 'react';
@@ -49,8 +49,16 @@ interface Sibling {
     school: string;
 }
 
-interface FormValues {
-    name: string;
+interface EmailData extends Omit<UniversityFormValues, 'academicHistories' | 'employmentHistories' | 'guardians' | 'siblings'> {
+    academicHistories: string;
+    employmentHistories: string;
+    guardians: string;
+    siblings: string;
+}
+
+interface UniversityFormValues {
+    firstName: string;
+    lastName: string;
     dob: string;
     address: string;
     phoneNumber: string;
@@ -87,35 +95,25 @@ interface FormValues {
 const maxMessageWords = 250;
 const maxQuestionWords = 500;
 
-const SignupSchema = Yup.object().shape({
-    name: Yup.string().required('Required'),
+const UniversitySchema = Yup.object().shape({
+    firstName: Yup.string().required('Required'),
+    lastName: Yup.string().required('Required'),
     dob: Yup.date().required('Required').max(new Date(), 'Date of birth cannot be in the future'),
     address: Yup.string().required('Required'),
     phoneNumber: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email').required('Required'),
-    message: Yup.string().max(maxMessageWords, `Message cannot exceed ${maxMessageWords} words`).required('Required'),
     academicHistories: Yup.array().of(
         Yup.object().shape({
             nameOfSchool: Yup.string().required('School name required'),
             datesAttended: Yup.string().required('Dates attended are required'),
-            numberInClass: Yup.string().required('Number in class is required'),
-            classRank: Yup.string().required('Class rank is required'),
         })
     ),
+    numberInClass: Yup.string().required('Number in class is required'),
+    classRank: Yup.string().required('Class rank is required'),
+    expectedGraduationDate: Yup.string().required('Expected graduation date is required'),
+    questionOne: Yup.string().required('Required'),
+    questionTwo: Yup.string().required('Required'),
 });
-
-const sendEmail = (templateParams: FormValues) => {
-    const serviceId = 'service_55zyzln';
-    const templateId = 'template_hwgv5qm';
-    const userId = '5MK4rWbh_fCErDO7u';
-
-    emailjs.send(serviceId, templateId, templateParams as unknown as Record<string, unknown>, userId)
-        .then((response) => {
-            console.log('SUCCESS!', response.status, response.text);
-        }, (err) => {
-            console.log('FAILED...', err);
-        });
-}
 
 const UniversityForm = () => {
     const [honorsWordCount, setHonorsWordCount] = useState(0);
@@ -126,6 +124,75 @@ const UniversityForm = () => {
     const [ecMembershipWordCount, setECMembershipWordCount] = useState(0);
     const [questionOneWordCount, setQuestionOneWordCount] = useState(0);
     const [questionTwoWordCount, setQuestionTwoWordCount] = useState(0);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const sendEmail = (templateParams: EmailData) => {
+        const serviceId = 'service_55zyzln';
+        const templateId = 'template_hwgv5qm';
+        const userId = '5MK4rWbh_fCErDO7u';
+
+        // Create a params object of type Record<string, unknown>
+        const params: Record<string, unknown> = {};
+
+        // Use keyof to iterate over the keys of UniversityFormValues
+        (Object.keys(templateParams) as Array<keyof UniversityFormValues>).forEach(key => {
+            params[key] = templateParams[key];
+        });
+
+        console.log("Sending email with params:", templateParams);
+
+        emailjs.send(serviceId, templateId, params, userId)
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+            }, (err) => {
+                console.log('FAILED...', err);
+            });
+    };
+
+    const handleFormSubmit = async (
+        values: UniversityFormValues,
+        { resetForm, setSubmitting }: FormikHelpers<UniversityFormValues>
+    ) => {
+        console.log("Form submission started");
+        try {
+            // Convert academicHistories array to a string
+            const academicHistoriesString = values.academicHistories.map(history =>
+                `School: ${history.nameOfSchool}\nDates Attended: ${history.datesAttended}\n\n`
+            ).join('');
+
+            const employmentHistoriesString = values.employmentHistories.map(job =>
+                `Employer: ${job.placeOfEmployment}\nAddress: ${job.employmentAddress}\nTitle: ${job.jobTitle}\nSupervisor: ${job.supervisorName}\nStart Date: ${job.startDate}\nEnd Date: ${job.endDate}\nHours per Week: ${job.hoursPerWeek}\n\n`
+            ).join('');
+
+            const guardiansString = values.guardians.map(guardian =>
+                `Name: ${guardian.name}\nRelationship: ${guardian.relationship}\nAddress: ${guardian.address}\nMobile: ${guardian.mobileNumber}\nEmail: ${guardian.email}\nOccupation: ${guardian.occupation}\nEmployer: ${guardian.employer}\n\n`
+            ).join('');
+
+            const siblingsString = values.siblings.map(sibling =>
+                `Name: ${sibling.name}\nAge: ${sibling.age}\nRelationship: ${sibling.relationship}\nSchool: ${sibling.school}\n\n`
+            ).join('');
+
+            // Create an email data object
+            const emailData: EmailData = {
+                ...values,
+                academicHistories: academicHistoriesString,
+                employmentHistories: employmentHistoriesString,
+                guardians: guardiansString,
+                siblings: siblingsString
+            };
+
+            console.log("Email data being sent:", emailData);
+
+            await sendEmail(emailData);
+            setIsSubmitted(true);
+            resetForm({});
+        } catch (error) {
+            console.error('Submission error', error);
+        } finally {
+            setSubmitting(false);
+            console.log("handleFormSubmit 'finally' reached.");
+        }
+    };
 
     const handleTextAreaChange = (
         e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -185,8 +252,9 @@ const UniversityForm = () => {
         }
     };
 
-    const initialValues: FormValues = {
-        name: '',
+    const initialValues: UniversityFormValues = {
+        firstName: '',
+        lastName: '',
         dob: '',
         address: '',
         phoneNumber: '',
@@ -253,30 +321,121 @@ const UniversityForm = () => {
         questionTwo: '',
     };
 
+    const fillTestValues = (setFieldValue: FormikHelpers<UniversityFormValues>['setFieldValue']) => {
+        // Basic fields
+        setFieldValue('firstName', 'John');
+        setFieldValue('lastName', 'Doe');
+        setFieldValue('dob', '2000-01-01');
+        setFieldValue('address', '123 Test Street');
+        setFieldValue('phoneNumber', '1234567890');
+        setFieldValue('email', 'test@example.com');
+
+        // Academic histories
+        setFieldValue('academicHistories', [{
+            nameOfSchool: 'Test School',
+            datesAttended: '2019-2023',
+        }]);
+
+        // Number in Class and Class Rank
+        setFieldValue('numberInClass', '100');
+        setFieldValue('classRank', '10');
+        setFieldValue('expectedGraduationDate', '2023-05-01');
+
+        // Scholastic
+        setFieldValue('scholastic.honorsAwards', 'Test Honor');
+        setFieldValue('scholastic.leadershipPositions', 'Test Leadership');
+        setFieldValue('scholastic.organizationsMembership', 'Test Organization');
+
+        // ExtraCurricular
+        setFieldValue('extraCurricular.ecHonorsAwards', 'Test EC Honor');
+        setFieldValue('extraCurricular.ecLeadershipPositions', 'Test EC Leadership');
+        setFieldValue('extraCurricular.ecOrganizationsMembership', 'Test EC Organization');
+
+        // Employment Histories
+        setFieldValue('employmentHistories', [{
+            placeOfEmployment: 'Test Company',
+            employmentAddress: '456 Test Lane',
+            jobTitle: 'Test Job',
+            supervisorName: 'Test Supervisor',
+            startDate: '2021-01-01',
+            endDate: '2023-01-01',
+            hoursPerWeek: '20',
+        }]);
+
+        // College details
+        setFieldValue('appliedCollege', 'Test University');
+        setFieldValue('plannedCollege', 'Planned University');
+        setFieldValue('intendedMajor', 'Test Major');
+        setFieldValue('plannedCollegeStartDate', '2023-09-01');
+
+        // Guardians
+        setFieldValue('guardians', [{
+            name: 'Guardian Name',
+            relationship: 'Parent',
+            address: '789 Guardian Ave',
+            mobileNumber: '1234567891',
+            email: 'guardian@example.com',
+            occupation: 'Guardian Job',
+            employer: 'Guardian Employer',
+        }]);
+
+        // Siblings
+        setFieldValue('siblings', [{
+            name: 'Sibling Name',
+            age: '18',
+            relationship: 'Sibling',
+            school: 'Sibling School',
+        }]);
+
+        // Budget and Other Income
+        setFieldValue('scholarships', '1000');
+        setFieldValue('loans', '2000');
+        setFieldValue('summerEarnings', '1500');
+        setFieldValue('schoolYearEarnings', '1200');
+        setFieldValue('floridaPrePaid', '800');
+        setFieldValue('fundsFromParents', '500');
+        setFieldValue('fundsFromRelatives', '300');
+        setFieldValue('otherSources', '200');
+
+        // Estimated Costs
+        setFieldValue('tuition', '10000');
+        setFieldValue('roomAndBoard', '5000');
+        setFieldValue('booksAndSupplies', '500');
+        setFieldValue('allOtherExpenses', '1500');
+
+        // Essay Questions
+        setFieldValue('questionOne', 'Test Answer for Question One');
+        setFieldValue('questionTwo', 'Test Answer for Question Two');
+    };
+
     return (
         <div className="container">
             <Formik
                 initialValues={initialValues}
-                validationSchema={SignupSchema}
-                onSubmit={(values, { resetForm }) => {
-                    sendEmail(values);
-                    resetForm({});
-                }}
+                validationSchema={UniversitySchema}
+                onSubmit={handleFormSubmit}
             >
                 {({ values, setFieldValue }) => (
+
                     <Form>
                         <img src={sancaplogo} className="logo img-fluid" alt="Sanibel Captiva Rotary Club logo" />
                         <h3>University Scholarship Application</h3>
                         <h5>Must be submitted by April 15</h5>
 
-                        { /* Personal Information Section */ }
+                        { /* Personal Information Section */}
                         <div className="section-container">
                             <b>Personal Information</b>
 
                             <div className="form-group">
-                                <label htmlFor="name">First Name:</label>
-                                <Field name="name" type="text" placeholder="Name" />
-                                <ErrorMessage name="name" component="div" />
+                                <label htmlFor="firstName">First Name:</label>
+                                <Field name="firstName" type="text" placeholder="first name" />
+                                <ErrorMessage name="firstName" component="div" />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="lastName">Last Name:</label>
+                                <Field name="lastName" type="text" placeholder="last name" />
+                                <ErrorMessage name="lastName" component="div" />
                             </div>
 
                             <div className="form-group">
@@ -312,10 +471,10 @@ const UniversityForm = () => {
                                         <b>Academic History</b>
                                         {values.academicHistories.map((_, index) => (
                                             <div className="academic-history-entry" key={index}>
-                                            School
+                                                School
                                                 <Field name={`academicHistories.${index}.nameOfSchool`} placeholder="Name of School" />
                                                 <ErrorMessage name={`academicHistories.${index}.nameOfSchool`} component="div" />
-                                            Dates Attended
+                                                Dates Attended
                                                 <Field name={`academicHistories.${index}.datesAttended`} placeholder="Dates Attended" />
                                                 <ErrorMessage name={`academicHistories.${index}.datesAttended`} component="div" />
                                                 <button type="button" className="remove-x-button" onClick={() => remove(index)}>
@@ -349,7 +508,7 @@ const UniversityForm = () => {
                             </div>
 
                             <div className="academic-history-entry">
-                                Class Rank
+                                 Expected Graduation Date
                                 <Field name="expectedGraduationDate" placeholder="Expected Graduation" />
                                 <ErrorMessage name="expectedGraduationDate" component="div" />
                             </div>
@@ -440,18 +599,19 @@ const UniversityForm = () => {
                             </div>
                         </div>
 
-                        {/* Employment History Section */ }
+                        {/* Employment History Section */}
                         <div className="section-container">
+
                             <FieldArray name="employmentHistories">
                                 {({ remove, push }) => (
                                     <div>
                                         <b>Employment History</b>
-                                        {values.employmentHistories.map((_, index) => (
+                                        {values.employmentHistories.map((_, index: number) => (
                                             <div className="academic-history-entry" key={index}>
                                                 Employer <br />
                                                 <Field name={`employmentHistories.${index}.placeOfEmployment`} placeholder="Place of Employment" />
-                                                    <ErrorMessage name={`employmentHistories.${index}.placeOfEmployment`} component="div" />
-                                            
+                                                <ErrorMessage name={`employmentHistories.${index}.placeOfEmployment`} component="div" />
+
                                                 Address <br />
                                                 <Field name={`employmentHistories.${index}.employmentAddress`} placeholder="Address" />
                                                 <ErrorMessage name={`employmentHistories.${index}.employmentAddress`} component="div" />
@@ -464,11 +624,9 @@ const UniversityForm = () => {
                                                 <Field name={`employmentHistories.${index}.supervisorName`} placeholder="Supervisor Name" />
                                                 <ErrorMessage name={`employmentHistories.${index}.supervisorName`} component="div" />
 
-                                            
                                                 Start Date <br />
                                                 <Field name={`employmentHistories.${index}.startDate`} type="date" placeholder="Start Date" />
-                                                    <ErrorMessage name={`employmentHistories.${index}.startDate`} component="div" />
-                                            
+                                                <ErrorMessage name={`employmentHistories.${index}.startDate`} component="div" />
 
                                                 End Date <br />
                                                 <Field name={`employmentHistories.${index}.endDate`} type="date" placeholder="End Date" />
@@ -485,6 +643,8 @@ const UniversityForm = () => {
                                     </div>
                                 )}
                             </FieldArray>
+
+
                         </div>
 
                         {/* College Section */}
@@ -524,7 +684,7 @@ const UniversityForm = () => {
                             <FieldArray name="guardians">
                                 {({ remove, push }) => (
                                     <div>
-                                        {values.guardians.map((_, index) => (
+                                        {values.guardians.map((_, index: number) => (
                                             <div key={index} className="academic-history-entry">
                                                 <Field name={`guardians.${index}.name`} placeholder="Name of Parent or Guardian" />
                                                 <ErrorMessage name={`guardians.${index}.name`} component="div" />
@@ -555,6 +715,8 @@ const UniversityForm = () => {
                                 )}
                             </FieldArray>
 
+
+
                             {/* Siblings Information Section */}
                             <p />
 
@@ -562,7 +724,7 @@ const UniversityForm = () => {
                             <FieldArray name="siblings">
                                 {({ remove, push }) => (
                                     <div>
-                                        {values.siblings.map((_, index) => (
+                                        {values.siblings.map((_, index: number) => (
                                             <div key={index} className="academic-history-entry">
                                                 <Field name={`siblings.${index}.name`} placeholder="Sibling Name" />
                                                 <ErrorMessage name={`siblings.${index}.name`} component="div" />
@@ -583,6 +745,7 @@ const UniversityForm = () => {
                                     </div>
                                 )}
                             </FieldArray>
+
                         </div>
 
                         {/* Budget Section */}
@@ -669,11 +832,11 @@ const UniversityForm = () => {
                             </div>
                         </div>
 
-                        {/* QuestionOne Section */}
+                        {/* Question One Section */}
                         <div className="section-container">
                             <b>Essay Questions</b>
                             <div className="trade-honors-awards-form-group">
-                                    Why do you want to pursue a College Degree? How will your college experience prepare you to achieve your life goals?
+                                Why do you want to pursue a College Degree? How will your college experience prepare you to achieve your life goals?
                                 <span className="word-count">Word Count: {questionOneWordCount}/{maxQuestionWords}</span>
                                 <Field
                                     name="questionOne"
@@ -684,10 +847,9 @@ const UniversityForm = () => {
                                 <ErrorMessage name="questionOne" component="div" />
                             </div>
 
-                            <p />
-
+                        {/* Question Two Section */}
                             <div className="trade-honors-awards-form-group">
-                                    What is your opinion of Rotary's "4-Way Test"?
+                                What is your opinion of Rotary's "4-Way Test"?
                                 <span className="word-count">Word Count: {questionTwoWordCount}/{maxQuestionWords}</span>
                                 <Field
                                     name="questionTwo"
@@ -699,15 +861,19 @@ const UniversityForm = () => {
                             </div>
                         </div>
 
-                        <div className="section-container">
-                            <p style={{ textAlign: 'left' }}>
-                                By clicking the <b>Submit Application</b> button below I acknowledge that I have completed this application truthfully to the best of my ability.
-                            </p>
-
-                            <div className="col-12" style={{ textAlign: 'center' }}>
-                                <input type="submit" value="Submit Application" className="btn btn-primary" />
-                            </div>
+                        <div className="col-12" style={{ textAlign: 'center' }}>
+                            <input type="submit" value="Submit Application" className="btn btn-primary" />
                         </div>
+
+                        {isSubmitted && (
+                            <div className="alert alert-success" role="alert">
+                                Your application has been submitted successfully!
+                            </div>
+                        )}
+
+                        {/*<button type="button" onClick={() => fillTestValues(setFieldValue)} className="btn btn-secondary">*/}
+                        {/*    Fill Test Values*/}
+                        {/*</button>*/}
                     </Form>
                 )}
             </Formik>

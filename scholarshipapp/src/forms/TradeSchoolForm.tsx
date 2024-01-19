@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FieldArray, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import emailjs from '@emailjs/browser';
 import React, { useState } from 'react';
@@ -35,6 +35,13 @@ interface Sibling {
     age: string;
     relationship: string;
     school: string;
+}
+
+interface EmailData extends Omit<TradeSchoolApplicationFormValues, 'academicHistories' | 'employmentHistories' | 'guardians' | 'siblings'> {
+    academicHistories: string;
+    employmentHistories: string;
+    guardians: string;
+    siblings: string;
 }
 
 interface TradeSchoolApplicationFormValues {
@@ -77,53 +84,56 @@ const TradeSchoolSchema = Yup.object().shape({
     extraCurricularActivities: Yup.string().max(maxWords, `Cannot exceed ${maxWords} words`).required('Required'),
     employmentHistories: Yup.array().of(
         Yup.object().shape({
-            placeOfEmployment: Yup.string().required('Required'),
-            employmentAddress: Yup.string().required('Required'),
-            jobTitle: Yup.string().required('Required'),
-            supervisorName: Yup.string().required('Required'),
-            startDate: Yup.date().required('Required'),
-            endDate: Yup.date().required('Required'),
-            hoursPerWeek: Yup.string().required('Required'),
+            placeOfEmployment: Yup.string(),
+            employmentAddress: Yup.string(),
+            jobTitle: Yup.string(),
+            supervisorName: Yup.string(),
+            startDate: Yup.date(),
+            endDate: Yup.date(),
+            hoursPerWeek: Yup.string(),
         })
     ),
     guardians: Yup.array().of(
         Yup.object().shape({
-            name: Yup.string().required('Required'),
-            relationship: Yup.string().required('Required'),
-            address: Yup.string().required('Required'),
-            mobileNumber: Yup.string().required('Required'),
-            email: Yup.string().email('Invalid email').required('Required'),
-            occupation: Yup.string().required('Required'),
-            employer: Yup.string().required('Required'),
+            name: Yup.string(),
+            relationship: Yup.string(),
+            address: Yup.string(),
+            mobileNumber: Yup.string(),
+            email: Yup.string().email('Invalid email'),
+            occupation: Yup.string(),
+            employer: Yup.string(),
         })
     ),
     siblings: Yup.array().of(
         Yup.object().shape({
-            name: Yup.string().required('Required'),
-            age: Yup.string().required('Required'),
-            relationship: Yup.string().required('Required'),
-            school: Yup.string().required('Required'),
+            name: Yup.string(),
+            age: Yup.string(),
+            relationship: Yup.string(),
+            school: Yup.string(),
         })
     ),
 });
 
-const sendEmail = (templateParams: TradeSchoolApplicationFormValues) => {
+const sendEmail = (templateParams: EmailData): Promise<void> => {
     const serviceId = 'service_55zyzln';
     const templateId = 'template_rbwigdh';
     const userId = '5MK4rWbh_fCErDO7u';
 
-    emailjs.send(serviceId, templateId, templateParams as unknown as Record<string, unknown>, userId)
+    return emailjs.send(serviceId, templateId, templateParams as unknown as Record<string, unknown>, userId)
         .then((response) => {
             console.log('SUCCESS!', response.status, response.text);
         }, (err) => {
             console.log('FAILED...', err);
+            throw err; // Rethrow the error for the catch block in handleFormSubmit
         });
 }
+
 
 const TradeSchoolForm = () => {
     // State hooks for word counts
     const [scholasticHonorsWordCount, setScholasticHonorsWordCount] = useState(0);
     const [extraCurricularActivitiesWordCount, setExtraCurricularActivitiesWordCount] = useState(0);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleWordCountChange = (
         e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -138,6 +148,48 @@ const TradeSchoolForm = () => {
             setFieldValue(fieldName, e.target.value);
         }
     };
+
+    const handleFormSubmit = async (
+        values: TradeSchoolApplicationFormValues,
+        { resetForm }: FormikHelpers<TradeSchoolApplicationFormValues>
+    ) => {
+        try {
+            // Convert academicHistories, employmentHistories, guardians, and siblings arrays to strings
+            const academicHistoriesString = values.academicHistories.map(history =>
+                `School: ${history.nameOfSchool}\nDates Attended: ${history.datesAttended}\n\n`
+            ).join('');
+
+            const employmentHistoriesString = values.employmentHistories.map(job =>
+                `Employer: ${job.placeOfEmployment}\nAddress: ${job.employmentAddress}\nTitle: ${job.jobTitle}\nSupervisor: ${job.supervisorName}\nStart Date: ${job.startDate}\nEnd Date: ${job.endDate}\nHours per Week: ${job.hoursPerWeek}\n\n`
+            ).join('');
+
+            const guardiansString = values.guardians.map(guardian =>
+                `Name: ${guardian.name}\nRelationship: ${guardian.relationship}\nAddress: ${guardian.address}\nMobile: ${guardian.mobileNumber}\nEmail: ${guardian.email}\nOccupation: ${guardian.occupation}\nEmployer: ${guardian.employer}\n\n`
+            ).join('');
+
+            const siblingsString = values.siblings.map(sibling =>
+                `Name: ${sibling.name}\nAge: ${sibling.age}\nRelationship: ${sibling.relationship}\nSchool: ${sibling.school}\n\n`
+            ).join('');
+
+            // Create an email data object
+            const emailData: EmailData = {
+                ...values,
+                academicHistories: academicHistoriesString,
+                employmentHistories: employmentHistoriesString,
+                guardians: guardiansString,
+                siblings: siblingsString,
+            };
+
+            await sendEmail(emailData);
+
+            setIsSubmitted(true);
+            resetForm({});
+        } catch (error) {
+            console.error('Submission error', error);
+            // Handle submission error here
+        }
+    };
+
 
     // Initial values
     const initialValues: TradeSchoolApplicationFormValues = {
@@ -163,10 +215,7 @@ const TradeSchoolForm = () => {
             <Formik
                 initialValues={initialValues}
                 validationSchema={TradeSchoolSchema}
-                onSubmit={(values, { resetForm }) => {
-                    sendEmail(values);
-                    resetForm({});
-                }}
+                onSubmit={handleFormSubmit}
             >
                 {({ values, setFieldValue }) => (
                     <Form>
@@ -260,7 +309,7 @@ const TradeSchoolForm = () => {
                             </div>
 
                             <div className="academic-history-entry">
-                                Class Rank
+                                Expected Graduation
                                 <Field name="expectedGraduationDate" placeholder="Expected Graduation" />
                                 <ErrorMessage name="expectedGraduationDate" component="div" />
                             </div>
@@ -438,14 +487,14 @@ const TradeSchoolForm = () => {
                         </div>
 
                         <div className="section-container">
-                                           <h5>LETTER OF RECOMMENDATION</h5>
-                                           <p style={{ textAlign: 'left' }}>
-                                               A letter of recommendation is <strong>REQUIRED</strong> as part of this application.  That letter must be from an instructor or program director of the academy you are attending. The letter must be sent via email to <strong>someone@sancaprotary.com</strong>.
-                                           </p>
-                                            <p style={{ textAlign: 'left' }}>
-                                                It is your responsibility to make certain the email has been sent.
-                                            </p>
-                                        </div>
+                            <h5>LETTER OF RECOMMENDATION</h5>
+                            <p style={{ textAlign: 'left' }}>
+                                A letter of recommendation is <strong>REQUIRED</strong> as part of this application.  That letter must be from an instructor or program director of the academy you are attending. The letter must be sent via email to <strong>someone@sancaprotary.com</strong>.
+                            </p>
+                            <p style={{ textAlign: 'left' }}>
+                                It is your responsibility to make certain the email has been sent.
+                            </p>
+                        </div>
 
                         {/* Submit Button */}
                         <div className="section-container">
@@ -457,6 +506,13 @@ const TradeSchoolForm = () => {
                                 <input type="submit" value="Submit Application" className="btn btn-primary" />
                             </div>
                         </div>
+
+                        {isSubmitted && (
+                            <div className="alert alert-success" role="alert">
+                                Your application has been submitted successfully!
+                            </div>
+                        )}
+
                     </Form>
                 )}
             </Formik>
