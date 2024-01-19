@@ -115,6 +115,10 @@ const UniversitySchema = Yup.object().shape({
     questionTwo: Yup.string().required('Required'),
 });
 
+const handlePrint = () => {
+    window.print();
+};
+
 const UniversityForm = () => {
     const [honorsWordCount, setHonorsWordCount] = useState(0);
     const [leadershipWordCount, setLeadershipWordCount] = useState(0);
@@ -321,92 +325,92 @@ const UniversityForm = () => {
         questionTwo: '',
     };
 
-    const fillTestValues = (setFieldValue: FormikHelpers<UniversityFormValues>['setFieldValue']) => {
-        // Basic fields
-        setFieldValue('firstName', 'John');
-        setFieldValue('lastName', 'Doe');
-        setFieldValue('dob', '2000-01-01');
-        setFieldValue('address', '123 Test Street');
-        setFieldValue('phoneNumber', '1234567890');
-        setFieldValue('email', 'test@example.com');
+    //const fillTestValues = (setFieldValue: FormikHelpers<UniversityFormValues>['setFieldValue']) => {
+    //    // Basic fields
+    //    setFieldValue('firstName', 'John');
+    //    setFieldValue('lastName', 'Doe');
+    //    setFieldValue('dob', '2000-01-01');
+    //    setFieldValue('address', '123 Test Street');
+    //    setFieldValue('phoneNumber', '1234567890');
+    //    setFieldValue('email', 'test@example.com');
 
-        // Academic histories
-        setFieldValue('academicHistories', [{
-            nameOfSchool: 'Test School',
-            datesAttended: '2019-2023',
-        }]);
+    //    // Academic histories
+    //    setFieldValue('academicHistories', [{
+    //        nameOfSchool: 'Test School',
+    //        datesAttended: '2019-2023',
+    //    }]);
 
-        // Number in Class and Class Rank
-        setFieldValue('numberInClass', '100');
-        setFieldValue('classRank', '10');
-        setFieldValue('expectedGraduationDate', '2023-05-01');
+    //    // Number in Class and Class Rank
+    //    setFieldValue('numberInClass', '100');
+    //    setFieldValue('classRank', '10');
+    //    setFieldValue('expectedGraduationDate', '2023-05-01');
 
-        // Scholastic
-        setFieldValue('scholastic.honorsAwards', 'Test Honor');
-        setFieldValue('scholastic.leadershipPositions', 'Test Leadership');
-        setFieldValue('scholastic.organizationsMembership', 'Test Organization');
+    //    // Scholastic
+    //    setFieldValue('scholastic.honorsAwards', 'Test Honor');
+    //    setFieldValue('scholastic.leadershipPositions', 'Test Leadership');
+    //    setFieldValue('scholastic.organizationsMembership', 'Test Organization');
 
-        // ExtraCurricular
-        setFieldValue('extraCurricular.ecHonorsAwards', 'Test EC Honor');
-        setFieldValue('extraCurricular.ecLeadershipPositions', 'Test EC Leadership');
-        setFieldValue('extraCurricular.ecOrganizationsMembership', 'Test EC Organization');
+    //    // ExtraCurricular
+    //    setFieldValue('extraCurricular.ecHonorsAwards', 'Test EC Honor');
+    //    setFieldValue('extraCurricular.ecLeadershipPositions', 'Test EC Leadership');
+    //    setFieldValue('extraCurricular.ecOrganizationsMembership', 'Test EC Organization');
 
-        // Employment Histories
-        setFieldValue('employmentHistories', [{
-            placeOfEmployment: 'Test Company',
-            employmentAddress: '456 Test Lane',
-            jobTitle: 'Test Job',
-            supervisorName: 'Test Supervisor',
-            startDate: '2021-01-01',
-            endDate: '2023-01-01',
-            hoursPerWeek: '20',
-        }]);
+    //    // Employment Histories
+    //    setFieldValue('employmentHistories', [{
+    //        placeOfEmployment: 'Test Company',
+    //        employmentAddress: '456 Test Lane',
+    //        jobTitle: 'Test Job',
+    //        supervisorName: 'Test Supervisor',
+    //        startDate: '2021-01-01',
+    //        endDate: '2023-01-01',
+    //        hoursPerWeek: '20',
+    //    }]);
 
-        // College details
-        setFieldValue('appliedCollege', 'Test University');
-        setFieldValue('plannedCollege', 'Planned University');
-        setFieldValue('intendedMajor', 'Test Major');
-        setFieldValue('plannedCollegeStartDate', '2023-09-01');
+    //    // College details
+    //    setFieldValue('appliedCollege', 'Test University');
+    //    setFieldValue('plannedCollege', 'Planned University');
+    //    setFieldValue('intendedMajor', 'Test Major');
+    //    setFieldValue('plannedCollegeStartDate', '2023-09-01');
 
-        // Guardians
-        setFieldValue('guardians', [{
-            name: 'Guardian Name',
-            relationship: 'Parent',
-            address: '789 Guardian Ave',
-            mobileNumber: '1234567891',
-            email: 'guardian@example.com',
-            occupation: 'Guardian Job',
-            employer: 'Guardian Employer',
-        }]);
+    //    // Guardians
+    //    setFieldValue('guardians', [{
+    //        name: 'Guardian Name',
+    //        relationship: 'Parent',
+    //        address: '789 Guardian Ave',
+    //        mobileNumber: '1234567891',
+    //        email: 'guardian@example.com',
+    //        occupation: 'Guardian Job',
+    //        employer: 'Guardian Employer',
+    //    }]);
 
-        // Siblings
-        setFieldValue('siblings', [{
-            name: 'Sibling Name',
-            age: '18',
-            relationship: 'Sibling',
-            school: 'Sibling School',
-        }]);
+    //    // Siblings
+    //    setFieldValue('siblings', [{
+    //        name: 'Sibling Name',
+    //        age: '18',
+    //        relationship: 'Sibling',
+    //        school: 'Sibling School',
+    //    }]);
 
-        // Budget and Other Income
-        setFieldValue('scholarships', '1000');
-        setFieldValue('loans', '2000');
-        setFieldValue('summerEarnings', '1500');
-        setFieldValue('schoolYearEarnings', '1200');
-        setFieldValue('floridaPrePaid', '800');
-        setFieldValue('fundsFromParents', '500');
-        setFieldValue('fundsFromRelatives', '300');
-        setFieldValue('otherSources', '200');
+    //    // Budget and Other Income
+    //    setFieldValue('scholarships', '1000');
+    //    setFieldValue('loans', '2000');
+    //    setFieldValue('summerEarnings', '1500');
+    //    setFieldValue('schoolYearEarnings', '1200');
+    //    setFieldValue('floridaPrePaid', '800');
+    //    setFieldValue('fundsFromParents', '500');
+    //    setFieldValue('fundsFromRelatives', '300');
+    //    setFieldValue('otherSources', '200');
 
-        // Estimated Costs
-        setFieldValue('tuition', '10000');
-        setFieldValue('roomAndBoard', '5000');
-        setFieldValue('booksAndSupplies', '500');
-        setFieldValue('allOtherExpenses', '1500');
+    //    // Estimated Costs
+    //    setFieldValue('tuition', '10000');
+    //    setFieldValue('roomAndBoard', '5000');
+    //    setFieldValue('booksAndSupplies', '500');
+    //    setFieldValue('allOtherExpenses', '1500');
 
-        // Essay Questions
-        setFieldValue('questionOne', 'Test Answer for Question One');
-        setFieldValue('questionTwo', 'Test Answer for Question Two');
-    };
+    //    // Essay Questions
+    //    setFieldValue('questionOne', 'Test Answer for Question One');
+    //    setFieldValue('questionTwo', 'Test Answer for Question Two');
+    //};
 
     return (
         <div className="container">
@@ -418,451 +422,478 @@ const UniversityForm = () => {
                 {({ values, setFieldValue }) => (
 
                     <Form>
-                        <img src={sancaplogo} className="logo img-fluid" alt="Sanibel Captiva Rotary Club logo" />
-                        <h3>University Scholarship Application</h3>
-                        <h5>Must be submitted by April 15</h5>
+                        <div className="print-area">
 
-                        { /* Personal Information Section */}
-                        <div className="section-container">
-                            <b>Personal Information</b>
+                            <img src={sancaplogo} className="logo img-fluid" alt="Sanibel Captiva Rotary Club logo" />
+                            <h3>University Scholarship Application</h3>
+                            <h5>Must be submitted by April 15</h5>
 
-                            <div className="form-group">
-                                <label htmlFor="firstName">First Name:</label>
-                                <Field name="firstName" type="text" placeholder="first name" />
-                                <ErrorMessage name="firstName" component="div" />
+                            { /* Personal Information Section */}
+                            <div className="section-container">
+                                <b>Personal Information</b>
+
+                                <div className="form-group">
+                                    <label htmlFor="firstName">First Name:</label>
+                                    <Field name="firstName" type="text" placeholder="first name" />
+                                    <ErrorMessage name="firstName" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="lastName">Last Name:</label>
+                                    <Field name="lastName" type="text" placeholder="last name" />
+                                    <ErrorMessage name="lastName" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="dob">Date of Birth:</label>
+                                    <Field name="dob" type="date" placeholder="Date of Birth" />
+                                    <ErrorMessage name="dob" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="address">Mailing Address:</label>
+                                    <Field name="address" type="text" placeholder="Address" />
+                                    <ErrorMessage name="address" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="phoneNumber">Phone Number:</label>
+                                    <Field name="phoneNumber" type="text" placeholder="Phone Number" />
+                                    <ErrorMessage name="phoneNumber" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="email">Email Address:</label>
+                                    <Field name="email" type="email" placeholder="Email Address" />
+                                    <ErrorMessage name="email" component="div" />
+                                </div>
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="lastName">Last Name:</label>
-                                <Field name="lastName" type="text" placeholder="last name" />
-                                <ErrorMessage name="lastName" component="div" />
+                            { /* Academic History Section */}
+                            <div className="section-container">
+                                <FieldArray name="academicHistories">
+                                    {({ remove, push }) => (
+                                        <div>
+                                            <b>Academic History</b>
+                                            {values.academicHistories.map((_, index) => (
+                                                <div className="academic-history-entry" key={index}>
+                                                    School
+                                                    <Field name={`academicHistories.${index}.nameOfSchool`} placeholder="Name of School" />
+                                                    <ErrorMessage name={`academicHistories.${index}.nameOfSchool`} component="div" />
+                                                    Dates Attended
+                                                    <Field name={`academicHistories.${index}.datesAttended`} placeholder="Dates Attended" />
+                                                    <ErrorMessage name={`academicHistories.${index}.datesAttended`} component="div" />
+                                                    <button type="button" className="remove-x-button" onClick={() => remove(index)}>
+                                                        X
+                                                    </button>
+                                                </div>
+                                            ))}
+                                            <button
+                                                type="button"
+                                                className="add-button"
+                                                onClick={() => push({ nameOfSchool: '', datesAttended: '', numberInClass: '', classRank: '' })}
+                                            >
+                                                Add School
+                                            </button>
+                                        </div>
+                                    )}
+                                </FieldArray>
+
+                                <p />
+
+                                <div className="academic-history-entry">
+                                    Number in Class
+                                    <Field name="numberInClass" placeholder="Number in Class" />
+                                    <ErrorMessage name="numberInClass" component="div" />
+                                </div>
+
+                                <div className="academic-history-entry">
+                                    Class Rank
+                                    <Field name="classRank" placeholder="Class Rank" />
+                                    <ErrorMessage name="classRank" component="div" />
+                                </div>
+
+                                <div className="academic-history-entry">
+                                    Expected Graduation Date
+                                    <Field name="expectedGraduationDate" placeholder="Expected Graduation" />
+                                    <ErrorMessage name="expectedGraduationDate" component="div" />
+                                </div>
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="dob">Date of Birth:</label>
-                                <Field name="dob" type="date" placeholder="Date of Birth" />
-                                <ErrorMessage name="dob" component="div" />
+                            {/* Scholastic Section */}
+                            <div className="section-container">
+                                <b>Scholastic</b>
+                                <div className="trade-honors-awards-form-group">
+                                    {/* Honors, Awards & Distinctions */}
+                                    <label htmlFor="scholastic.honorsAwards">
+                                        Honors, Awards & Distinctions Received (Year and Nature of Award):
+                                    </label>
+                                    <span className="word-count">Word Count: {honorsWordCount}/{maxMessageWords}</span>
+                                    <Field name="scholastic.honorsAwards" as="textarea"
+                                        placeholder="Detail your honors and awards"
+                                        value={values.scholastic.honorsAwards}
+                                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleTextAreaChange(e, 'honorsAwards', setFieldValue)}
+                                    />
+                                    <ErrorMessage name="scholastic.honorsAwards" component="div" />
+
+                                    {/* Office and Positions of Leadership */}
+                                    <label htmlFor="scholastic.leadershipPositions">
+                                        Office and Positions of Leadership (Organization, Position, Year):
+                                    </label>
+                                    <span className="word-count">Word Count: {leadershipWordCount}/{maxMessageWords}</span>
+                                    <Field name="scholastic.leadershipPositions" as="textarea"
+                                        placeholder="Detail your leadership positions"
+                                        value={values.scholastic.leadershipPositions}
+                                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleTextAreaChange(e, 'leadershipPositions', setFieldValue)}
+                                    />
+                                    <ErrorMessage name="scholastic.leadershipPositions" component="div" />
+
+                                    {/* Member of Organization */}
+                                    <label htmlFor="scholastic.organizationsMembership">
+                                        Member of Organization (Where no office was held):
+                                    </label>
+                                    <span className="word-count">Word Count: {membershipWordCount}/{maxMessageWords}</span>
+                                    <Field name="scholastic.organizationsMembership" as="textarea"
+                                        placeholder="Detail your organization memberships"
+                                        value={values.scholastic.organizationsMembership}
+                                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleTextAreaChange(e, 'organizationsMembership', setFieldValue)}
+                                    />
+                                    <ErrorMessage name="scholastic.organizationsMembership" component="div" />
+                                </div>
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="address">Mailing Address:</label>
-                                <Field name="address" type="text" placeholder="Address" />
-                                <ErrorMessage name="address" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="phoneNumber">Phone Number:</label>
-                                <Field name="phoneNumber" type="text" placeholder="Phone Number" />
-                                <ErrorMessage name="phoneNumber" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="email">Email Address:</label>
-                                <Field name="email" type="email" placeholder="Email Address" />
-                                <ErrorMessage name="email" component="div" />
-                            </div>
-                        </div>
-
-                        { /* Academic History Section */}
-                        <div className="section-container">
-                            <FieldArray name="academicHistories">
-                                {({ remove, push }) => (
-                                    <div>
-                                        <b>Academic History</b>
-                                        {values.academicHistories.map((_, index) => (
-                                            <div className="academic-history-entry" key={index}>
-                                                School
-                                                <Field name={`academicHistories.${index}.nameOfSchool`} placeholder="Name of School" />
-                                                <ErrorMessage name={`academicHistories.${index}.nameOfSchool`} component="div" />
-                                                Dates Attended
-                                                <Field name={`academicHistories.${index}.datesAttended`} placeholder="Dates Attended" />
-                                                <ErrorMessage name={`academicHistories.${index}.datesAttended`} component="div" />
-                                                <button type="button" className="remove-x-button" onClick={() => remove(index)}>
-                                                    X
-                                                </button>
-                                            </div>
-                                        ))}
-                                        <button
-                                            type="button"
-                                            className="add-button"
-                                            onClick={() => push({ nameOfSchool: '', datesAttended: '', numberInClass: '', classRank: '' })}
-                                        >
-                                            Add School
-                                        </button>
-                                    </div>
-                                )}
-                            </FieldArray>
-
-                            <p />
-
-                            <div className="academic-history-entry">
-                                Number in Class
-                                <Field name="numberInClass" placeholder="Number in Class" />
-                                <ErrorMessage name="numberInClass" component="div" />
-                            </div>
-
-                            <div className="academic-history-entry">
-                                Class Rank
-                                <Field name="classRank" placeholder="Class Rank" />
-                                <ErrorMessage name="classRank" component="div" />
-                            </div>
-
-                            <div className="academic-history-entry">
-                                 Expected Graduation Date
-                                <Field name="expectedGraduationDate" placeholder="Expected Graduation" />
-                                <ErrorMessage name="expectedGraduationDate" component="div" />
-                            </div>
-                        </div>
-
-                        {/* Scholastic Section */}
-                        <div className="section-container">
-                            <b>Scholastic</b>
-                            <div className="trade-honors-awards-form-group">
+                            {/* ExtraCurricular Section */}
+                            <div className="section-container">
+                                <b>Extra Curricular</b>
                                 {/* Honors, Awards & Distinctions */}
-                                <label htmlFor="scholastic.honorsAwards">
+                                <div className="trade-honors-awards-form-group">
                                     Honors, Awards & Distinctions Received (Year and Nature of Award):
-                                </label>
-                                <span className="word-count">Word Count: {honorsWordCount}/{maxMessageWords}</span>
-                                <Field name="scholastic.honorsAwards" as="textarea"
-                                    placeholder="Detail your honors and awards"
-                                    value={values.scholastic.honorsAwards}
-                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleTextAreaChange(e, 'honorsAwards', setFieldValue)}
-                                />
-                                <ErrorMessage name="scholastic.honorsAwards" component="div" />
+                                    <span className="word-count">Word Count: {ecHonorsWordCount}/{maxMessageWords}</span>
+                                    <Field
+                                        name="extraCurricular.ecHonorsAwards"
+                                        as="textarea"
+                                        placeholder="Detail your honors and awards"
+                                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleECTextAreaChange(e, 'ecHonorsAwards', setFieldValue)}
+                                    />
+                                    <ErrorMessage name="extraCurricular.ecHonorsAwards" component="div" />
+                                </div>
 
                                 {/* Office and Positions of Leadership */}
-                                <label htmlFor="scholastic.leadershipPositions">
+                                <div className="trade-honors-awards-form-group">
                                     Office and Positions of Leadership (Organization, Position, Year):
-                                </label>
-                                <span className="word-count">Word Count: {leadershipWordCount}/{maxMessageWords}</span>
-                                <Field name="scholastic.leadershipPositions" as="textarea"
-                                    placeholder="Detail your leadership positions"
-                                    value={values.scholastic.leadershipPositions}
-                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleTextAreaChange(e, 'leadershipPositions', setFieldValue)}
-                                />
-                                <ErrorMessage name="scholastic.leadershipPositions" component="div" />
+                                    <span className="word-count">Word Count: {ecLeadershipWordCount}/{maxMessageWords}</span>
+                                    <Field
+                                        name="extraCurricular.ecLeadershipPositions"
+                                        as="textarea"
+                                        placeholder="Detail your leadership positions"
+                                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleECTextAreaChange(e, 'ecLeadershipPositions', setFieldValue)}
+                                    />
+                                    <ErrorMessage name="extraCurricular.ecLeadershipPositions" component="div" />
+                                </div>
 
-                                {/* Member of Organization */}
-                                <label htmlFor="scholastic.organizationsMembership">
+                                {/* Member of Organization (Where no office was held) */}
+                                <div className="trade-honors-awards-form-group">
                                     Member of Organization (Where no office was held):
-                                </label>
-                                <span className="word-count">Word Count: {membershipWordCount}/{maxMessageWords}</span>
-                                <Field name="scholastic.organizationsMembership" as="textarea"
-                                    placeholder="Detail your organization memberships"
-                                    value={values.scholastic.organizationsMembership}
-                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleTextAreaChange(e, 'organizationsMembership', setFieldValue)}
-                                />
-                                <ErrorMessage name="scholastic.organizationsMembership" component="div" />
+                                    <span className="word-count">Word Count: {ecMembershipWordCount}/{maxMessageWords}</span>
+                                    <Field
+                                        name="extraCurricular.ecOrganizationsMembership"
+                                        as="textarea"
+                                        placeholder="Detail your organization memberships"
+                                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleECTextAreaChange(e, 'ecOrganizationsMembership', setFieldValue)}
+                                    />
+                                    <ErrorMessage name="extraCurricular.ecOrganizationsMembership" component="div" />
+                                </div>
                             </div>
+
+                            {/* Employment History Section */}
+                            <div className="section-container">
+
+                                <FieldArray name="employmentHistories">
+                                    {({ remove, push }) => (
+                                        <div>
+                                            <b>Employment History</b>
+                                            {values.employmentHistories.map((_, index: number) => (
+                                                <div className="academic-history-entry" key={index}>
+                                                    Employer <br />
+                                                    <Field name={`employmentHistories.${index}.placeOfEmployment`} placeholder="Place of Employment" />
+                                                    <ErrorMessage name={`employmentHistories.${index}.placeOfEmployment`} component="div" />
+
+                                                    Address <br />
+                                                    <Field name={`employmentHistories.${index}.employmentAddress`} placeholder="Address" />
+                                                    <ErrorMessage name={`employmentHistories.${index}.employmentAddress`} component="div" />
+
+                                                    Job Title
+                                                    <Field name={`employmentHistories.${index}.jobTitle`} placeholder="Job Title" />
+                                                    <ErrorMessage name={`employmentHistories.${index}.jobTitle`} component="div" />
+
+                                                    Supervisor Name <br />
+                                                    <Field name={`employmentHistories.${index}.supervisorName`} placeholder="Supervisor Name" />
+                                                    <ErrorMessage name={`employmentHistories.${index}.supervisorName`} component="div" />
+
+                                                    Start Date <br />
+                                                    <Field name={`employmentHistories.${index}.startDate`} type="date" placeholder="Start Date" />
+                                                    <ErrorMessage name={`employmentHistories.${index}.startDate`} component="div" />
+
+                                                    End Date <br />
+                                                    <Field name={`employmentHistories.${index}.endDate`} type="date" placeholder="End Date" />
+                                                    <ErrorMessage name={`employmentHistories.${index}.endDate`} component="div" />
+
+                                                    Average Hours per Week <br />
+                                                    <Field name={`employmentHistories.${index}.hoursPerWeek`} type="number" placeholder="Average Hours per Week" />
+                                                    <ErrorMessage name={`employmentHistories.${index}.hoursPerWeek`} component="div" />
+
+                                                    <button type="button" className="remove-x-button" onClick={() => remove(index)}>X</button>
+                                                </div>
+                                            ))}
+                                            <button type="button" className="add-button" onClick={() => push({ placeOfEmployment: '', employmentAddress: '', jobTitle: '', supervisorName: '', startDate: '', endDate: '', hoursPerWeek: '' })}>Add Employment</button>
+                                        </div>
+                                    )}
+                                </FieldArray>
+
+
+                            </div>
+
+                            {/* College Section */}
+                            <div className="section-container">
+                                <b>College</b>
+                                <div className="form-group">
+                                    <label htmlFor="appliedCollege">Which College, University, or Post-Secondary Institution have you applied to?</label>
+                                    <Field name="appliedCollege" type="text" placeholder="College Name" />
+                                    <ErrorMessage name="appliedCollege" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="plannedCollege">Which College do you plan to attend?</label>
+                                    <Field name="plannedCollege" type="text" placeholder="Planned College" />
+                                    <ErrorMessage name="plannedCollege" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="intendedMajor">What is your intended Major?</label>
+                                    <Field name="intendedMajor" type="text" placeholder="Intended Major" />
+                                    <ErrorMessage name="intendedMajor" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="plannedCollegeStartDate">When do you plan to start?</label>
+                                    <Field name="plannedCollegeStartDate" type="date" />
+                                    <ErrorMessage name="plannedCollegeStartDate" component="div" />
+                                </div>
+                            </div>
+
+                            {/* Family Information Section */}
+                            <div className="section-container">
+                                <b>Family Information</b>
+                                <p />
+                                <b>Parent / Guardian</b>
+
+                                <FieldArray name="guardians">
+                                    {({ remove, push }) => (
+                                        <div>
+                                            {values.guardians.map((_, index: number) => (
+                                                <div key={index} className="academic-history-entry">
+                                                    <Field name={`guardians.${index}.name`} placeholder="Name of Parent or Guardian" />
+                                                    <ErrorMessage name={`guardians.${index}.name`} component="div" />
+
+                                                    <Field name={`guardians.${index}.relationship`} placeholder="Relationship" />
+                                                    <ErrorMessage name={`guardians.${index}.relationship`} component="div" />
+
+                                                    <Field name={`guardians.${index}.address`} placeholder="Address" />
+                                                    <ErrorMessage name={`guardians.${index}.address`} component="div" />
+
+                                                    <Field name={`guardians.${index}.mobileNumber`} placeholder="Mobile Number" />
+                                                    <ErrorMessage name={`guardians.${index}.mobileNumber`} component="div" />
+
+                                                    <Field name={`guardians.${index}.email`} placeholder="Email address" />
+                                                    <ErrorMessage name={`guardians.${index}.email`} component="div" />
+
+                                                    <Field name={`guardians.${index}.occupation`} placeholder="Occupation" />
+                                                    <ErrorMessage name={`guardians.${index}.occupation`} component="div" />
+
+                                                    <Field name={`guardians.${index}.employer`} placeholder="Employer" />
+                                                    <ErrorMessage name={`guardians.${index}.employer`} component="div" />
+
+                                                    <button type="button" className="remove-x-button" onClick={() => remove(index)}>X</button>
+                                                </div>
+                                            ))}
+                                            <button type="button" className="add-button" onClick={() => push({ name: '', relationship: '', address: '', mobileNumber: '', email: '', occupation: '', employer: '' })}>Add Guardian</button>
+                                        </div>
+                                    )}
+                                </FieldArray>
+
+
+
+                                {/* Siblings Information Section */}
+                                <p />
+
+                                <b>Siblings</b>
+                                <FieldArray name="siblings">
+                                    {({ remove, push }) => (
+                                        <div>
+                                            {values.siblings.map((_, index: number) => (
+                                                <div key={index} className="academic-history-entry">
+                                                    <Field name={`siblings.${index}.name`} placeholder="Sibling Name" />
+                                                    <ErrorMessage name={`siblings.${index}.name`} component="div" />
+
+                                                    <Field name={`siblings.${index}.age`} placeholder="Sibling Age" />
+                                                    <ErrorMessage name={`siblings.${index}.age`} component="div" />
+
+                                                    <Field name={`siblings.${index}.relationship`} placeholder="Relationship" />
+                                                    <ErrorMessage name={`siblings.${index}.relationship`} component="div" />
+
+                                                    <Field name={`siblings.${index}.school`} placeholder="School" />
+                                                    <ErrorMessage name={`siblings.${index}.school`} component="div" />
+
+                                                    <button type="button" className="remove-x-button" onClick={() => remove(index)}>X</button>
+                                                </div>
+                                            ))}
+                                            <button type="button" className="add-button" onClick={() => push({ name: '', age: '', relationship: '', school: '' })}>Add Sibling</button>
+                                        </div>
+                                    )}
+                                </FieldArray>
+
+                            </div>
+
+                            {/* Budget Section */}
+                            <div className="section-container">
+                                <b>Projected Budget for Next Year</b>
+                                <div className="form-group">
+                                    <label htmlFor="scholarships">Scholarships:</label>
+                                    <Field name="scholarships" type="text" placeholder="Scholarships Amount" />
+                                    <ErrorMessage name="scholarships" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="loans">Loan(s):</label>
+                                    <Field name="loans" type="text" placeholder="Loan Amount" />
+                                    <ErrorMessage name="loans" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="summerEarnings">Summer Earnings:</label>
+                                    <Field name="summerEarnings" type="text" placeholder="Summer Earnings Amount" />
+                                    <ErrorMessage name="summerEarnings" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="schoolYearEarnings">School Year Earnings:</label>
+                                    <Field name="schoolYearEarnings" type="text" placeholder="School Year Earnings Amount" />
+                                    <ErrorMessage name="schoolYearEarnings" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="floridaPrePaid">Florida Pre-Paid:</label>
+                                    <Field name="floridaPrePaid" type="text" placeholder="Florida Pre-Paid Amount" />
+                                    <ErrorMessage name="floridaPrePaid" component="div" />
+                                </div>
+                            </div>
+
+                            {/* Other Income Section */}
+                            <div className="section-container">
+                                <b>Other Income</b>
+                                <div className="form-group">
+                                    <label htmlFor="fundsFromParents">Funds from Parents or Guardians:</label>
+                                    <Field name="fundsFromParents" type="text" placeholder="Amount from Parents/Guardians" />
+                                    <ErrorMessage name="fundsFromParents" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="fundsFromRelatives">Funds from Relatives or Friends:</label>
+                                    <Field name="fundsFromRelatives" type="text" placeholder="Amount from Relatives/Friends" />
+                                    <ErrorMessage name="fundsFromRelatives" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="otherSources">Other Sources:</label>
+                                    <Field name="otherSources" type="text" placeholder="Other Income Sources" />
+                                    <ErrorMessage name="otherSources" component="div" />
+                                </div>
+                            </div>
+
+                            {/* Estimated Costs Section */}
+                            <div className="section-container">
+                                <b>Estimated Costs</b>
+                                <div className="form-group">
+                                    <label htmlFor="tuition">Tuition:</label>
+                                    <Field name="tuition" type="text" placeholder="Tuition Cost" />
+                                    <ErrorMessage name="tuition" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="roomAndBoard">Room & Board:</label>
+                                    <Field name="roomAndBoard" type="text" placeholder="Room and Board Cost" />
+                                    <ErrorMessage name="roomAndBoard" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="booksAndSupplies">Books & Supplies:</label>
+                                    <Field name="booksAndSupplies" type="text" placeholder="Cost of Books & Supplies" />
+                                    <ErrorMessage name="booksAndSupplies" component="div" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="allOtherExpenses">All Other Expenses:</label>
+                                    <Field name="allOtherExpenses" type="text" placeholder="Other Expenses" />
+                                    <ErrorMessage name="allOtherExpenses" component="div" />
+                                </div>
+                            </div>
+
+                            {/* Question One Section */}
+                            <div className="section-container">
+                                <b>Essay Questions</b>
+                                <div className="trade-honors-awards-form-group">
+                                    Why do you want to pursue a College Degree? How will your college experience prepare you to achieve your life goals?
+                                    <span className="word-count">Word Count: {questionOneWordCount}/{maxQuestionWords}</span>
+                                    <Field
+                                        name="questionOne"
+                                        as="textarea"
+                                        placeholder="Your response to Question One"
+                                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleQuestionTextAreaChange(e, 'questionOne', setQuestionOneWordCount, setFieldValue)}
+                                    />
+                                    <ErrorMessage name="questionOne" component="div" />
+                                </div>
+
+                                {/* Question Two Section */}
+                                <div className="trade-honors-awards-form-group">
+                                    What is your opinion of Rotary's "4-Way Test"?
+                                    <span className="word-count">Word Count: {questionTwoWordCount}/{maxQuestionWords}</span>
+                                    <Field
+                                        name="questionTwo"
+                                        as="textarea"
+                                        placeholder="Your response to Question Two"
+                                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleQuestionTextAreaChange(e, 'questionTwo', setQuestionTwoWordCount, setFieldValue)}
+                                    />
+                                    <ErrorMessage name="questionTwo" component="div" />
+                                </div>
+                            </div>
+
                         </div>
 
-                        {/* ExtraCurricular Section */}
+                        {/* Print Section */}
                         <div className="section-container">
-                            <b>Extra Curricular</b>
-                            {/* Honors, Awards & Distinctions */}
-                            <div className="trade-honors-awards-form-group">
-                                Honors, Awards & Distinctions Received (Year and Nature of Award):
-                                <span className="word-count">Word Count: {ecHonorsWordCount}/{maxMessageWords}</span>
-                                <Field
-                                    name="extraCurricular.ecHonorsAwards"
-                                    as="textarea"
-                                    placeholder="Detail your honors and awards"
-                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleECTextAreaChange(e, 'ecHonorsAwards', setFieldValue)}
-                                />
-                                <ErrorMessage name="extraCurricular.ecHonorsAwards" component="div" />
-                            </div>
+                            <p style={{ textAlign: 'left' }}>
 
-                            {/* Office and Positions of Leadership */}
-                            <div className="trade-honors-awards-form-group">
-                                Office and Positions of Leadership (Organization, Position, Year):
-                                <span className="word-count">Word Count: {ecLeadershipWordCount}/{maxMessageWords}</span>
-                                <Field
-                                    name="extraCurricular.ecLeadershipPositions"
-                                    as="textarea"
-                                    placeholder="Detail your leadership positions"
-                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleECTextAreaChange(e, 'ecLeadershipPositions', setFieldValue)}
-                                />
-                                <ErrorMessage name="extraCurricular.ecLeadershipPositions" component="div" />
-                            </div>
-
-                            {/* Member of Organization (Where no office was held) */}
-                            <div className="trade-honors-awards-form-group">
-                                Member of Organization (Where no office was held):
-                                <span className="word-count">Word Count: {ecMembershipWordCount}/{maxMessageWords}</span>
-                                <Field
-                                    name="extraCurricular.ecOrganizationsMembership"
-                                    as="textarea"
-                                    placeholder="Detail your organization memberships"
-                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleECTextAreaChange(e, 'ecOrganizationsMembership', setFieldValue)}
-                                />
-                                <ErrorMessage name="extraCurricular.ecOrganizationsMembership" component="div" />
-                            </div>
+                                You can print your application for your records by clicking the button below <strong>before</strong> you submit your application.
+                                <br></br>
+                                <br></br>
+                                Once you click the <strong>Submit</strong> button, all fields will be reset.
+                            </p>
+                            <center>
+                                <button type="button" onClick={handlePrint}>
+                                    Print Application
+                                </button>
+                            </center>
                         </div>
 
-                        {/* Employment History Section */}
+                        {/* Submit Button */}
                         <div className="section-container">
-
-                            <FieldArray name="employmentHistories">
-                                {({ remove, push }) => (
-                                    <div>
-                                        <b>Employment History</b>
-                                        {values.employmentHistories.map((_, index: number) => (
-                                            <div className="academic-history-entry" key={index}>
-                                                Employer <br />
-                                                <Field name={`employmentHistories.${index}.placeOfEmployment`} placeholder="Place of Employment" />
-                                                <ErrorMessage name={`employmentHistories.${index}.placeOfEmployment`} component="div" />
-
-                                                Address <br />
-                                                <Field name={`employmentHistories.${index}.employmentAddress`} placeholder="Address" />
-                                                <ErrorMessage name={`employmentHistories.${index}.employmentAddress`} component="div" />
-
-                                                Job Title
-                                                <Field name={`employmentHistories.${index}.jobTitle`} placeholder="Job Title" />
-                                                <ErrorMessage name={`employmentHistories.${index}.jobTitle`} component="div" />
-
-                                                Supervisor Name <br />
-                                                <Field name={`employmentHistories.${index}.supervisorName`} placeholder="Supervisor Name" />
-                                                <ErrorMessage name={`employmentHistories.${index}.supervisorName`} component="div" />
-
-                                                Start Date <br />
-                                                <Field name={`employmentHistories.${index}.startDate`} type="date" placeholder="Start Date" />
-                                                <ErrorMessage name={`employmentHistories.${index}.startDate`} component="div" />
-
-                                                End Date <br />
-                                                <Field name={`employmentHistories.${index}.endDate`} type="date" placeholder="End Date" />
-                                                <ErrorMessage name={`employmentHistories.${index}.endDate`} component="div" />
-
-                                                Average Hours per Week <br />
-                                                <Field name={`employmentHistories.${index}.hoursPerWeek`} type="number" placeholder="Average Hours per Week" />
-                                                <ErrorMessage name={`employmentHistories.${index}.hoursPerWeek`} component="div" />
-
-                                                <button type="button" className="remove-x-button" onClick={() => remove(index)}>X</button>
-                                            </div>
-                                        ))}
-                                        <button type="button" className="add-button" onClick={() => push({ placeOfEmployment: '', employmentAddress: '', jobTitle: '', supervisorName: '', startDate: '', endDate: '', hoursPerWeek: '' })}>Add Employment</button>
-                                    </div>
-                                )}
-                            </FieldArray>
-
-
-                        </div>
-
-                        {/* College Section */}
-                        <div className="section-container">
-                            <b>College</b>
-                            <div className="form-group">
-                                <label htmlFor="appliedCollege">Which College, University, or Post-Secondary Institution have you applied to?</label>
-                                <Field name="appliedCollege" type="text" placeholder="College Name" />
-                                <ErrorMessage name="appliedCollege" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="plannedCollege">Which College do you plan to attend?</label>
-                                <Field name="plannedCollege" type="text" placeholder="Planned College" />
-                                <ErrorMessage name="plannedCollege" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="intendedMajor">What is your intended Major?</label>
-                                <Field name="intendedMajor" type="text" placeholder="Intended Major" />
-                                <ErrorMessage name="intendedMajor" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="plannedCollegeStartDate">When do you plan to start?</label>
-                                <Field name="plannedCollegeStartDate" type="date" />
-                                <ErrorMessage name="plannedCollegeStartDate" component="div" />
-                            </div>
-                        </div>
-
-                        {/* Family Information Section */}
-                        <div className="section-container">
-                            <b>Family Information</b>
-                            <p />
-                            <b>Parent / Guardian</b>
-
-                            <FieldArray name="guardians">
-                                {({ remove, push }) => (
-                                    <div>
-                                        {values.guardians.map((_, index: number) => (
-                                            <div key={index} className="academic-history-entry">
-                                                <Field name={`guardians.${index}.name`} placeholder="Name of Parent or Guardian" />
-                                                <ErrorMessage name={`guardians.${index}.name`} component="div" />
-
-                                                <Field name={`guardians.${index}.relationship`} placeholder="Relationship" />
-                                                <ErrorMessage name={`guardians.${index}.relationship`} component="div" />
-
-                                                <Field name={`guardians.${index}.address`} placeholder="Address" />
-                                                <ErrorMessage name={`guardians.${index}.address`} component="div" />
-
-                                                <Field name={`guardians.${index}.mobileNumber`} placeholder="Mobile Number" />
-                                                <ErrorMessage name={`guardians.${index}.mobileNumber`} component="div" />
-
-                                                <Field name={`guardians.${index}.email`} placeholder="Email address" />
-                                                <ErrorMessage name={`guardians.${index}.email`} component="div" />
-
-                                                <Field name={`guardians.${index}.occupation`} placeholder="Occupation" />
-                                                <ErrorMessage name={`guardians.${index}.occupation`} component="div" />
-
-                                                <Field name={`guardians.${index}.employer`} placeholder="Employer" />
-                                                <ErrorMessage name={`guardians.${index}.employer`} component="div" />
-
-                                                <button type="button" className="remove-x-button" onClick={() => remove(index)}>X</button>
-                                            </div>
-                                        ))}
-                                        <button type="button" className="add-button" onClick={() => push({ name: '', relationship: '', address: '', mobileNumber: '', email: '', occupation: '', employer: '' })}>Add Guardian</button>
-                                    </div>
-                                )}
-                            </FieldArray>
-
-
-
-                            {/* Siblings Information Section */}
-                            <p />
-
-                            <b>Siblings</b>
-                            <FieldArray name="siblings">
-                                {({ remove, push }) => (
-                                    <div>
-                                        {values.siblings.map((_, index: number) => (
-                                            <div key={index} className="academic-history-entry">
-                                                <Field name={`siblings.${index}.name`} placeholder="Sibling Name" />
-                                                <ErrorMessage name={`siblings.${index}.name`} component="div" />
-
-                                                <Field name={`siblings.${index}.age`} placeholder="Sibling Age" />
-                                                <ErrorMessage name={`siblings.${index}.age`} component="div" />
-
-                                                <Field name={`siblings.${index}.relationship`} placeholder="Relationship" />
-                                                <ErrorMessage name={`siblings.${index}.relationship`} component="div" />
-
-                                                <Field name={`siblings.${index}.school`} placeholder="School" />
-                                                <ErrorMessage name={`siblings.${index}.school`} component="div" />
-
-                                                <button type="button" className="remove-x-button" onClick={() => remove(index)}>X</button>
-                                            </div>
-                                        ))}
-                                        <button type="button" className="add-button" onClick={() => push({ name: '', age: '', relationship: '', school: '' })}>Add Sibling</button>
-                                    </div>
-                                )}
-                            </FieldArray>
-
-                        </div>
-
-                        {/* Budget Section */}
-                        <div className="section-container">
-                            <b>Projected Budget for Next Year</b>
-                            <div className="form-group">
-                                <label htmlFor="scholarships">Scholarships:</label>
-                                <Field name="scholarships" type="text" placeholder="Scholarships Amount" />
-                                <ErrorMessage name="scholarships" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="loans">Loan(s):</label>
-                                <Field name="loans" type="text" placeholder="Loan Amount" />
-                                <ErrorMessage name="loans" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="summerEarnings">Summer Earnings:</label>
-                                <Field name="summerEarnings" type="text" placeholder="Summer Earnings Amount" />
-                                <ErrorMessage name="summerEarnings" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="schoolYearEarnings">School Year Earnings:</label>
-                                <Field name="schoolYearEarnings" type="text" placeholder="School Year Earnings Amount" />
-                                <ErrorMessage name="schoolYearEarnings" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="floridaPrePaid">Florida Pre-Paid:</label>
-                                <Field name="floridaPrePaid" type="text" placeholder="Florida Pre-Paid Amount" />
-                                <ErrorMessage name="floridaPrePaid" component="div" />
-                            </div>
-                        </div>
-
-                        {/* Other Income Section */}
-                        <div className="section-container">
-                            <b>Other Income</b>
-                            <div className="form-group">
-                                <label htmlFor="fundsFromParents">Funds from Parents or Guardians:</label>
-                                <Field name="fundsFromParents" type="text" placeholder="Amount from Parents/Guardians" />
-                                <ErrorMessage name="fundsFromParents" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="fundsFromRelatives">Funds from Relatives or Friends:</label>
-                                <Field name="fundsFromRelatives" type="text" placeholder="Amount from Relatives/Friends" />
-                                <ErrorMessage name="fundsFromRelatives" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="otherSources">Other Sources:</label>
-                                <Field name="otherSources" type="text" placeholder="Other Income Sources" />
-                                <ErrorMessage name="otherSources" component="div" />
-                            </div>
-                        </div>
-
-                        {/* Estimated Costs Section */}
-                        <div className="section-container">
-                            <b>Estimated Costs</b>
-                            <div className="form-group">
-                                <label htmlFor="tuition">Tuition:</label>
-                                <Field name="tuition" type="text" placeholder="Tuition Cost" />
-                                <ErrorMessage name="tuition" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="roomAndBoard">Room & Board:</label>
-                                <Field name="roomAndBoard" type="text" placeholder="Room and Board Cost" />
-                                <ErrorMessage name="roomAndBoard" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="booksAndSupplies">Books & Supplies:</label>
-                                <Field name="booksAndSupplies" type="text" placeholder="Cost of Books & Supplies" />
-                                <ErrorMessage name="booksAndSupplies" component="div" />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="allOtherExpenses">All Other Expenses:</label>
-                                <Field name="allOtherExpenses" type="text" placeholder="Other Expenses" />
-                                <ErrorMessage name="allOtherExpenses" component="div" />
-                            </div>
-                        </div>
-
-                        {/* Question One Section */}
-                        <div className="section-container">
-                            <b>Essay Questions</b>
-                            <div className="trade-honors-awards-form-group">
-                                Why do you want to pursue a College Degree? How will your college experience prepare you to achieve your life goals?
-                                <span className="word-count">Word Count: {questionOneWordCount}/{maxQuestionWords}</span>
-                                <Field
-                                    name="questionOne"
-                                    as="textarea"
-                                    placeholder="Your response to Question One"
-                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleQuestionTextAreaChange(e, 'questionOne', setQuestionOneWordCount, setFieldValue)}
-                                />
-                                <ErrorMessage name="questionOne" component="div" />
-                            </div>
-
-                        {/* Question Two Section */}
-                            <div className="trade-honors-awards-form-group">
-                                What is your opinion of Rotary's "4-Way Test"?
-                                <span className="word-count">Word Count: {questionTwoWordCount}/{maxQuestionWords}</span>
-                                <Field
-                                    name="questionTwo"
-                                    as="textarea"
-                                    placeholder="Your response to Question Two"
-                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleQuestionTextAreaChange(e, 'questionTwo', setQuestionTwoWordCount, setFieldValue)}
-                                />
-                                <ErrorMessage name="questionTwo" component="div" />
-                            </div>
-                        </div>
+                            <p style={{ textAlign: 'left' }}>
+                                By clicking the <b>Submit Application</b> button below you acknowledge that you have completed this application truthfully to the best of your ability.
+                            </p>
 
                         <div className="col-12" style={{ textAlign: 'center' }}>
                             <input type="submit" value="Submit Application" className="btn btn-primary" />
+                        </div>
                         </div>
 
                         {isSubmitted && (
