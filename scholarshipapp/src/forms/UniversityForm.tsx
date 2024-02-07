@@ -88,6 +88,7 @@ interface UniversityFormValues {
     roomAndBoard: string;
     booksAndSupplies: string;
     allOtherExpenses: string;
+    workedOnSanibel: boolean;
     questionOne: string;
     questionTwo: string;
 }
@@ -111,6 +112,7 @@ const UniversitySchema = Yup.object().shape({
     numberInClass: Yup.string().required('Number in class is required'),
     classRank: Yup.string().required('Class rank is required'),
     expectedGraduationDate: Yup.string().required('Expected graduation date is required'),
+    workedOnSanibel: Yup.boolean(),
     questionOne: Yup.string().required('Required'),
     questionTwo: Yup.string().required('Required'),
 });
@@ -321,6 +323,7 @@ const UniversityForm = () => {
         roomAndBoard: '',
         booksAndSupplies: '',
         allOtherExpenses: '',
+        workedOnSanibel: false,
         questionOne: '',
         questionTwo: '',
     };
@@ -685,6 +688,16 @@ const UniversityForm = () => {
                             <div className="section-container">
                                 <b>Family Information</b>
                                 <p />
+
+                                <div className="form-group">
+                                    <label htmlFor="workedOnSanibel">Have you or your family lived or worked on Sanibel?</label>
+                                    <Field name="workedOnSanibel" as="select">
+                                        <option value="true">Yes</option>
+                                        <option value="workedOnSanibel">No</option>
+                                    </Field>
+
+                                </div>
+
                                 <b>Parent / Guardian</b>
 
                                 <FieldArray name="guardians">
