@@ -494,7 +494,7 @@ const TradeSchoolForm = () => {
                             <div className="section-container">
                                 <h5>LETTER OF RECOMMENDATION</h5>
                                 <p style={{ textAlign: 'left' }}>
-                                    A letter of recommendation is <strong>REQUIRED</strong> as part of this application.  That letter must be from an instructor or program director of the academy you are attending. The letter must be sent via email to <strong>someone@sancaprotary.com</strong>.
+                                    A letter of recommendation is <strong>REQUIRED</strong> as part of this application.  That letter must be from an instructor or program director of the academy you are attending. The letter must be sent via email to <strong>chet@sanibelrotary.org</strong>.
                                 </p>
                                 <p style={{ textAlign: 'left' }}>
                                     It is your responsibility to make certain the email has been sent.
