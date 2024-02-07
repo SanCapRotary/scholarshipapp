@@ -60,6 +60,7 @@ interface TradeSchoolApplicationFormValues {
     employmentHistories: EmploymentHistory[];
     guardians: Guardian[];
     siblings: Sibling[];
+    workedOnSanibel: boolean;
 }
 
 const maxWords = 150;
@@ -93,6 +94,7 @@ const TradeSchoolSchema = Yup.object().shape({
             hoursPerWeek: Yup.string(),
         })
     ),
+    workedOnSanibel: Yup.boolean(),
     guardians: Yup.array().of(
         Yup.object().shape({
             name: Yup.string(),
@@ -209,6 +211,7 @@ const TradeSchoolForm = () => {
         scholasticHonors: '',
         extraCurricularActivities: '',
         employmentHistories: [{ placeOfEmployment: '', employmentAddress: '', jobTitle: '', supervisorName: '', startDate: '', endDate: '', hoursPerWeek: '' }],
+        workedOnSanibel: false,
         guardians: [{ name: '', relationship: '', address: '', mobileNumber: '', email: '', occupation: '', employer: '' }],
         siblings: [{ name: '', age: '', relationship: '', school: '' }],
     };
@@ -375,6 +378,15 @@ const TradeSchoolForm = () => {
 
                             {/* Employment History Section */}
                             <div className="section-container">
+
+                                <div className="form-group">
+                                    <label htmlFor="workedOnSanibel">Have you or your family lived or worked on Sanibel?</label>
+                                    <Field name="workedOnSanibel" as="select">
+                                        <option value="true">Yes</option>
+                                        <option value="workedOnSanibel">No</option>
+                                    </Field>
+                                </div>
+
                                 <FieldArray name="employmentHistories">
                                     {({ remove, push }) => (
                                         <div>
@@ -488,6 +500,9 @@ const TradeSchoolForm = () => {
                                         </div>
                                     )}
                                 </FieldArray>
+
+
+
                             </div>
 
                             {/* Letter of Recommendation Section */}
