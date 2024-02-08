@@ -10,9 +10,4 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="src\components\university\" />
-    <Folder Include="src\components\shared\" />
-    <Folder Include="src\contexts\" />
-  </ItemGroup>
 </Project>
