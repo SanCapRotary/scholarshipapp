@@ -328,93 +328,6 @@ const UniversityForm = () => {
         questionTwo: '',
     };
 
-    //const fillTestValues = (setFieldValue: FormikHelpers<UniversityFormValues>['setFieldValue']) => {
-    //    // Basic fields
-    //    setFieldValue('firstName', 'John');
-    //    setFieldValue('lastName', 'Doe');
-    //    setFieldValue('dob', '2000-01-01');
-    //    setFieldValue('address', '123 Test Street');
-    //    setFieldValue('phoneNumber', '1234567890');
-    //    setFieldValue('email', 'test@example.com');
-
-    //    // Academic histories
-    //    setFieldValue('academicHistories', [{
-    //        nameOfSchool: 'Test School',
-    //        datesAttended: '2019-2023',
-    //    }]);
-
-    //    // Number in Class and Class Rank
-    //    setFieldValue('numberInClass', '100');
-    //    setFieldValue('classRank', '10');
-    //    setFieldValue('expectedGraduationDate', '2023-05-01');
-
-    //    // Scholastic
-    //    setFieldValue('scholastic.honorsAwards', 'Test Honor');
-    //    setFieldValue('scholastic.leadershipPositions', 'Test Leadership');
-    //    setFieldValue('scholastic.organizationsMembership', 'Test Organization');
-
-    //    // ExtraCurricular
-    //    setFieldValue('extraCurricular.ecHonorsAwards', 'Test EC Honor');
-    //    setFieldValue('extraCurricular.ecLeadershipPositions', 'Test EC Leadership');
-    //    setFieldValue('extraCurricular.ecOrganizationsMembership', 'Test EC Organization');
-
-    //    // Employment Histories
-    //    setFieldValue('employmentHistories', [{
-    //        placeOfEmployment: 'Test Company',
-    //        employmentAddress: '456 Test Lane',
-    //        jobTitle: 'Test Job',
-    //        supervisorName: 'Test Supervisor',
-    //        startDate: '2021-01-01',
-    //        endDate: '2023-01-01',
-    //        hoursPerWeek: '20',
-    //    }]);
-
-    //    // College details
-    //    setFieldValue('appliedCollege', 'Test University');
-    //    setFieldValue('plannedCollege', 'Planned University');
-    //    setFieldValue('intendedMajor', 'Test Major');
-    //    setFieldValue('plannedCollegeStartDate', '2023-09-01');
-
-    //    // Guardians
-    //    setFieldValue('guardians', [{
-    //        name: 'Guardian Name',
-    //        relationship: 'Parent',
-    //        address: '789 Guardian Ave',
-    //        mobileNumber: '1234567891',
-    //        email: 'guardian@example.com',
-    //        occupation: 'Guardian Job',
-    //        employer: 'Guardian Employer',
-    //    }]);
-
-    //    // Siblings
-    //    setFieldValue('siblings', [{
-    //        name: 'Sibling Name',
-    //        age: '18',
-    //        relationship: 'Sibling',
-    //        school: 'Sibling School',
-    //    }]);
-
-    //    // Budget and Other Income
-    //    setFieldValue('scholarships', '1000');
-    //    setFieldValue('loans', '2000');
-    //    setFieldValue('summerEarnings', '1500');
-    //    setFieldValue('schoolYearEarnings', '1200');
-    //    setFieldValue('floridaPrePaid', '800');
-    //    setFieldValue('fundsFromParents', '500');
-    //    setFieldValue('fundsFromRelatives', '300');
-    //    setFieldValue('otherSources', '200');
-
-    //    // Estimated Costs
-    //    setFieldValue('tuition', '10000');
-    //    setFieldValue('roomAndBoard', '5000');
-    //    setFieldValue('booksAndSupplies', '500');
-    //    setFieldValue('allOtherExpenses', '1500');
-
-    //    // Essay Questions
-    //    setFieldValue('questionOne', 'Test Answer for Question One');
-    //    setFieldValue('questionTwo', 'Test Answer for Question Two');
-    //};
-
     return (
         <div className="container">
             <Formik
@@ -422,7 +335,7 @@ const UniversityForm = () => {
                 validationSchema={UniversitySchema}
                 onSubmit={handleFormSubmit}
             >
-                {({ values, setFieldValue }) => (
+                {({ values, setFieldValue, isValid, submitCount, isSubmitting }) => (
 
                     <Form>
                         <div className="print-area">
@@ -904,9 +817,15 @@ const UniversityForm = () => {
                                 By clicking the <b>Submit Application</b> button below you acknowledge that you have completed this application truthfully to the best of your ability.
                             </p>
 
-                        <div className="col-12" style={{ textAlign: 'center' }}>
-                            <input type="submit" value="Submit Application" className="btn btn-primary" />
-                        </div>
+                            {submitCount > 0 && !isValid && (
+                                <div className="alert alert-danger" role="alert">
+                                    Your application has <strong>NOT</strong> been submitted.  Please fill in all required fields before submitting.
+                                </div>
+                            )}
+
+                            <div className="col-12" style={{ textAlign: 'center' }}>
+                                <input type="submit" value="Submit Application" className="btn btn-primary" disabled={isSubmitting || isSubmitted} />
+                            </div>
                         </div>
 
                         {isSubmitted && (

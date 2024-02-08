@@ -223,7 +223,7 @@ const TradeSchoolForm = () => {
                 validationSchema={TradeSchoolSchema}
                 onSubmit={handleFormSubmit}
             >
-                {({ values, setFieldValue }) => (
+                {({ values, setFieldValue, isValid, submitCount, isSubmitting }) => (
                     <Form>
                         <div className="print-area">
                             <img src={sancaplogo} className="logo img-fluid" alt="Sanibel Captiva Rotary Club logo" />
@@ -540,8 +540,15 @@ const TradeSchoolForm = () => {
                                 By clicking the <b>Submit Application</b> button below you acknowledge that you have completed this application truthfully to the best of your ability.
                             </p>
 
+                            {submitCount > 0 && !isValid && (
+                                <div className="alert alert-danger" role="alert">
+                                    Your application has <strong>NOT</strong> been submitted.  Please fill in all required fields before submitting.
+                                </div>
+                            )}
+
+
                             <div className="col-12" style={{ textAlign: 'center' }}>
-                                <input type="submit" value="Submit Application" className="btn btn-primary" />
+                                <input type="submit" value="Submit Application" className="btn btn-primary" disabled={isSubmitting || isSubmitted} />
                             </div>
                         </div>
 
