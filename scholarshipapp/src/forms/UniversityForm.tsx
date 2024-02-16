@@ -91,6 +91,7 @@ interface UniversityFormValues {
     workedOnSanibel: boolean;
     questionOne: string;
     questionTwo: string;
+    documentLink: string;
 }
 
 const maxMessageWords = 250;
@@ -115,6 +116,7 @@ const UniversitySchema = Yup.object().shape({
     workedOnSanibel: Yup.boolean(),
     questionOne: Yup.string().required('Required'),
     questionTwo: Yup.string().required('Required'),
+    documentLink: Yup.string().required('Required'),
 });
 
 const handlePrint = () => {
@@ -326,6 +328,7 @@ const UniversityForm = () => {
         workedOnSanibel: false,
         questionOne: '',
         questionTwo: '',
+        documentLink: '',
     };
 
     return (
@@ -794,6 +797,36 @@ const UniversityForm = () => {
                             </div>
 
                         </div>
+
+                        {/* Attachments Section */ }
+                        <div className="section-container">
+                            <p style={{ textAlign: 'left' }}>
+
+                                In addition to the questions above, you must submit the following attachments:
+
+                                <ul>
+                                    <li>Two Letters of Recommendation from Non-Relatives</li>
+                                    <li>Transcripts (unofficial transcripts for the most recently completed term)</li>
+                                    <li>ACT or SAT Scores</li>
+                                    <li>First and Second page of Applicant's most recent 1040 (if applicable)</li>
+                                    <li>EFC (Expected Family Contribution) obtained from FAFSA</li>
+                                    <li>Any additional information or documentation that may be helpful to the Review Committee</li>
+                                </ul>
+
+                                Please upload these documents to a cloud storage service (Google Drive, Dropbox, etc.) and provide the link in the field below.
+                            </p>
+
+                            <div className="form-group">
+                                <label htmlFor="documentLink">Link to Documents:</label>
+                                <Field name="documentLink"
+                                    type="text"
+                                    placeholder="Link to Documents" />
+                                <ErrorMessage name="documentLink" component="div" />
+                            </div>
+
+                        </div>
+
+                        
 
                         {/* Print Section */}
                         <div className="section-container">
