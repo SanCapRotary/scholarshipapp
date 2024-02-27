@@ -52,6 +52,9 @@ interface TradeSchoolApplicationFormValues {
     phoneNumber: string;
     email: string;
     academicHistories: AcademicHistory[];
+    numberInClass: string;
+    classRank: string;
+    expectedGraduationDate: string;
     appliedTradeSchool: string;
     accepted: boolean;
     costOfProgram: string;
@@ -205,6 +208,9 @@ const TradeSchoolForm = () => {
         phoneNumber: '',
         email: '',
         academicHistories: [{ nameOfSchool: '', datesAttended: '' }],
+        numberInClass: '',
+        classRank: '',
+        expectedGraduationDate: '',
         appliedTradeSchool: '',
         accepted: false,
         costOfProgram: '',
