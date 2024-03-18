@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import TradeSchoolForm from './forms/TradeSchoolForm';
-import UniversityForm from './forms/UniversityForm'; // Import UniversityForm
 import 'bootstrap/dist/css/bootstrap.min.css';
 import sancaplogo from './assets/sancaplogo.png';
 
@@ -11,15 +9,11 @@ import sancaplogo from './assets/sancaplogo.png';
 function App() {
     const [activeForm, setActiveForm] = useState<React.ReactNode | null>(null);
 
-    const handleFormChange = (formName: string) => {
-        if (formName === 'tradeSchool')
-        {
-            setActiveForm(<TradeSchoolForm />);
-        }
-        else if (formName === 'university')
-        {
-            setActiveForm(<UniversityForm />);
-        }
+
+    const openPDF = (fileName: string) => {
+        // Adjusted path assuming the PDFs are directly in the public folder
+        const basePath = window.location.origin;
+        window.open(`${basePath}/${fileName}`, '_blank');
     };
 
     const handleBackButtonClick = () => {
@@ -48,11 +42,15 @@ function App() {
                         <p className="read-the-docs">
                             Select which application you would like to complete:
                         </p>
-                        <button className="btn btn-primary m-2" onClick={() => handleFormChange('tradeSchool')}>
+                        <button className="btn btn-primary m-2" onClick={() => openPDF('TechSchoolApplication.pdf')}>
                             Trade School Scholarship
                         </button>
-                        <button className="btn btn-primary m-2" disabled={false} onClick={() => handleFormChange('university')}>
+                        <p> </p>
+                        <button className="btn btn-primary m-2" onClick={() => openPDF('UniversityApplication.pdf')}>
                             University Scholarship
+                        </button>
+                        <button className="btn btn-primary m-2" onClick={() => openPDF('ApplicationInstructions.pdf')}>
+                            University Instructions
                         </button>
                     </div>
                 </>
