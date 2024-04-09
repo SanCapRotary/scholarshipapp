@@ -52,6 +52,14 @@ function App() {
                         <button className="btn btn-primary m-2" onClick={() => openPDF('ApplicationInstructions.pdf')}>
                             University Instructions
                         </button>
+
+                        <p className="read-the-docs">
+                            At this time, we are only accepting applications for Florida Gulf Coast University.
+                        </p>
+
+                        <p className="read-the-docs">
+                            Your application must be postmarked no later than April 15th, 2024.
+                        </p>
                     </div>
                 </>
             )}
