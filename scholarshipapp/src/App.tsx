@@ -58,7 +58,7 @@ function App() {
                         </p>
 
                         <p className="read-the-docs">
-                            Your application must be postmarked no later than April 15th, 2024.
+                            <b>Your application must be postmarked no later than May 1st, 2024.</b>
                         </p>
                     </div>
                 </>
